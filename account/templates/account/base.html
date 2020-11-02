@@ -1,9 +1,10 @@
 <!doctype html>
+{% load static %}
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>index page</title>
+  <title>目標管理アプリ</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   
@@ -11,6 +12,9 @@
   <link rel="stylesheet" type=text/css href='{% static "temp/styles/styles.css" %}'>
 </head>
 <body>
+    
+    {% block body %}
+                
   <header class="header">
     <div class="container header--wrapper">
       <h1 class="header__title"><span class="header__title--light">目標管理支援</span> アプリ</h1>
@@ -38,6 +42,8 @@
     </div>
   </section>
 
+  {% endblock body %}
+
   <footer class="footer footer--bg">
     <div class="container">
       <div class="page-section page-section--small">
@@ -53,5 +59,7 @@
       </div>
     </div>
   </footer>
+
+
 </body>
 </html>  
