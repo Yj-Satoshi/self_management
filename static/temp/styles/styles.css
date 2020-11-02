@@ -1,0 +1,161 @@
+body{
+  line-height: 1.8;
+}
+
+@media screen and (min-width: 1200px) {
+  .container{
+    width: 1366px;
+  }
+}
+
+html,body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden; 
+}
+
+.header{
+    background: rgb(0, 129, 11);
+    background-size: cover;
+  }
+
+.header--wrapper{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+.header__title{
+    font-size: 60px;
+    color: white;
+    font-weight: 800;
+  }
+
+.header__title--light{
+      font-weight: 100;
+    }
+
+.header__paragraph{
+    font-size: 20px;
+    color: black;
+    max-width: 850px;
+    margin-bottom: 45px;
+  }
+
+@media screen and (max-width: 480px){
+  .header .header__title{
+    font-size: 52px;
+  }
+}
+
+.button{
+  padding: 8px 50px;
+  border-radius: 30px;
+  font-size: 18px;
+  color: white;
+  border: 2px solid white;
+  margin-right: 20px;
+  display: inline-block;
+  background-color: rgb(0, 129, 11);
+  position: relative;
+}
+
+
+
+.button:hover{
+    background-color: #00B8D4;
+    border-color: #00B8D4;
+    -webkit-box-shadow: 3px 4px 7px #2BBBB8;
+            box-shadow: 3px 4px 7px #2BBBB8;
+  }
+
+.button:focus{
+    text-decoration: none;
+    color: black
+  }
+
+
+
+@media screen and (max-width: 480px){
+  .header .button{
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .button__subscribe{
+    right: 0;
+  }
+}
+
+.page-section{
+  margin-top: 100px;
+  margin-bottom: 10px;
+}
+
+.page-section--large{
+    margin-top: 150px;
+    margin-bottom: 150px;
+  }
+
+.page-section--small{
+    margin-top: 20px;
+  }
+
+.page-section__title{
+    font-size: 30px;
+    color: #061e37;
+    font-weight: bold;
+  }
+
+.page-section__paragraph{
+    font-size: 15px;
+    color: #061e37;
+    max-width: 520px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+
+.footer--bg{
+    background-color: #021E2F;
+  }
+
+.footer__title{
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+.footer ul{
+    padding-left: 0;
+  }
+
+.footer ul li{
+    list-style-type: none;
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 15x;
+  }
+
+.footer ul li a{
+      color: white;
+      font-weight: bold;
+    }
+/* 
+.footer .gutters-100.row{
+  margin-right: -50px;
+  margin-left: -50px;
+} */
+
+.footer .gutters-100 > [class^="col-"], .gutters-100 > [class^="col-"]{
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.col-md-6 {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+}
