@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="ja">
 <head>
@@ -25,9 +26,6 @@
         <p class="page-section__paragraph">
           目標達成のサポートを目的としたアプリです。   
           <br>これから達成したい目標があったり、成長したい人用の役に立てば幸いです</p>
-          
-          <a class="button" href="#">SIGN IN</a>
-          <a class="button" href="#">SIGN UP</a>
       </div>
     </div>
   </section>
@@ -35,6 +33,18 @@
   <section class="subscribe">
     <div class="container">
       <div class="page-section page-section--medium text-center">
+        <h2>サインインはこちらから</h2>
+        <form method="POST" role="form" action="" class="signin-form">
+          {% csrf_token %}
+          {{form|crispy}}
+          {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+          <button type="submit" class="button">Sign in</button>
+          <p>*アプリの利用にはアカウント登録が必要です</p>
+        </form>
+        <h2>アカウント登録</h2>
+        <a class="button" href="{% url 'account:signup' %}">SIGN UP</a>
       </div>
     </div>
   </section>
