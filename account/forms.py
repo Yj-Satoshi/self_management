@@ -31,5 +31,5 @@ class SignInForm(forms.Form):
     password = forms.CharField(
         label='パスワード',
         strip=False,
-        # widget=forms.PasswordInput(render_value=True),
+        widget=forms.PasswordInput(render_value=True),
     )

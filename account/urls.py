@@ -6,5 +6,5 @@ app_name = 'account'
 urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('', views_auth.LoginView.as_view(template_name='account/index.html'), name='index'),
-    path('<int:custom_user_id>/', views.SignIn, name='main'),
+    path('account/<int:pk>/', views.SignIn.post, name='main'),
 ]
