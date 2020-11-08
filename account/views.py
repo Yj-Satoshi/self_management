@@ -1,7 +1,7 @@
 from django.contrib.auth import login as auth_signin
 
 # from django.contrib.auth import get_user_model
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.views import View
 # from django.contrib.auth.models import User
@@ -42,7 +42,7 @@ class SignIn(View):
         if not form.is_valid():
             return render(request, 'account/index.html', {'form': form})
 
-        return render(request, 'account/main.html', {'form': form})
+        return render(request, 'account/signin.html', {'form': form})
 
         auth_signin(request, form)
         # custom_user = request.custom_user

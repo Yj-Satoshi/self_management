@@ -129,4 +129,4 @@ AUTH_USER_MODEL = 'account.CustomUser'
 
 CRISPY_TEMPLATE_ = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'account:main'
+LOGIN_REDIRECT_URL = 'account:signin'
