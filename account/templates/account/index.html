@@ -1,23 +1,7 @@
-{% load static %}
+{% extends 'account/base.html' %}
 {% load crispy_forms_tags %}
-<!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>index page</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="">
-  
-  <link rel="stylesheet" type=text/css href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type=text/css href='{% static "temp/styles/styles.css" %}'>
-</head>
-<body>
-  <header class="header">
-    <div class="container header--wrapper">
-      <h1 class="header__title"><span class="header__title--light">目標管理支援</span> アプリ</h1>
-    </div>
-  </header>
+
+{% block body %}
   
   <section class="process">
     <div class="container">
@@ -48,21 +32,4 @@
       </div>
     </div>
   </section>
-
-  <footer class="footer footer--bg">
-    <div class="container">
-      <div class="page-section page-section--small">
-        <div class="row gutters-100">
-          <div class="col-md-6 col-lg-2">
-            <h3 class="footer__title">Contact</h3>
-            <ul class="footer">
-              <li><span class="glyphicon glyphicon-envelope"></span><a href="#"> support@dartthemes.com</a> </li>
-              <li class="copylight">©︎ 2020 created by Satoshi Yajima</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-</body>
-</html>  
+  {% endblock body %}

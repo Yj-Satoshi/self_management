@@ -1,0 +1,20 @@
+{% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block body %}
+<div class="post-monthly-goal">
+    <form method='POST' role="form" action="" class="login-form">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary">目標投稿!</button>
+    </form>
+    <style>
+    #hint_id_username,
+    #hint_id_password1 {
+        display: none;
+    }
+    </style>
+</div>
+
+{% endblock body %}

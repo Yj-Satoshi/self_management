@@ -16,7 +16,7 @@ class MonthlyGoal(models.Model):
     why_need_goal = models.TextField(
         verbose_name='Why_need_goal',
         max_length=255, null=True, blank=True)
-    sccore = models.IntegerField(verbose_name='sccore')
+    sccore = models.IntegerField(verbose_name='sccore', null=True, blank=True)
     revised_goal = models.CharField(
         verbose_name='revised_goal', max_length=255, null=True, blank=True)
     why_revise = models.TextField(
