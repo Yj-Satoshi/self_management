@@ -2,4 +2,25 @@
 
 {% block body %}
     <h1>{{ user.username }}さんのマイページ</h1>
+    <p><a href="#">サインアウト</a></p>
+    <h1><a href="#">月間目標作成</a></h1>
+
+    <div class="monthly-goal"> 
+        <h1>直近の目標</h1>
+        {% for post in posts %}
+        <!-- 月間目標・1週間アクションを表示(1ヶ月分)、クリックで詳細・編集ページへ -->
+            <!-- <h2><a href="{% url 'post-detail' post.id %}">{{post.title}} <small>written by: </small><span>{{post.author}}</span></a></h2>
+            <p class="subheading">L{{post.date_posted|date:'Y-m-d P'}}</p>
+        
+
+            <ul class="aboutul">
+                <li> <i class="fa fa-check"></i>{{post.content}}</li>                       
+            </ul> -->
+        {% endfor %}
+    </div>
+
+    <div class="calendar">
+
+    </div>
+    
 {% endblock body %}
