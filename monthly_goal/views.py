@@ -6,36 +6,43 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-# from account.models import CustomUser
 from .models import MonthlyGoal
+from account.views import MyPageView
 
 
-class MonthlyGoalListView(ListView):
+class OnlyYouMixin(UserPassesTestMixin):
+    """本人か、スーパーユーザーだけユーザーページアクセスを許可する"""
+    raise_exception = True
+
+    def test_func(self):
+        user = self.request.user
+        return user.pk == self.kwargs['pk'] or user.is_superuser
+
+
+class MonthlyGoalListView(OnlyYouMixin, ListView):
     model = MonthlyGoal
 #   template_name = 'blog/home.html'
 #   context_object_name = 'posts'
 #   ordering = ['-date_posted']
 
 
-class MonthlyGoalDetailView(DetailView):
+class MonthlyGoalDetailView(OnlyYouMixin, DetailView):
     model = MonthlyGoal
 
 
-class MonthlyGoalCreateView(LoginRequiredMixin, CreateView):
+class MonthlyGoalCreateView(OnlyYouMixin, LoginRequiredMixin, CreateView, MyPageView):
     model = MonthlyGoal
     fields = [
-        'month', 'category', 'goal', 'why_need_goal', 'category', 'category'
+        'year', 'month', 'category', 'goal', 'why_need_goal', 'custom_user_id'
         ]
-    # user = request.user
-
-    # def post_detail(request, pk):
+    success_url = '/'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 
-class MonthlyGoalUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class MonthlyGoalUpdateView(OnlyYouMixin, LoginRequiredMixin, UpdateView):
     model = MonthlyGoal
     # fields = ['title','content']
 
@@ -50,9 +57,9 @@ class MonthlyGoalUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         return False
 
 
-class MonthlyGoalDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
     model = MonthlyGoal
-    success_url = '/'
+    # success_url = '/'
 
     def test_func(self):
         monthly_goal = self.get_object()

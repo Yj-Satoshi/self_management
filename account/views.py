@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth import login as auth_signin
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, SignInForm
@@ -41,6 +42,7 @@ class SignIn(View):
         auth_signin(request, form)
 
 
-def users_detail(request, pk):
-    user = request.user
-    return render(request, 'account/main.html', {'user': user})
+class MyPageView(UserPassesTestMixin):
+    def users_detail(request, pk):
+        user = request.user
+        return render(request, 'account/main.html', {'user': user})

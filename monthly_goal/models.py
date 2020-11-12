@@ -7,7 +7,7 @@ class MonthlyGoal(models.Model):
     class Meta:
         db_table = 'monthly_goal'
 
-    custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    custom_user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     year = models.IntegerField(verbose_name='year')
     month = models.IntegerField(verbose_name='month')
