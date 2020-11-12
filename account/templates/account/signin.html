@@ -3,6 +3,20 @@
 
     
 {% block body %}
-
-
+{% if request.user.is_authenticated %}
+    <h1>
+        ブログ {{ user.username }}さんは
+        {% if request.user.is_superuser %}
+            スーパーユーザー
+        {% elif request.user.is_staff %}
+            スタッフユーザー
+        {% elif request.user.is_active %}
+            アクティブユーザー
+        {% endif %}
+        です
+    </h1>
+{% else %}
+    <h1>ブログ 一般ユーザーさんです</h1>
+{% endif %}
+<!-- <a href="{% url 'account:main' custom_user.id %}"></a> -->
 {% endblock body %}
