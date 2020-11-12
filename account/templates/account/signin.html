@@ -5,7 +5,7 @@
 {% block body %}
 {% if request.user.is_authenticated %}
     <h1>
-        ブログ {{ user.username }}さんは
+        {{ user.username }}さんは
         {% if request.user.is_superuser %}
             スーパーユーザー
         {% elif request.user.is_staff %}
@@ -18,5 +18,5 @@
 {% else %}
     <h1>ブログ 一般ユーザーさんです</h1>
 {% endif %}
-<!-- <a href="{% url 'account:main' custom_user.id %}"></a> -->
+<h2><a href="{% url 'account:main' request.user.id %}">マイページへ</a></h2>
 {% endblock body %}

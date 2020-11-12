@@ -1,9 +1,8 @@
 from django.contrib.auth import login as auth_signin
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, DetailView
-from django.views import View
-from .models import CustomUser
 from .forms import SignUpForm, SignInForm
+from django.views.generic import TemplateView
+from django.views import View
 
 
 def signup(request):
@@ -42,6 +41,6 @@ class SignIn(View):
         auth_signin(request, form)
 
 
-class MainView(DetailView):
-    model = CustomUser
-    template_name = 'account/main.html'
+def users_detail(request, pk):
+    user = request.user
+    return render(request, 'account/main.html', {'user': user})
