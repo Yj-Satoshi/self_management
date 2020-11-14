@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 from django.views.generic import (
     ListView,
     DetailView,
@@ -33,12 +34,12 @@ class MonthlyGoalDetailView(OnlyYouMixin, DetailView):
 class MonthlyGoalCreateView(OnlyYouMixin, LoginRequiredMixin, CreateView, MyPageView):
     model = MonthlyGoal
     fields = [
-        'year', 'month', 'category', 'goal', 'why_need_goal', 'custom_user_id'
+        'year', 'month', 'category', 'goal', 'why_need_goal'
         ]
-    success_url = '/'
+    success_url = '/home'
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.custom_user_id = self.request.user
         return super().form_valid(form)
 
 
