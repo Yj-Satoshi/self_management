@@ -1,7 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.views.generic import (
-    # ListView,
     DetailView,
     CreateView,
     UpdateView,
@@ -38,25 +37,27 @@ class MonthlyGoalCreateView(OnlyYouMixin, LoginRequiredMixin, CreateView, MyPage
 
 class MonthlyGoalUpdateView(OnlyYouMixin, LoginRequiredMixin, UpdateView):
     model = MonthlyGoal
-    # fields = ['title','content']
+    fields = [
+        'year', 'month', 'category', 'goal', 'why_need_goal'
+        ]
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.custom_user_id = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
         monthly_goal = self.get_object()
-        if self.request.user == monthly_goal.author:
+        if self.request.user == monthly_goal.custom_user_id:
             return True
         return False
 
 
 class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
     model = MonthlyGoal
-    # success_url = '/'
+    success_url = '/signin'
 
     def test_func(self):
         monthly_goal = self.get_object()
-        if self.request.user == monthly_goal.author:
+        if self.request.user == monthly_goal.custom_user_id:
             return True
         return False
