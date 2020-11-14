@@ -6,8 +6,8 @@ app_name = 'account'
 urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('', views_auth.LoginView.as_view(template_name='account/index.html'), name='index'),
-    path('home', views.SignIn.as_view(), name='home'),
+    path('signin/', views.SignIn.as_view(), name='signin'),
     path(
-        'main/<int:pk>/', views.MyPageView.users_detail, name='main'
+        'main/<int:user_id>/', views.MyPageView.users_detail, name='main'
         ),
 ]

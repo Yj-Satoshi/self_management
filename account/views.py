@@ -4,6 +4,12 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm, SignInForm
 from django.views.generic import TemplateView
 from django.views import View
+# from django.views.generic import (
+#     ListView
+# )
+
+from monthly_goal.models import MonthlyGoal
+# from monthly_goal.views import OnlyYouMixin
 
 
 def signup(request):
@@ -43,6 +49,21 @@ class SignIn(View):
 
 
 class MyPageView(UserPassesTestMixin):
-    def users_detail(request, pk):
+    def users_detail(request, user_id):
         user = request.user
-        return render(request, 'account/main.html', {'user': user})
+        monthly_goals = MonthlyGoal.objects.filter(custom_user_id_id=user_id)
+        return render(
+            request, 'account/main.html', {'user': user, 'monthly_goals': monthly_goals})
+        # monthly_goal_list = MonthlyGoal.objects.filter(custom_user_id=user_id)
+    # return render(request, 'account/main.html', {"monthly_goals": monthly_goal_list})
+
+    # model = MonthlyGoal
+    # template_name = 'account/main.html'
+    # context_object_name = 'manthly_goals'
+    # ordering = ['-date_posted']
+
+# class MonthlyGoalListView(OnlyYouMixin, ListView):
+#     model = MonthlyGoal
+#     template_name = 'account/.html'
+#     context_object_name = 'monthly_goals'
+#     ordering = ['-date_posted']

@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.views.generic import (
-    ListView,
+    # ListView,
     DetailView,
     CreateView,
     UpdateView,
@@ -20,13 +20,6 @@ class OnlyYouMixin(UserPassesTestMixin):
         return user.pk == self.kwargs['pk'] or user.is_superuser
 
 
-class MonthlyGoalListView(OnlyYouMixin, ListView):
-    model = MonthlyGoal
-#   template_name = 'blog/home.html'
-#   context_object_name = 'posts'
-#   ordering = ['-date_posted']
-
-
 class MonthlyGoalDetailView(OnlyYouMixin, DetailView):
     model = MonthlyGoal
 
@@ -36,7 +29,7 @@ class MonthlyGoalCreateView(OnlyYouMixin, LoginRequiredMixin, CreateView, MyPage
     fields = [
         'year', 'month', 'category', 'goal', 'why_need_goal'
         ]
-    success_url = '/home'
+    success_url = '/signin'
 
     def form_valid(self, form):
         form.instance.custom_user_id = self.request.user
