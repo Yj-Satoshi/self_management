@@ -20,3 +20,16 @@ class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
         fields = ('username', 'email', 'birth_year', 'gender', 'profession')
+
+
+class SignInForm(forms.Form):
+    username = forms.CharField(
+        label='ユーザー名',
+        max_length=255,
+    )
+
+    password = forms.CharField(
+        label='パスワード',
+        strip=False,
+        widget=forms.PasswordInput(render_value=True),
+    )

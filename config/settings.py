@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
-    'monthly_goal.apps.AccountConfig',
+    'monthly_goal.apps.MonthlyGoalConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,3 +128,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 AUTH_USER_MODEL = 'account.CustomUser'
 
 CRISPY_TEMPLATE_ = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'account:signin'
