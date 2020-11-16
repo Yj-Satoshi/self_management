@@ -1,16 +1,18 @@
 from django.db import models
 from account.models import CustomUser
+import datetime
 # Create your models here.
+date_string = datetime.datetime.now()
 
 
 class MonthlyGoal(models.Model):
     class Meta:
         db_table = 'monthly_goal'
 
-    custom_user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
-    year = models.IntegerField(verbose_name='year')
-    month = models.IntegerField(verbose_name='month')
+    year = models.IntegerField(verbose_name='year', default=date_string.year)
+    month = models.IntegerField(verbose_name='month', default=date_string.month)
     category = models.CharField(verbose_name='category', max_length=255, null=True, blank=True)
     goal = models.CharField(verbose_name='goal', max_length=255)
     why_need_goal = models.TextField(
