@@ -9,7 +9,14 @@
         <h1>直近の目標</h1>
         {% for goal in monthly_goals %}
         <!-- 月間目標・1週間アクションを表示(1ヶ月分)、クリックで詳細・編集ページへ -->
-            <h2>{{ goal.goal }}</h2>
+            <div>
+                <h2>{{ goal.goal }}</h2>
+                <ul>
+                    <li>達成期限{{ goal.year }}年{{ goal.month }}月</li>
+                    <li>週別アクション</li>
+                </ul>
+            </div>
+
         {% endfor %}
     </div>
 
