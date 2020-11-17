@@ -1,6 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import UpdateGoalForm
-from django.shortcuts import render
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -20,54 +18,40 @@ class OnlyYouMixin(UserPassesTestMixin):
         return user.pk == self.kwargs['pk'] or user.is_superuser
 
 
-class MonthlyGoalDetailView(OnlyYouMixin, DetailView):
+class MonthlyGoalDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
     model = MonthlyGoal
 
 
 class MonthlyGoalCreateView(OnlyYouMixin, LoginRequiredMixin, CreateView, MyPageView):
     model = MonthlyGoal
-    # form_class = CreateGoalForm
     fields = [
         'year', 'month', 'category', 'goal', 'why_need_goal'
         ]
     success_url = '/signin'
 
-    # def post(request):
-    #     form = CreateGoalForm()
-    #     if request.method == 'POST':
-    #         form = CreateGoalForm(request.POST)
-    #         if form.is_valid():
-    #             form.save()
-    #             return redirect('/signin')
-    #     else:
-    #         form = CreateGoalForm()
-    #     return render(request, 'account/signup.html', {'form': form})
-
     def form_valid(self, form):
-        form.instance.custom_user_id = self.request.user
+        form.instance.custom_user = self.request.user
         return super().form_valid(form)
 
 
-class MonthlyGoalUpdateView(OnlyYouMixin, LoginRequiredMixin, UpdateView):
+class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = MonthlyGoal
+    # form_calss = UpdateGoalForm
     fields = [
-        'year', 'month', 'category', 'goal', 'why_need_goal'
+        'year', 'month', 'category', 'sccore', 'revised_goal', 'why_revise'
         ]
 
-    def post(self, request, *args, **kwargs):
-        form = UpdateGoalForm(request.POST)
-        if not form.is_valid():
-            return render(request, 'account/signin.html', {'form': form})
-
     def form_valid(self, form):
-        form.instance.custom_user_id = self.request.user
+        form.instance.custom_user = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
         monthly_goal = self.get_object()
-        if self.request.user == monthly_goal.custom_user_id:
+        if self.request.user == monthly_goal.custom_user:
             return True
         return False
+
+    success_url = '/signin'
 
 
 class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
@@ -76,6 +60,6 @@ class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
 
     def test_func(self):
         monthly_goal = self.get_object()
-        if self.request.user == monthly_goal.custom_user_id:
+        if self.request.user == monthly_goal.custom_user:
             return True
         return False
