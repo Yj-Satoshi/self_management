@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>{{ user.username }}さんのマイページ</h1>
-    <p><a href="#">サインアウト</a></p>
+    <p><a href="{% url 'account:signout' %}">サインアウト</a></p>
     <h1><a href="{% url 'monthly_goal:goal-create' %}">月間目標作成</a></h1>
 
     <div class="monthly-goal"> 
@@ -10,7 +10,7 @@
         {% for goal in monthly_goals %}
         <!-- 月間目標・1週間アクションを表示(1ヶ月分)、クリックで詳細・編集ページへ -->
             <div>
-                <h2>{{ goal.goal }}</h2>
+                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">{{ goal.goal }}</a></h2>
                 <ul>
                     <li>達成期限{{ goal.year }}年{{ goal.month }}月</li>
                     <li>週別アクション</li>

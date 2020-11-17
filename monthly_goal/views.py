@@ -20,13 +20,12 @@ class OnlyYouMixin(UserPassesTestMixin):
         return user.pk == self.kwargs['pk'] or user.is_superuser
 
 
-class MonthlyGoalDetailView(OnlyYouMixin, DetailView):
+class MonthlyGoalDetailView(DetailView, UserPassesTestMixin):
     model = MonthlyGoal
 
 
 class MonthlyGoalCreateView(OnlyYouMixin, LoginRequiredMixin, CreateView, MyPageView):
     model = MonthlyGoal
-    # form_class = CreateGoalForm
     fields = [
         'year', 'month', 'category', 'goal', 'why_need_goal'
         ]
