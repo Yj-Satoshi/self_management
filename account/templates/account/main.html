@@ -9,7 +9,12 @@
         {% for goal in monthly_goals %}
         <!-- 月間目標・1週間アクションを表示(1ヶ月分)、クリックで詳細・編集ページへ -->
             <div>
-                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">{{ goal.goal }}</a></h2>
+                {% if goal.revised_goal %}
+                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
+                <h3>（初期目標：{{ goal.goal }}）</h3>
+                {% else %}
+                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
+                {% endif %}
                 <ul>
                     <li>達成期限{{ goal.year }}年{{ goal.month }}月</li>
                     <li>週別アクション</li>
