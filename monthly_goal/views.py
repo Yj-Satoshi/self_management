@@ -1,6 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-# from .forms import UpdateGoalForm
-# from django.shortcuts import render
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -20,7 +18,7 @@ class OnlyYouMixin(UserPassesTestMixin):
         return user.pk == self.kwargs['pk'] or user.is_superuser
 
 
-class MonthlyGoalDetailView(DetailView, UserPassesTestMixin):
+class MonthlyGoalDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
     model = MonthlyGoal
 
 
@@ -32,7 +30,7 @@ class MonthlyGoalCreateView(OnlyYouMixin, LoginRequiredMixin, CreateView, MyPage
     success_url = '/signin'
 
     def form_valid(self, form):
-        form.instance.custom_user_id = self.request.user
+        form.instance.custom_user = self.request.user
         return super().form_valid(form)
 
 
@@ -42,11 +40,6 @@ class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView)
     fields = [
         'year', 'month', 'category', 'sccore', 'revised_goal', 'why_revise'
         ]
-
-    # def post(self, request, *args, **kwargs):
-    #     form = UpdateGoalForm(request.POST)
-    #     if not form.is_valid():
-    #         return render(request, 'account/signin.html', {'form': form})
 
     def form_valid(self, form):
         form.instance.custom_user = self.request.user
@@ -58,6 +51,8 @@ class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView)
             return True
         return False
 
+    success_url = '/signin'
+
 
 class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
     model = MonthlyGoal
@@ -65,6 +60,6 @@ class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
 
     def test_func(self):
         monthly_goal = self.get_object()
-        if self.request.user == monthly_goal.custom_user_id:
+        if self.request.user == monthly_goal.custom_user:
             return True
         return False

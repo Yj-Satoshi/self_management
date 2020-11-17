@@ -16,11 +16,12 @@ urlpatterns = [
     ),
     path(
         'goal/<int:pk>/update', views.MonthlyGoalUpdateView.as_view(
-            template_name='monthly_goal/goal_create.html'),
+            template_name='monthly_goal/goal_update.html'),
         name='goal-update'
     ),
     path(
-        'goal/<int:pk>/delete', views.MonthlyGoalDeleteView.as_view(),
+        'goal/<int:pk>/delete', views.MonthlyGoalDeleteView.as_view(
+            template_name='monthly_goal/goal_delete.html'),
         name='goal-delete'
     ),
 ]
