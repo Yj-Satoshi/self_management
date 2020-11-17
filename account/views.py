@@ -47,5 +47,9 @@ class MyPageView(UserPassesTestMixin):
     def users_detail(request, user_id):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(custom_user_id=user_id)
+        context = {
+            'user': user,
+            'monthly_goals': monthly_goals
+        }
         return render(
-            request, 'account/main.html', {'user': user, 'monthly_goals': monthly_goals})
+            request, 'account/main.html', context)
