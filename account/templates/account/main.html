@@ -2,7 +2,6 @@
 
 {% block body %}
     <h1>{{ user.username }}さんのマイページ</h1>
-    <p><a href="{% url 'account:signout' %}">サインアウト</a></p>
     <h1><a href="{% url 'monthly_goal:goal-create' %}">月間目標作成</a></h1>
 
     <div class="monthly-goal"> 

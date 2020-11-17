@@ -18,9 +18,11 @@
     <div class="container header--wrapper">
       <h1 class="header__title"><span class="header__title--light">目標管理</span> アプリ</h1>
       {% if user.is_authenticated %}
-      <li>{{ user.username }}</li>
-      <li><a href="{% url 'account:signout' %}">サインアウト</a></li>
-      <li><a href="#">プロフィール</a></li> 
+      <div class="baseheader">
+        <div class="baseheader_name">ユーザ名：{{ user.username }}</div>
+        <div class="baseheader_content"><a href="{% url 'account:signout' %}">サインアウト</a></div>
+        <div class="baseheader_content"><a href="#">プロフィール</a></div> 
+      </div>
       {% endif %}
     </div>
   </header>

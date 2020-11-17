@@ -1,3 +1,19 @@
+.baseheader a{
+  color: rgba(0, 36, 240, 0.74);
+}
+
+.baseheader_content {
+  position: relative;
+  padding: 0.25em 0;
+}
+.baseheader_content:after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: -webkit-linear-gradient(to right, rgb(46, 60, 255), transparent);
+  background: linear-gradient(to right, rgb(46, 60, 255), transparent);
+}
+
 body{
   line-height: 1.8;
 }
@@ -22,12 +38,12 @@ html,body {
   }
 
 .header--wrapper{
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
+  display: flex;
+  justify-content: flex-start;
+}
 
 .header__title{
-    font-size: 60px;
+    font-size: 50px;
     color: white;
     font-weight: 800;
   }
@@ -44,8 +60,11 @@ html,body {
   }
 
 @media screen and (max-width: 480px){
-  .header .header__title{
-    font-size: 52px;
+  .header .header__title {
+    font-size: 20px;
+  }
+  body h2{
+    font-size: 15px;
   }
 }
 
@@ -60,21 +79,30 @@ html,body {
   background-color: rgb(0, 129, 11);
   position: relative;
 }
+.baseheader {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
-
+.baseheader_content .baseheader_name{
+  /* padding-top: 7px; */
+  font-size: 20px;
+  color: black;
+  padding-right:5px ;
+}
 
 .button:hover{
-    background-color: #00B8D4;
-    border-color: #00B8D4;
-    -webkit-box-shadow: 3px 4px 7px #2BBBB8;
-            box-shadow: 3px 4px 7px #2BBBB8;
-  }
+  background-color: #00B8D4;
+  border-color: #00B8D4;
+  -webkit-box-shadow: 3px 4px 7px #2BBBB8;
+          box-shadow: 3px 4px 7px #2BBBB8;
+}
 
 .button:focus{
     text-decoration: none;
     color: black
   }
-
 
 
 @media screen and (max-width: 480px){
@@ -95,27 +123,27 @@ html,body {
 }
 
 .page-section--large{
-    margin-top: 150px;
-    margin-bottom: 150px;
-  }
+  margin-top: 150px;
+  margin-bottom: 150px;
+}
 
 .page-section--small{
-    margin-top: 20px;
-  }
+  margin-top: 20px;
+}
 
 .page-section__title{
-    font-size: 30px;
-    color: #061e37;
-    font-weight: bold;
-  }
+  font-size: 30px;
+  color: #061e37;
+  font-weight: bold;
+}
 
 .page-section__paragraph{
-    font-size: 15px;
-    color: #061e37;
-    max-width: 520px;
-    margin-right: auto;
-    margin-left: auto;
-  }
+  font-size: 15px;
+  color: #061e37;
+  max-width: 520px;
+  margin-right: auto;
+  margin-left: auto;
+}
 
 
 .footer--bg{
