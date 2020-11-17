@@ -1,6 +1,6 @@
 {% extends 'account/base.html' %}
-
 {% block body %}
+{% if request.user.is_authenticated %}
     <h1>{{ user.username }}さんのマイページ</h1>
     <h1><a href="{% url 'monthly_goal:goal-create' %}">月間目標作成</a></h1>
 
@@ -18,9 +18,11 @@
 
         {% endfor %}
     </div>
-
+    
     <div class="calendar">
-
+        
     </div>
     
+{% endif %}
 {% endblock body %}
+

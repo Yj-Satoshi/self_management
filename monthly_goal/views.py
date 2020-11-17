@@ -22,7 +22,7 @@ class MonthlyGoalDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
     model = MonthlyGoal
 
 
-class MonthlyGoalCreateView(OnlyYouMixin, LoginRequiredMixin, CreateView, MyPageView):
+class MonthlyGoalCreateView(CreateView, MyPageView):
     model = MonthlyGoal
     fields = [
         'year', 'month', 'category', 'goal', 'why_need_goal'
@@ -36,7 +36,6 @@ class MonthlyGoalCreateView(OnlyYouMixin, LoginRequiredMixin, CreateView, MyPage
 
 class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = MonthlyGoal
-    # form_calss = UpdateGoalForm
     fields = [
         'year', 'month', 'category', 'sccore', 'revised_goal', 'why_revise'
         ]

@@ -1,10 +1,11 @@
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth import login as auth_signin
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, SignInForm
 from django.views.generic import TemplateView
 from django.views import View
 from monthly_goal.models import MonthlyGoal
+from .models import CustomUser
 
 
 def signup(request):
@@ -43,7 +44,7 @@ class SignIn(View):
         auth_signin(request, form)
 
 
-class MyPageView(UserPassesTestMixin):
+class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
     def users_detail(request, user_id):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(custom_user_id=user_id)
@@ -51,5 +52,7 @@ class MyPageView(UserPassesTestMixin):
             'user': user,
             'monthly_goals': monthly_goals
         }
+        if user.id == CustomUser:
+            redirect('/')
         return render(
             request, 'account/main.html', context)

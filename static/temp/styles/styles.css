@@ -2,11 +2,11 @@
   color: rgba(0, 36, 240, 0.74);
 }
 
-.baseheader_content {
+.baseheader_name {
   position: relative;
   padding: 0.25em 0;
 }
-.baseheader_content:after {
+.baseheader_name:after {
   content: "";
   display: block;
   height: 4px;
@@ -39,7 +39,7 @@ html,body {
 
 .header--wrapper{
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .header__title{
@@ -66,6 +66,11 @@ html,body {
   body h2{
     font-size: 15px;
   }
+  .baseheader{
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .button{
@@ -81,15 +86,15 @@ html,body {
 }
 .baseheader {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  width: 300px;
 }
 
 .baseheader_content .baseheader_name{
   /* padding-top: 7px; */
   font-size: 20px;
   color: black;
-  padding-right:5px ;
 }
 
 .button:hover{
