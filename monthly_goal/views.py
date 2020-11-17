@@ -32,17 +32,6 @@ class MonthlyGoalCreateView(OnlyYouMixin, LoginRequiredMixin, CreateView, MyPage
         ]
     success_url = '/signin'
 
-    # def post(request):
-    #     form = CreateGoalForm()
-    #     if request.method == 'POST':
-    #         form = CreateGoalForm(request.POST)
-    #         if form.is_valid():
-    #             form.save()
-    #             return redirect('/signin')
-    #     else:
-    #         form = CreateGoalForm()
-    #     return render(request, 'account/signup.html', {'form': form})
-
     def form_valid(self, form):
         form.instance.custom_user_id = self.request.user
         return super().form_valid(form)
