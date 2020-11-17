@@ -4,6 +4,20 @@
 
 {% block body %}
 <p>詳細ページ</p>
+
+    <div>
+        <div class="top-bar">
+            <h2>目標：{{ object.goal }}</h2>
+            <button class="button"><a href="{% url 'monthly_goal:goal-update' object.id %}">自己評価・目標修正</a></button>
+            <button class="button"><a href="{% url 'monthly_goal:goal-delete' object.id %}">削除</a></button>
+        </div>
+        <ul>
+            <li>達成期限{{ object.year }}年{{ object.month }}月</li>
+            <li>週別アクション</li>
+
+        </ul>
+    </div>
+
 <!-- <div class="post-monthly-goal">
     <form action="">
         <button type="submit" class="btn btn-success slide">Update</button>

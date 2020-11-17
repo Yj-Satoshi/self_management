@@ -15,7 +15,8 @@ urlpatterns = [
             template_name='monthly_goal/goal_detail.html'), name='goal-detail'
     ),
     path(
-        'goal/<int:pk>/update', views.MonthlyGoalUpdateView.as_view(),
+        'goal/<int:pk>/update', views.MonthlyGoalUpdateView.as_view(
+            template_name='monthly_goal/goal_create.html'),
         name='goal-update'
     ),
     path(
