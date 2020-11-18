@@ -45,12 +45,10 @@ class SignIn(View):
 
 
 class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
-    ordering = ['-date_posted']
-
     def users_detail(request, user_id):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(
-            custom_user_id=user_id).order_by('year', '-month', 'goal')
+            custom_user_id=user.id).order_by('year', '-month', 'goal')
         context = {
             'user': user,
             'monthly_goals': monthly_goals
