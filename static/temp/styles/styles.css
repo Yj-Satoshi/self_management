@@ -192,3 +192,11 @@ html,body {
   display: flex;
   flex-direction: column;
 }
+
+.main_upper, .deteil_lower{
+  display: flex;
+  
+}
+.pege_title{
+  
+}
