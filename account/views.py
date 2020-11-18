@@ -48,7 +48,7 @@ class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
     def users_detail(request, user_id):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(
-            custom_user_id=user.id).order_by('year', '-month', 'goal')
+            custom_user_id=user.id).order_by('year', 'month', 'goal')
         context = {
             'user': user,
             'monthly_goals': monthly_goals
@@ -61,7 +61,7 @@ class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
     def scored_users_detail(request, user_id):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(
-            custom_user_id=user.id).order_by('year', '-month', 'goal')
+            custom_user_id=user.id).order_by('-year', '-month', 'goal')
         context = {
             'user': user,
             'monthly_goals': monthly_goals
