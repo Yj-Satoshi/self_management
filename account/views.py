@@ -57,3 +57,16 @@ class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
             redirect('/')
         return render(
             request, 'account/main.html', context)
+
+    def scored_users_detail(request, user_id):
+        user = request.user
+        monthly_goals = MonthlyGoal.objects.filter(
+            custom_user_id=user.id).order_by('year', '-month', 'goal')
+        context = {
+            'user': user,
+            'monthly_goals': monthly_goals
+        }
+        if user.id == CustomUser:
+            redirect('/')
+        return render(
+            request, 'account/main_scored.html', context)
