@@ -3,6 +3,8 @@
 {% load static %}
 
 {% block body %}
+{% if request.user.id == object.custom_user.id %}
+<h1 class="pege_title">目標削除確認</h1>
 <div class="form-box">
     <div class="form-top">
         <div class="form-top-left">
@@ -26,5 +28,5 @@
         </style>
     </div>
 </div>
-
+{% endif %}
 {% endblock body %}
