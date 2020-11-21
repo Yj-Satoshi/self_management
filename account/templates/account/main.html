@@ -21,7 +21,7 @@
                 {% endif %}
                 <ul>
                     <li>達成期限{{ goal.year }}年{{ goal.month }}月</li>
-                    <li>週別アクション</li>
+                    <li><a href="{% url 'weekly_action:action-create' goal.id %}">週別アクション作成</a></li>
                 </ul>
             </div>
         {% endif %}
