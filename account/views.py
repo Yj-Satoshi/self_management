@@ -5,7 +5,7 @@ from .forms import SignUpForm, SignInForm
 from django.views.generic import TemplateView
 from django.views import View
 from monthly_goal.models import MonthlyGoal
-# from weekly_action.models import WeeklyAction
+from weekly_action.models import WeeklyAction
 
 
 def signup(request):
@@ -45,17 +45,17 @@ class SignIn(View):
 
 
 class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
-    def users_detail(request, user_id):
+    def users_detail(request, user_id, *args, **kwargs):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(
             custom_user_id=user.id).exclude(sccore__isnull=False).order_by('year', 'month', 'goal')
-        # weekly_actions = WeeklyAction.objects.filter(
-        #     custom_user_id=user.id
-        # )
+        for goal in monthly_goals:
+            weekly_actions = WeeklyAction.objects.filter(
+                    monthly_goal_id=goal.id)
         context = {
             'user': user,
             'monthly_goals': monthly_goals,
-            # 'weekly_actions': weekly_actions
+            'weekly_actions': weekly_actions
         }
         return render(
             request, 'account/main.html', context)
