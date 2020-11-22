@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-# from django.shortcuts import redirect
+from django.urls import reverse
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -28,14 +28,13 @@ class MonthlyGoalCreateView(CreateView, MyPageView):
     fields = [
         'year', 'month', 'category', 'goal', 'why_need_goal'
         ]
-    success_url = '/signin'
-
-    # def to_main(self):
-    #     redirect('account:main', pk=self.user.id)
 
     def form_valid(self, form):
         form.instance.custom_user = self.request.user
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
 
 
 class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
@@ -54,15 +53,18 @@ class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView)
             return True
         return False
 
-    success_url = '/signin'
+    def get_success_url(self):
+        return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
 
 
 class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
     model = MonthlyGoal
-    success_url = '/signin'
 
     def test_func(self):
         monthly_goal = self.get_object()
         if self.request.user == monthly_goal.custom_user:
             return True
         return False
+
+    def get_success_url(self):
+        return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
