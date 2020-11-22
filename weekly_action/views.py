@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import redirect
+from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -16,13 +17,17 @@ from django.shortcuts import get_object_or_404
 class WeeklyActionDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
     model = WeeklyAction
 
+    # def get(request, monthly_goal_id):
+    #     monthly_goal = MonthlyGoal.objects.filter(id=monthly_goal_id)
+    #     context = {'monthly_goal': monthly_goal}
+    #     return render(request, 'weekly_action/action_detail.html', context)
+
 
 class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
     model = WeeklyAction
     fields = [
         'week_no', 'goal_action', 'why_need_goal'
         ]
-    # success_url = '/signin'
 
     def form_valid(self, form):
         form.instance.custom_user = self.request.user
@@ -31,13 +36,15 @@ class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
         weekly_action.monthly_goal = get_object_or_404(MonthlyGoal, pk=monthly_goal_pk)
         weekly_action.save()
         return super().form_valid(form)
-        return redirect('account:main', pk=self.request.user.id)
+
+    def get_success_url(self):
+        return reverse('account:main', kwargs={'user_id': self.request.user.id})
 
 
 class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = WeeklyAction
     fields = [
-        'year', 'month', 'category', 'score', 'revised_goal', 'why_revise'
+        'score', 'week_no', 'goal_action', 'why_need_goal'
         ]
 
     def form_valid(self, form):
@@ -50,15 +57,18 @@ class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView
             return True
         return False
 
-    success_url = '/signin'
+    def get_success_url(self):
+        return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
 
 
 class WeeklyActionDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
     model = WeeklyAction
-    success_url = '/signin'
 
     def test_func(self):
         weekly_action = self.get_object()
         if self.request.user == weekly_action.custom_user:
             return True
         return False
+
+    def get_success_url(self):
+        return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})

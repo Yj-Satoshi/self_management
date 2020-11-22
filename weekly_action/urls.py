@@ -15,12 +15,12 @@ urlpatterns = [
             template_name='weekly_action/action_detail.html'), name='action-detail'
     ),
     path(
-        'goal/<int:monthly_goal_id>/action/<int:pk>/update', views.WeeklyActionUpdateView.as_view(
+        'action/<int:pk>/update', views.WeeklyActionUpdateView.as_view(
             template_name='weekly_action/action_update.html'),
         name='action-update'
     ),
     path(
-        'goal/<int:monthly_goal_id>/action/<int:pk>/delete', views.WeeklyActionDeleteView.as_view(
+        'action/<int:pk>/delete', views.WeeklyActionDeleteView.as_view(
             template_name='weekly_action/action_delete.html'),
         name='action-delete'
     ),
