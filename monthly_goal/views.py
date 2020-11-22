@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+# from django.shortcuts import redirect
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -29,6 +30,9 @@ class MonthlyGoalCreateView(CreateView, MyPageView):
         ]
     success_url = '/signin'
 
+    # def to_main(self):
+    #     redirect('account:main', pk=self.user.id)
+
     def form_valid(self, form):
         form.instance.custom_user = self.request.user
         return super().form_valid(form)
@@ -37,7 +41,7 @@ class MonthlyGoalCreateView(CreateView, MyPageView):
 class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = MonthlyGoal
     fields = [
-        'year', 'month', 'category', 'sccore', 'revised_goal', 'why_revise'
+        'year', 'month', 'category', 'score', 'revised_goal', 'why_revise'
         ]
 
     def form_valid(self, form):

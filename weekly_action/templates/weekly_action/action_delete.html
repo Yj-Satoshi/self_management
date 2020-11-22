@@ -1,0 +1,32 @@
+{% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block body %}
+{% if request.user.id == object.custom_user.id %}
+<h1 class="pege_title">目標削除確認</h1>
+<div class="form-box">
+    <div class="form-top">
+        <div class="form-top-left">
+            <h3>目標削除</h3>
+            <p>本当に 「{{ object.goal }} を削除しますか？」</p>
+        </div>
+        <div class="form-top-right">
+            <i class="fa fa-pencil"></i>
+        </div>
+    </div>
+    <div class="form-bottom">
+        <form method='POST' role="form" action="" class="login-form">
+          {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        <style>
+          #hint_id_username,
+          #hint_id_password1 {
+            display: none;
+          }
+        </style>
+    </div>
+</div>
+{% endif %}
+{% endblock body %}
