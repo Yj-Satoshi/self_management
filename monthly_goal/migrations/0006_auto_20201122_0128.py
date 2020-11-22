@@ -13,7 +13,10 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='monthlygoal',
             name='category',
-            field=models.CharField(blank=True, choices=[('', '選択肢から選んでください'), ('0', '健康'), ('1', 'ビジネス'), ('2', '学習'), ('3', '家事'), ('4', 'プライベート'), ('5', 'アウトドア・旅行'), ('6', 'その他')], max_length=255, null=True, verbose_name='カテゴリー'),
+            field=models.CharField(blank=True, choices=[
+                ('', '選択肢から選んでください'), ('0', '健康'), ('1', 'ビジネス'), ('2', '学習'), ('3', '家事'),
+                ('4', 'プライベート'), ('5', 'アウトドア・旅行'), ('6', 'その他')
+                ], max_length=255, null=True, verbose_name='カテゴリー'),
         ),
         migrations.AlterField(
             model_name='monthlygoal',
@@ -32,18 +35,23 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='monthlygoal',
-            name='sccore',
-            field=models.IntegerField(blank=True, help_text='目標達成及び期限が来たら入力', null=True, verbose_name='自己評価'),
+            name='score',
+            field=models.IntegerField(
+                blank=True, help_text='目標達成及び期限が来たら入力', null=True, verbose_name='自己評価'),
         ),
         migrations.AlterField(
             model_name='monthlygoal',
             name='why_need_goal',
-            field=models.TextField(blank=True, help_text='なぜその目標を達成したいのか？（未設定可）', max_length=255, null=True, verbose_name='目標設定動機'),
+            field=models.TextField(
+                blank=True, help_text='なぜその目標を達成したいのか？（未設定可）', max_length=255, null=True,
+                verbose_name='目標設定動機'),
         ),
         migrations.AlterField(
             model_name='monthlygoal',
             name='why_revise',
-            field=models.TextField(blank=True, help_text='なぜ目標を修正するのか？（未設定可）', max_length=255, null=True, verbose_name='目標修正理由'),
+            field=models.TextField(
+                blank=True, help_text='なぜ目標を修正するのか？（未設定可）', max_length=255, null=True,
+                verbose_name='目標修正理由'),
         ),
         migrations.AlterField(
             model_name='monthlygoal',

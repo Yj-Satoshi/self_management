@@ -29,7 +29,7 @@ class MonthlyGoal(models.Model):
     why_need_goal = models.TextField(
         verbose_name='目標設定動機', help_text='なぜその目標を達成したいのか？（未設定可）',
         max_length=255, null=True, blank=True)
-    sccore = models.IntegerField(
+    score = models.IntegerField(
         verbose_name='自己評価', null=True,
         help_text='目標達成及び期限が来たら入力', blank=True)
     revised_goal = models.CharField(

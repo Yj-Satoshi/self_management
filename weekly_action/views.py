@@ -36,7 +36,7 @@ class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
 class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = WeeklyAction
     fields = [
-        'year', 'month', 'category', 'sccore', 'revised_goal', 'why_revise'
+        'year', 'month', 'category', 'score', 'revised_goal', 'why_revise'
         ]
 
     def form_valid(self, form):

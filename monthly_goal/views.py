@@ -37,7 +37,7 @@ class MonthlyGoalCreateView(CreateView, MyPageView):
 class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = MonthlyGoal
     fields = [
-        'year', 'month', 'category', 'sccore', 'revised_goal', 'why_revise'
+        'year', 'month', 'category', 'score', 'revised_goal', 'why_revise'
         ]
 
     def form_valid(self, form):

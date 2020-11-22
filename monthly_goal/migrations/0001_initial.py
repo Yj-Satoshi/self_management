@@ -17,16 +17,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='MonthlyGoal',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('year', models.IntegerField(verbose_name='year')),
                 ('month', models.IntegerField(verbose_name='month')),
-                ('category', models.CharField(blank=True, max_length=255, null=True, verbose_name='category')),
+                ('category', models.CharField(
+                    blank=True, max_length=255, null=True, verbose_name='category')),
                 ('goal', models.CharField(max_length=255, verbose_name='goal')),
-                ('why_need_goal', models.TextField(blank=True, max_length=255, null=True, verbose_name='Why_need_goal')),
-                ('sccore', models.IntegerField(blank=True, null=True, verbose_name='sccore')),
-                ('revised_goal', models.CharField(blank=True, max_length=255, null=True, verbose_name='revised_goal')),
-                ('why_revise', models.TextField(blank=True, max_length=255, null=True, verbose_name='Why_revise')),
-                ('custom_user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('why_need_goal', models.TextField(
+                    blank=True, max_length=255, null=True, verbose_name='Why_need_goal')),
+                ('score', models.IntegerField(blank=True, null=True, verbose_name='score')),
+                ('revised_goal', models.CharField(
+                    blank=True, max_length=255, null=True, verbose_name='revised_goal')),
+                ('why_revise', models.TextField(
+                    blank=True, max_length=255, null=True, verbose_name='Why_revise')),
+                ('custom_user', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'db_table': 'monthly_goal',

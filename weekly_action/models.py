@@ -19,6 +19,6 @@ class WeeklyAction(models.Model):
     why_need_goal = models.TextField(
         verbose_name='アクション設定理由', help_text='なぜそのアクションで目標が達成できるのか？（未設定可）',
         max_length=255, null=True, blank=True)
-    sccore = models.IntegerField(
+    score = models.IntegerField(
         verbose_name='自己評価', null=True,
         help_text='アクションを終えたら入力', blank=True)

@@ -4,7 +4,7 @@ from .models import MonthlyGoal
 
 
 class UpdateGoalForm(forms.Form):
-    sccore = forms.IntegerField(
+    score = forms.IntegerField(
         required=False,
         help_text='目標達成及び期限が来たら入力',
         label='自己評価')
