@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-# from django.shortcuts import redirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import (
     DetailView,
@@ -16,6 +16,11 @@ from django.shortcuts import get_object_or_404
 
 class WeeklyActionDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
     model = WeeklyAction
+
+    # def get(request, monthly_goal_id):
+    #     monthly_goal = MonthlyGoal.objects.filter(id=monthly_goal_id)
+    #     context = {'monthly_goal': monthly_goal}
+    #     return render(request, 'weekly_action/action_detail.html', context)
 
 
 class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
