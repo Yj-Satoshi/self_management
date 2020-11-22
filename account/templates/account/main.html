@@ -24,9 +24,9 @@
                     {% for action in weekly_actions %}
                     {% if goal.id == action.monthly_goal_id %}
                         {% if action.score %}
-                            <li>週目:{{ action.week_no }} アクション:{{ action.goal_action }}</li>
+                            <li><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション:{{ action.goal_action }}</a></li>
                         {% else %}
-                            <li>週目:{{ action.week_no }} アクション:{{ action.goal_action }}</li>
+                            <li><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション:{{ action.goal_action }}</a></li>
                         {% endif %}
                     {% endif %}
                     {% endfor %}

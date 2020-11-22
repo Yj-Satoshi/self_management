@@ -3,20 +3,16 @@
 {% load static %}
 {% block body %}
 {% if request.user.id == object.custom_user.id %}
-<h1 class="pege_title">目標詳細</h1>
+<h1 class="pege_title">アクション詳細</h1>
 
     <div>
-        <h2>目標：{{ object.goal }}</h2>
+        <h2>アクション：{{ object.goal_action }}</h2>
         <ul>
-            <li>達成期限{{ object.year }}年{{ object.month }}月</li>
-            <li>修正目標{{ object.revised_goal }}</li>
             <li>週別アクション</li>
         </ul>
-        <div>{{ object.why_need_goal }}</div>
-        <div>{{ object.why_evised}}</div>
         <div class="deteil_lower">
-            <div><a class="button" href="{% url 'monthly_goal:goal-update' object.id %}">自己評価・目標修正</a></div>
-            <div><a class="button" href="{% url 'monthly_goal:goal-delete' object.id %}">削除</a></div>
+            <div><a class="button" href="{% url 'weekly_action:action-update' object.id %}">自己評価・目標修正</a></div>
+            <div><a class="button" href="{% url 'weekly_action:action-delete' object.id %}">削除</a></div>
         </div>
     </div>
 
