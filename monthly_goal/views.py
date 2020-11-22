@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+# from django.shortcuts import redirect
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -28,6 +29,9 @@ class MonthlyGoalCreateView(CreateView, MyPageView):
         'year', 'month', 'category', 'goal', 'why_need_goal'
         ]
     success_url = '/signin'
+
+    # def to_main(self):
+    #     redirect('account:main', pk=self.user.id)
 
     def form_valid(self, form):
         form.instance.custom_user = self.request.user

@@ -57,14 +57,14 @@ class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
             page_obj = paginator.page(paginator.num_pages)
         return page_obj
 
-    def users_detail(request, user_id, *args, **kwargs):
+    def users_detail(request, user_id):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(
             custom_user_id=user.id).exclude(score__isnull=False).order_by('year', 'month', 'goal')
         for goal in monthly_goals:
             weekly_actions = WeeklyAction.objects.filter(
                     monthly_goal_id=goal.id)
-        page_obj = MyPageView.paginate_queryset(request, monthly_goals, 2)
+        page_obj = MyPageView.paginate_queryset(request, monthly_goals, 5)
         context = {
             'user': user,
             'monthly_goals': page_obj.object_list,
@@ -78,7 +78,7 @@ class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(
             custom_user_id=user.id, score__isnull=False).order_by('-year', '-month', 'goal')
-        page_obj = MyPageView.paginate_queryset(request, monthly_goals, 2)
+        page_obj = MyPageView.paginate_queryset(request, monthly_goals, 5)
         context = {
             'user': user,
             'monthly_goals': page_obj.object_list,

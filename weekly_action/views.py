@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import redirect
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -21,7 +22,7 @@ class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
     fields = [
         'week_no', 'goal_action', 'why_need_goal'
         ]
-    success_url = '/signin'
+    # success_url = '/signin'
 
     def form_valid(self, form):
         form.instance.custom_user = self.request.user
@@ -30,7 +31,7 @@ class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
         weekly_action.monthly_goal = get_object_or_404(MonthlyGoal, pk=monthly_goal_pk)
         weekly_action.save()
         return super().form_valid(form)
-        # return redirect('blog:post_detail', pk=post_pk)
+        return redirect('account:main', pk=self.request.user.id)
 
 
 class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
