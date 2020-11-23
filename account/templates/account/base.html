@@ -1,5 +1,6 @@
 <!doctype html>
 {% load static %}
+{% load sass_tags %} 
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -9,7 +10,7 @@
   <meta name="description" content="">
   
   <link rel="stylesheet" type=text/css href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type=text/css href='{% static "temp/styles/styles.css" %}'>
+  <link rel="stylesheet" href='{% sass_src "temp/styles/styles.scss" %}' type="text/css">
 </head>
 <body>
     

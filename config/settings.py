@@ -136,3 +136,10 @@ CRISPY_TEMPLATE_ = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'account:signin'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+SASS_PROCESSOR_AUTO_INCLUDE = False
+SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
+SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
+SASS_PRECISION = 8
+SASS_OUTPUT_STYLE = 'compact'
+SASS_TEMPLATE_EXTS = ['.html', '.haml']
