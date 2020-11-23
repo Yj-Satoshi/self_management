@@ -4,7 +4,7 @@
 
 .baseheader_name {
   position: relative;
-  padding: 0.25em 0;
+  padding:0, 5px;
 }
 .baseheader_name:after {
   content: "";
@@ -39,7 +39,7 @@ html,body {
 
 .header--wrapper{
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
 }
 
 .header__title{
@@ -86,15 +86,15 @@ html,body {
 }
 .baseheader {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   width: 300px;
 }
 
 .baseheader_content .baseheader_name{
-  /* padding-top: 7px; */
   font-size: 20px;
   color: black;
+  padding-left: 35px;
 }
 
 .button:hover{
@@ -108,7 +108,6 @@ html,body {
     text-decoration: none;
     color: black
   }
-
 
 @media screen and (max-width: 480px){
   .header .button{
@@ -150,7 +149,6 @@ html,body {
   margin-left: auto;
 }
 
-
 .footer--bg{
     background-color: #021E2F;
   }
@@ -176,11 +174,6 @@ html,body {
       color: white;
       font-weight: bold;
     }
-/* 
-.footer .gutters-100.row{
-  margin-right: -50px;
-  margin-left: -50px;
-} */
 
 .footer .gutters-100 > [class^="col-"], .gutters-100 > [class^="col-"]{
   padding-right: 50px;
@@ -197,6 +190,13 @@ html,body {
   display: flex;
   
 }
-.pege_title{
-  
+
+.pagenation_main {
+  display: flex;
+  justify-content: center;
+  div {
+    display: grid;
+    place-items: center;
+    padding-right: 5px;
+  }
 }
