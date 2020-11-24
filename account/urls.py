@@ -11,7 +11,7 @@ urlpatterns = [
         'main/<int:user_id>/', views.MyPageView.users_detail, name='main'
         ),
     path(
-        'main_scored/<int:user_id>/', views.MyPageView.scored_users_detail, name='main_scored'
+        'main_scored/<int:user_id>/', views.MyPageScoredView.scored_users_detail, name='main_scored'
     ),
     path(
         'signout/', views_auth.LogoutView.as_view(template_name='account/signout.html'),

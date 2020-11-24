@@ -65,6 +65,7 @@ class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
         weekly_actions = WeeklyAction.objects.filter(
                     custom_user_id=user.id).order_by('score', 'week_no', 'goal_action')[:100]
         page_obj = MyPageView.paginate_queryset(request, monthly_goals, 5)
+
         context = {
             'user': user,
             'monthly_goals': page_obj.object_list,
@@ -74,6 +75,8 @@ class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
         return render(
             request, 'account/main.html', context)
 
+
+class MyPageScoredView(MyPageView):
     def scored_users_detail(request, user_id):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(
