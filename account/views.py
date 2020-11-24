@@ -7,6 +7,7 @@ from django.views import View
 from monthly_goal.models import MonthlyGoal
 from weekly_action.models import WeeklyAction
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from . import mixins
 
 
 def signup(request):
@@ -45,7 +46,7 @@ class SignIn(View):
         auth_signin(request, form)
 
 
-class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
+class MyPageView(mixins.MonthCalendarMixin, UserPassesTestMixin, LoginRequiredMixin):
     def paginate_queryset(request, queryset, count):
         paginator = Paginator(queryset, count)
         page = request.GET.get('page')
@@ -57,6 +58,10 @@ class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
             page_obj = paginator.page(paginator.num_pages)
         return page_obj
 
+    def get_context_data(self):
+        calendar_context = self.get_month_calendar()
+        return calendar_context
+
     def users_detail(request, user_id):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(
@@ -66,11 +71,14 @@ class MyPageView(UserPassesTestMixin, LoginRequiredMixin):
                     custom_user_id=user.id).order_by('score', 'week_no', 'goal_action')[:100]
         page_obj = MyPageView.paginate_queryset(request, monthly_goals, 5)
 
+        calendar_context = MyPageView().get_context_data
+
         context = {
             'user': user,
             'monthly_goals': page_obj.object_list,
             'weekly_actions': weekly_actions,
             'page_obj': page_obj,
+            'calendar_context': calendar_context,
         }
         return render(
             request, 'account/main.html', context)
