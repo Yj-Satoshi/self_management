@@ -18,9 +18,19 @@ body{
   line-height: 1.8;
 }
 
+
 @media screen and (min-width: 1200px) {
   .container{
     width: 1366px;
+  }
+  .main{
+    display: flex;
+    .calendar{
+      width: 50vw;
+    }
+    .monthly-goal{
+      width: 50vw;
+    }
   }
 }
 
@@ -70,6 +80,9 @@ html,body {
     width: 100px;
     display: flex;
     flex-direction: column;
+  }
+  .main{
+    display: block;
   }
 }
 
@@ -201,6 +214,3 @@ html,body {
   }
 }
 
-.main{
-  display: flex;
-}
