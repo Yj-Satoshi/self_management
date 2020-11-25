@@ -1,3 +1,6 @@
+a{
+  text-decoration:none;
+}
 .baseheader a{
   color: rgba(0, 36, 240, 0.74);
 }
@@ -110,11 +113,11 @@ html,body {
   padding-left: 35px;
 }
 
-.button:hover{
-  background-color: #00B8D4;
-  border-color: #00B8D4;
+.button:hover {
+  background-color: #00b8d4b6;
+  background-color: #00b8d4b6;
   -webkit-box-shadow: 3px 4px 7px #2BBBB8;
-          box-shadow: 3px 4px 7px #2BBBB8;
+          box-shadow: 3px 4px 7px #2e9e9c;
 }
 
 .button:focus{
@@ -214,3 +217,64 @@ html,body {
   }
 }
 
+.monthly-goal{
+  margin-left: 10px;
+}
+.goals_content{
+  margin-left: 15px;
+  text-decoration: none;
+  color: black;
+  a:link, a:visited {
+    color: black;
+  }
+}
+.action_create{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  .goal_create_link{
+    font-size: 25px;
+    text-align: center;
+  }
+}
+.weekly_action_select{
+  display: flex;
+  justify-content: space-between;
+  .weekly_action_select_button{
+    display: flex;
+    margin: 0,10px;
+  }
+  .button_red, .button_blue{
+    border-radius: 10px;
+    font-size: 15px;
+    
+    border: 2px solid white;
+    padding: 8px;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+  }
+  .button_red{
+    background-color: rgba(209, 22, 22, 0.466);
+    a:link, a:visited {
+      color: white;
+    }
+  }
+  .button_blue{
+    background-color: rgb(74, 91, 189);
+    a:link, a:visited {
+      color: white;
+    }
+  }
+  .button_blue:hover, .button_red:hover {
+    background-color: #00b8d4b6;
+    background-color: #00b8d4b6;
+    -webkit-box-shadow: 3px 4px 7px #2BBBB8;
+            box-shadow: 3px 4px 7px #2e9e9c;
+  }
+  
+  .button_blue:focus{
+      text-decoration: none;
+      color: black
+    }
+}

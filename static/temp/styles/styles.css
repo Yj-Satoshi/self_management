@@ -1,3 +1,5 @@
+a { text-decoration: none; }
+
 .baseheader a { color: rgba(0, 36, 240, 0.74); }
 
 .baseheader_name { position: relative; padding: 0, 5px; }
@@ -28,7 +30,7 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 
 .baseheader_content .baseheader_name { font-size: 20px; color: black; padding-left: 35px; }
 
-.button:hover { background-color: #00B8D4; border-color: #00B8D4; -webkit-box-shadow: 3px 4px 7px #2BBBB8; box-shadow: 3px 4px 7px #2BBBB8; }
+.button:hover { background-color: #00b8d4b6; background-color: #00b8d4b6; -webkit-box-shadow: 3px 4px 7px #2BBBB8; box-shadow: 3px 4px 7px #2e9e9c; }
 
 .button:focus { text-decoration: none; color: black; }
 
@@ -65,5 +67,33 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 .pagenation_main { display: flex; justify-content: center; }
 
 .pagenation_main div { display: grid; place-items: center; padding-right: 5px; }
+
+.monthly-goal { margin-left: 10px; }
+
+.goals_content { margin-left: 15px; text-decoration: none; color: black; }
+
+.goals_content a:link, .goals_content a:visited { color: black; }
+
+.action_create { display: flex; justify-content: start; align-items: center; }
+
+.action_create .goal_create_link { font-size: 25px; text-align: center; }
+
+.weekly_action_select { display: flex; justify-content: space-between; }
+
+.weekly_action_select .weekly_action_select_button { display: flex; margin: 0,10px; }
+
+.weekly_action_select .button_red, .weekly_action_select .button_blue { border-radius: 10px; font-size: 15px; border: 2px solid white; padding: 8px; display: inline-block; position: relative; text-decoration: none; }
+
+.weekly_action_select .button_red { background-color: rgba(209, 22, 22, 0.466); }
+
+.weekly_action_select .button_red a:link, .weekly_action_select .button_red a:visited { color: white; }
+
+.weekly_action_select .button_blue { background-color: #4a5bbd; }
+
+.weekly_action_select .button_blue a:link, .weekly_action_select .button_blue a:visited { color: white; }
+
+.weekly_action_select .button_blue:hover, .weekly_action_select .button_red:hover { background-color: #00b8d4b6; background-color: #00b8d4b6; -webkit-box-shadow: 3px 4px 7px #2BBBB8; box-shadow: 3px 4px 7px #2e9e9c; }
+
+.weekly_action_select .button_blue:focus { text-decoration: none; color: black; }
 
 /*# sourceMappingURL=styles.css.map */
