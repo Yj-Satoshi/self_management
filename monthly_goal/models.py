@@ -14,6 +14,15 @@ category_choice = (
     ('6', 'その他'),
 )
 
+score_choice = (
+    ('', '自己評価'),
+    ('0', 1),
+    ('1', 2),
+    ('2', 3),
+    ('3', 4),
+    ('4', 5),
+)
+
 
 class MonthlyGoal(models.Model):
     class Meta:
@@ -30,7 +39,7 @@ class MonthlyGoal(models.Model):
         verbose_name='目標設定動機', help_text='なぜその目標を達成したいのか？（未設定可）',
         max_length=255, null=True, blank=True)
     score = models.IntegerField(
-        verbose_name='自己評価', null=True,
+        verbose_name='自己評価', choices=score_choice, null=True,
         help_text='目標達成及び期限が来たら入力', blank=True)
     revised_goal = models.CharField(
         verbose_name='修正目標', max_length=255, null=True, blank=True)

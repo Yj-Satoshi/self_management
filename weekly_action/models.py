@@ -5,6 +5,14 @@ import datetime
 date_string = datetime.datetime.now()
 this_week = round(date_string.day / 7) + 1
 # Create your models here.
+score_choice = (
+    ('', '自己評価'),
+    ('0', 1),
+    ('1', 2),
+    ('2', 3),
+    ('3', 4),
+    ('4', 5),
+)
 
 
 class WeeklyAction(models.Model):
@@ -21,4 +29,4 @@ class WeeklyAction(models.Model):
         max_length=255, null=True, blank=True)
     score = models.IntegerField(
         verbose_name='自己評価', null=True,
-        help_text='アクションを終えたら入力', blank=True)
+        help_text='アクションを終えたら入力', choices=score_choice, blank=True)
