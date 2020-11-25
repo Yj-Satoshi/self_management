@@ -13,20 +13,20 @@
         {% for goal in monthly_goals %}
             <div class="goals_content">
                 {% if goal.revised_goal %}
-                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
-                <h3>（初期目標：{{ goal.goal }}）</h3>
+                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}（初期目標：{{ goal.goal }}）</a></h2>
                 {% else %}
                 <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
                 {% endif %}
                 <div class="action_create">
                     <h3 class="goal_limit">達成期限{{ goal.year }}年{{ goal.month }}月</h3>
-                    <div class="button"><a href="{% url 'weekly_action:action-create' goal.id %}">週別アクション作成</a></div>
+                    <div class="button_middle"><a href="{% url 'weekly_action:action-create' goal.id %}">週別アクション作成</a></div>
                 </div>
+                <div calss="actionlist">アクション一覧</div>
                 {% for action in weekly_actions %}
                 {% if goal.id == action.monthly_goal_id %}
                 {% if not action.score %}
                         <div class="weekly_action_select">
-                            <div><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション:{{ action.goal_action }}</a></div>
+                            <div class="goal_action l_font"><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション:{{ action.goal_action }}</a></div>
                             <div class="weekly_action_select_button">
                                 <div class="button_blue"><a href="{% url 'weekly_action:action-update' action.id %}">編集</a></div>
                                 <div class="button_red"><a href="{% url 'weekly_action:action-delete' action.id %}">削除</a></div>
