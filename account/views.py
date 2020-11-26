@@ -11,7 +11,57 @@ from .mixins import MonthCalendarMixin, WeekCalendarMixin
 import datetime
 import math
 date_string = datetime.datetime.now()
-this_week = math.ceil(date_string.day / 7)
+
+if date_string.day % 7 == 2:
+    if date_string.strftime('%a') == 'Mon' or 'Sun':
+        add = +1
+    elif date_string.strftime('%a') == 'Tue':
+        add = -1
+    else:
+        add = 0
+elif date_string.day % 7 == 3:
+    if date_string.strftime('%a') == 'Tue' or 'Mon':
+        add = +1
+    elif date_string.strftime('%a') == 'Wed':
+        add = -1
+    else:
+        add = 0
+elif date_string.day % 7 == 4:
+    if date_string.strftime('%a') == 'Wed' or 'Tue':
+        add = +1
+    elif date_string.strftime('%a') == 'Thu':
+        add = -1
+    else:
+        add = 0
+elif date_string.day % 7 == 5:
+    if date_string.strftime('%a') == 'Thu' or 'Wed':
+        add = +1
+    elif date_string.strftime('%a') == 'Fri':
+        add = -1
+    else:
+        add = 0
+elif date_string.day % 7 == 6:
+    if date_string.strftime('%a') == 'Fri' or 'Thu':
+        add = +1
+    elif date_string.strftime('%a') == 'Sat':
+        add = -1
+    else:
+        add = 0
+elif date_string.day % 7 == 0:
+    if date_string.strftime('%a') == 'Sat' or 'Fri':
+        add = +1
+    elif date_string.strftime('%a') == 'Sun':
+        add = -1
+    else:
+        add = 0
+elif date_string.day % 7 == 1:
+    if date_string.strftime('%a') == 'Sun' or 'Sat':
+        add = +1
+    elif date_string.strftime('%a') == 'Mon':
+        add = -1
+    else:
+        add = 0
+this_week = math.ceil(date_string.day / 7) + add
 
 
 def signup(request):
@@ -98,6 +148,7 @@ class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, Log
             'page_obj': page_obj,
             'month_calendar_context': month_calendar_context,
             'week_calendar_context': week_calendar_context,
+            'this_week': this_week,
         }
         return render(
             request, 'account/main.html', context)
