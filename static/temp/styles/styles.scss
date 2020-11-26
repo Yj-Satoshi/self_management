@@ -2,7 +2,7 @@ a{
   text-decoration:none;
 }
 .baseheader a{
-  color: rgba(0, 36, 240, 0.74);
+  color: rgba(12, 14, 24, 0.74);
 }
 
 .baseheader_name {
@@ -83,9 +83,13 @@ html,body {
     width: 100px;
     display: flex;
     flex-direction: column;
-  }
+  }  
+}
+
+@media screen and (max-width: 1200px){
   .main{
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 
@@ -100,6 +104,7 @@ html,body {
   background-color: rgb(0, 129, 11);
   position: relative;
 }
+
 .baseheader {
   display: flex;
   justify-content: left;
@@ -204,7 +209,6 @@ html,body {
 
 .main_upper, .deteil_lower{
   display: flex;
-  
 }
 
 .pagenation_main {
@@ -230,24 +234,32 @@ html,body {
   h3{
     font-size: 18px;
   }
-  .l_font{
+  .l_font {
     font-size: 18px;
-    display: flex;
     align-items: center;
-    padding: 0.5em 1em;
-    margin: 0.5em 0;
-    border: double 5px #4ec4d3;
+  }
+  .goal_action {
+    display: flex;
+    padding: 0.15em 0.5em;
+    margin: 0.1em 0;
+    border: double 5px #0e53d4;
+  }
+  .goal_action_finish {
+    display: flex;
+    padding: 0.15em 0.5em;
+    margin: 0.1em 0;
+    border: double 5px #4e66d38f;
   }
 }
 .goals_content{
   background-color: rgba(0, 109, 18, 0.123);
-  margin: 0, 15px;
+  margin-top: 10px;
   text-decoration: none;
   color: rgb(107, 107, 107);
-
-  .actionlist{
-    border-bottom: 6px double #000;
-  }
+  border-style: solid;
+  border-color: #137001; /* 枠の色 */
+  border-width: 5px 1px 1px;
+  box-shadow: 1px 1px 3px #ccc; /* 影 */
   }
 
 
@@ -266,6 +278,7 @@ html,body {
     color: white;
   }
 }
+
 .action_create{
   align-items: center;
   .goal_create_link{
@@ -273,6 +286,7 @@ html,body {
     text-align: center;
   }
 }
+
 .weekly_action_select{
   display: flex;
   justify-content: space-between;
@@ -281,28 +295,32 @@ html,body {
     margin: 0,10px;
   }
 }
+
 .button_red, .button_blue{
   border-radius: 10px;
   font-size: 15px;
-  
+  height: 80%;
   border: 2px solid white;
   padding: 8px;
   display: inline-block;
-  position: relative;
   text-decoration: none;
 }
+
 .button_red{
+  text-align: center;
   background-color: rgba(209, 22, 22, 0.466);
   a:link, a:visited {
     color: white;
   }
 }
+
 .button_blue{
   background-color: rgb(74, 91, 189);
   a:link, a:visited {
     color: white;
   }
 }
+
 .button_blue:hover, .button_red:hover {
   background-color: #00b8d4b6;
   background-color: #00b8d4b6;
@@ -314,3 +332,17 @@ html,body {
     text-decoration: none;
     color: black
   }
+  
+  $hanko-size: 50px;
+  .hanko {
+    font-size: 40px * ($hanko-size / 100px);
+    border: 3px * ($hanko-size / 100px) double #f00;
+    border-radius: 50%;
+    color: #f00;
+    width: $hanko-size;
+    height: $hanko-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+

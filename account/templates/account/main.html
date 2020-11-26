@@ -33,7 +33,10 @@
                             </div>
                         </div >
                         {% else %}
-                            <div><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション済:{{ action.goal_action }}</a></div>
+                        <div class="weekly_action_select">
+                            <div class="goal_action_finish l_font"><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション:{{ action.goal_action }}</a></div>
+                                <div class="hanko">済</div>
+                            </div>
                         {% endif %}
                     {% endif %}
                     {% endfor %}
@@ -42,7 +45,9 @@
     </div>
     
     <div class="calendar">
-        {{ month_calendar_context.month_current | date:"Y年m月" }}  
+        <div>
+            <div>{{ month_calendar_context.month_current | date:"Y年m月" }}</div>
+        </div>
         <table class="table">
             <thead>
             <tr>
@@ -53,6 +58,7 @@
             </thead>
             <p>{{calendar_context.month_days}}</p>
             <tbody>
+                
             {% for week in month_calendar_context.month_days  %}
                 <tr>
                     {% for day in week %}
