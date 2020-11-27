@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'debug_toolbar',
     'sass_processor',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
