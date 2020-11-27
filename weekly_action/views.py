@@ -17,11 +17,16 @@ from django.shortcuts import get_object_or_404
 class WeeklyActionDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
     model = WeeklyAction
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['monthly_goal'] = MonthlyGoal.objects.get(id=self.object.monthly_goal_id)
+        return context
+
 
 class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
     model = WeeklyAction
     fields = [
-        'week_no', 'goal_action', 'why_need_goal'
+        'week_no', 'goal_action', 'why_select_action'
         ]
 
     def form_valid(self, form):
@@ -39,7 +44,7 @@ class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
 class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = WeeklyAction
     fields = [
-        'score', 'week_no', 'goal_action', 'why_need_goal'
+        'score', 'week_no', 'goal_action', 'why_select_action'
         ]
 
     def form_valid(self, form):

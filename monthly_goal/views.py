@@ -7,6 +7,7 @@ from django.views.generic import (
     DeleteView,
 )
 from .models import MonthlyGoal
+from weekly_action.models import WeeklyAction
 from account.views import MyPageView
 
 
@@ -22,6 +23,13 @@ class OnlyYouMixin(UserPassesTestMixin):
 class MonthlyGoalDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
     model = MonthlyGoal
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekly_action'] = WeeklyAction.objects.filter(monthly_goal_id=self.object.id)
+        return context
+        # weekly_action = {'weekly_action': WeeklyAction.objects.filter(id=self.object.id)}
+        # return weekly_action
+
 
 class MonthlyGoalCreateView(CreateView, MyPageView):
     model = MonthlyGoal
@@ -34,7 +42,8 @@ class MonthlyGoalCreateView(CreateView, MyPageView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
+        user = self.request.user
+        return reverse('account:main', kwargs={'user_id': user.id})
 
 
 class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
@@ -54,7 +63,8 @@ class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView)
         return False
 
     def get_success_url(self):
-        return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
+        user = self.request.user
+        return reverse('account:main', kwargs={'user_id': user.id})
 
 
 class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
@@ -67,4 +77,5 @@ class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
         return False
 
     def get_success_url(self):
-        return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
+        user = self.request.user
+        return reverse('account:main', kwargs={'user_id': user.id})
