@@ -9,7 +9,7 @@ a { text-decoration: none; }
 
 body { line-height: 1.8; }
 
-@media screen and (min-width: 1200px) { .container { width: 1366px; } .main { display: flex; } .main .calendar { width: 50vw; } .main .monthly-goal { width: 50vw; } }
+@media screen and (min-width: 1000px) { .container { width: 1000px; } .main { display: flex; } .main .calendar { width: 50vw; } .main .monthly-goal { width: 50vw; } }
 
 html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: hidden; }
 
@@ -23,9 +23,9 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 
 .header__paragraph { font-size: 20px; color: black; max-width: 850px; margin-bottom: 45px; }
 
-@media screen and (max-width: 480px) { .header .header__title { font-size: 20px; } body h2 { font-size: 15px; } .baseheader { width: 100px; display: flex; flex-direction: column; } }
+@media screen and (max-width: 1000px) { .main { display: flex; flex-direction: column-reverse; } .header .header__title { font-size: 20px; } body h2 { font-size: 15px; } .baseheader { width: 80px; display: flex; flex-direction: column; } .button_red, .button_blue { height: 100%; } .button_red a:link, .button_blue a:link { font-size: 15px; } }
 
-@media screen and (max-width: 1200px) { .main { display: flex; flex-direction: column-reverse; } }
+@media screen and (max-width: 1200px) { .button_red, .button_blue { height: 100%; } .button_red a:link, .button_blue a:link { font-size: 12px; } }
 
 .button { padding: 8px 50px; border-radius: 30px; font-size: 18px; color: white; border: 2px solid white; margin-right: 20px; display: inline-block; background-color: #00810b; position: relative; }
 
@@ -36,10 +36,6 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 .button:hover { background-color: #00b8d4b6; background-color: #00b8d4b6; -webkit-box-shadow: 3px 4px 7px #2BBBB8; box-shadow: 3px 4px 7px #2e9e9c; }
 
 .button:focus { text-decoration: none; color: black; }
-
-@media screen and (max-width: 480px) { .header .button { margin-bottom: 20px; } }
-
-@media screen and (max-width: 1000px) { .button__subscribe { right: 0; } }
 
 .page-section { margin-top: 10px; margin-bottom: 10px; }
 
@@ -73,7 +69,11 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 
 .monthly-goal { padding-right: 10px; margin-left: 10px; }
 
-.monthly-goal h1 { font-size: 30px; }
+.monthly-goal h1 { position: relative; border-left: 6px solid #ccc; padding: 10px; color: #000; font-size: 30px; }
+
+.monthly-goal h1::before { position: absolute; left: -6px; bottom: 0; content: ''; width: 6px; height: 50%; background-color: #00a02e; }
+
+.monthly-goal h1::after { position: absolute; left: 0; bottom: 0; content: ''; width: 100%; height: 0; border-bottom: 1px solid #00a02e; }
 
 .monthly-goal h2 { font-size: 25px; padding-top: 10px; }
 
@@ -81,11 +81,13 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 
 .monthly-goal .l_font { font-size: 18px; align-items: center; }
 
-.monthly-goal .goal_action { display: flex; padding: 0.15em 0.5em; margin: 0.1em 0; border: double 5px #0e53d4; }
+.monthly-goal .goal_action { display: flex; padding: 0.15em 0.5em; margin: 0.1em 0; border-bottom: double 5px #376ccf; width: 80%; }
 
-.monthly-goal .goal_action_finish { display: flex; padding: 0.15em 0.5em; margin: 0.1em 0; border: solid 2px #555c81; }
+.monthly-goal .goal_action_finish { display: flex; padding: 0.15em 0.5em; margin: 0.1em 0; border-bottom: solid 2px #555c81; width: 80%; }
 
-.goals_content { background-color: rgba(0, 109, 18, 0.123); margin-top: 10px; text-decoration: none; color: #6b6b6b; border-style: solid; border-color: #137001; /* 枠の色 */ border-width: 5px 1px 1px; box-shadow: 1px 1px 3px #ccc; /* 影 */ }
+.goals_content { background-color: rgba(0, 109, 18, 0.123); margin-top: 10px; padding-bottom: 10px; padding-left: 10px; text-decoration: none; color: #6b6b6b; border-style: solid; border-color: #137001; /* 枠の色 */ border-width: 5px 1px 1px; box-shadow: 1px 1px 3px #ccc; /* 影 */ }
+
+.goals_limit { background-color: rgba(255, 0, 0, 0.096); margin-top: 10px; padding-bottom: 10px; padding-left: 10px; text-decoration: none; color: #6b6b6b; border-style: solid; border-color: #137001; /* 枠の色 */ border-width: 5px 1px 1px; box-shadow: 1px 1px 3px #ccc; /* 影 */ }
 
 .button_middle { padding: 8px 10px; border-radius: 10px; font-size: 12px; color: white; border: 2px solid white; margin-right: 10px; display: inline-block; background-color: rgba(0, 156, 13, 0.726); position: relative; }
 
@@ -95,9 +97,9 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 
 .action_create .goal_create_link { font-size: 25px; text-align: center; }
 
-.weekly_action_select { display: flex; justify-content: space-between; }
+.weekly_action_select { display: flex; justify-content: space-between; margin-bottom: 10px; }
 
-.weekly_action_select .weekly_action_select_button { display: flex; margin: 0,10px; }
+.weekly_action_select .weekly_action_select_button { display: flex; margin: 0,10px; height: 60px; }
 
 .button_red, .button_blue { border-radius: 10px; font-size: 15px; height: 80%; border: 2px solid white; padding: 8px; display: inline-block; text-decoration: none; }
 
@@ -114,5 +116,13 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 .button_middle:hover a:link, .button_middle:hover a:visited, .button_blue:hover a:link, .button_blue:hover a:visited, .button_red:hover a:link, .button_red:hover a:visited { text-decoration: none; color: black; }
 
 .hanko { font-size: 20px; border: 1.5px double #f00; border-radius: 50%; color: #f00; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; }
+
+.not_this_month { background-color: rgba(79, 108, 126, 0.507); height: 120%; width: 110%; }
+
+.goal_button, .action_create { display: flex; align-items: center; }
+
+.goal_button .button_middle, .goal_button .button_blue, .goal_button .button_red, .action_create .button_middle, .action_create .button_blue, .action_create .button_red { margin-left: 4px; }
+
+hr { height: 1px; background-color: green; width: 100%; border: none; }
 
 /*# sourceMappingURL=styles.css.map */
