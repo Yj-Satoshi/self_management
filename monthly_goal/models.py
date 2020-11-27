@@ -40,7 +40,7 @@ class MonthlyGoal(models.Model):
     goal = models.CharField(verbose_name='達成目標', help_text='その月で達成したい目標', max_length=255)
     why_need_goal = models.TextField(
         verbose_name='目標設定動機', help_text='なぜその目標を達成したいのか？（未設定可）',
-        max_length=255, null=True, blank=True)
+        max_length=500, null=True, blank=True)
     score = models.IntegerField(
         verbose_name='自己評価', validators=[clean_score], null=True,
         help_text='目標達成及び期限が来たら入力（範囲１〜５）', blank=True)
@@ -48,5 +48,9 @@ class MonthlyGoal(models.Model):
         verbose_name='修正目標', max_length=255, null=True, blank=True)
     why_revise = models.TextField(
         verbose_name='目標修正理由',
-        max_length=255, null=True,
+        max_length=500, null=True,
         help_text='なぜ目標を修正するのか？（未設定可）', blank=True)
+    afte_memo = models.TextField(
+        verbose_name='後書きメモ',
+        max_length=500, null=True,
+        help_text='評価の際の反省点などの後から振り返るメモ（未設定可）', blank=True)
