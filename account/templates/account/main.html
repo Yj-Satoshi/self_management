@@ -1,4 +1,5 @@
 {% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
 {% block body %}
 
 <h1 class="pege_title">{{ user.username }}さんのマイページ</h1>
@@ -14,8 +15,10 @@
             <div class="goals_content">
                 {% if goal.revised_goal %}
                 <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}（初期目標：{{ goal.goal }}）</a></h2>
+               
                 {% else %}
                 <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
+                
                 {% endif %}
                 <div class="action_create">
                     <h3 class="goal_limit">達成期限{{ goal.year }}年{{ goal.month }}月</h3>

@@ -7,16 +7,27 @@
 
     <div>
         <h2>目標：{{ object.goal }}</h2>
-        <ul>
-            <li>達成期限{{ object.year }}年{{ object.month }}月</li>
-            <li>修正目標{{ object.revised_goal }}</li>
-            <li>週別アクション</li>
-        </ul>
+        
+            <div>達成期限{{ object.year }}年{{ object.month }}月</div>
+            <div>修正目標{{ object.revised_goal }}</div>
+            <div>カテゴリー:{{ object.category }}</div>
+       
         <div>{{ object.why_need_goal }}</div>
         <div>{{ object.why_evised}}</div>
         <div class="deteil_lower">
-            <div><a class="button" href="{% url 'monthly_goal:goal-update' object.id %}">自己評価・目標修正</a></div>
-            <div><a class="button" href="{% url 'monthly_goal:goal-delete' object.id %}">削除</a></div>
+            <div><a class="button_blue" href="{% url 'monthly_goal:goal-update' object.id %}">目標評価・修正</a></div>
+            <div><a class="button_red" href="{% url 'monthly_goal:goal-delete' object.id %}">削除</a></div>
+        </div>
+        <div calss="actionlist">アクション一覧</div>
+            {% for action in weekly_action %}
+                <div class="weekly_action_select">
+                    <div class="goal_action l_font"><a href="{% url 'weekly_action:action-detail' object.id action.id %}">{{ action.week_no }} 週目のアクション:{{ action.goal_action }}</a></div>
+                    <div class="weekly_action_select_button">
+                        <div class="button_blue"><a href="{% url 'weekly_action:action-update' action.id %}">編集</a></div>
+                        <div class="button_red"><a href="{% url 'weekly_action:action-delete' action.id %}">削除</a></div>
+                    </div>
+                </div >
+            {% endfor %}
         </div>
     </div>
 

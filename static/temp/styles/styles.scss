@@ -3,19 +3,20 @@ a{
 }
 .baseheader a{
   color: rgba(12, 14, 24, 0.74);
+  font-size: 15px;
+  margin-left: 10px;
 }
 
 .baseheader_name {
   position: relative;
   padding:0, 5px;
 }
-.baseheader_name:after {
-  content: "";
-  display: block;
-  height: 4px;
-  background: -webkit-linear-gradient(to right, rgb(46, 60, 255), transparent);
-  background: linear-gradient(to right, rgb(46, 60, 255), transparent);
-}
+.baseheader_name:after { 
+  content: ""; 
+  display: block; 
+  height: 4px; 
+  background: -webkit-linear-gradient(to right, #2e3cff, transparent); 
+  background: linear-gradient(to right, #2e3cff, transparent); }
 
 body{
   line-height: 1.8;
@@ -109,7 +110,8 @@ html,body {
   display: flex;
   justify-content: left;
   align-items: center;
-  width: 300px;
+  width: 50%;
+  
 }
 
 .baseheader_content .baseheader_name{
@@ -248,7 +250,7 @@ html,body {
     display: flex;
     padding: 0.15em 0.5em;
     margin: 0.1em 0;
-    border: double 5px #4e66d38f;
+    border: solid 2px #555c81;
   }
 }
 .goals_content{
@@ -309,29 +311,31 @@ html,body {
 .button_red{
   text-align: center;
   background-color: rgba(209, 22, 22, 0.466);
+  color: white;
   a:link, a:visited {
     color: white;
   }
 }
 
 .button_blue{
+  text-align: center;
   background-color: rgb(74, 91, 189);
+  color: white;
   a:link, a:visited {
     color: white;
   }
 }
 
-.button_blue:hover, .button_red:hover {
+.button_middle:hover, .button_blue:hover, .button_red:hover {
+  a:link, a:visited {
+    text-decoration: none;
+    color: black
+    }
   background-color: #00b8d4b6;
   background-color: #00b8d4b6;
   -webkit-box-shadow: 3px 4px 7px #2BBBB8;
           box-shadow: 3px 4px 7px #2e9e9c;
 }
-  
-.button_blue:focus, .button_blue:focus {
-    text-decoration: none;
-    color: black
-  }
   
   $hanko-size: 50px;
   .hanko {

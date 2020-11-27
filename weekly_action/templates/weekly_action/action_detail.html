@@ -6,12 +6,22 @@
 <h1 class="pege_title">アクション詳細</h1>
 
     <div>
+        <h1>{{monthly_goal.month}}月の目標：{{monthly_goal.goal}}</h1>
+        <h2>{{object.week_no}}週目のアクション</h2>
         <h2>アクション：{{ object.goal_action }}</h2>
-        <ul>
-            <li>週別アクション</li>
-        </ul>
+        {% if objec.score %}
+        <div>アクション選択理由：{{object.why_select_action}}</div>
+        {% else %}
+        <div>アクション選択理由：未記入</div>
+        {% endif %}
+
+        {% if objec.score %}
+        <div>評価：{{object.score}}</div>
+        {% else %}
+        <div>評価：未評価</div>
+        {% endif %}
         <div class="deteil_lower">
-            <div><a class="button_blue" href="{% url 'weekly_action:action-update' object.id %}">自己評価・目標修正</a></div>
+            <div><a class="button_blue" href="{% url 'weekly_action:action-update' object.id %}">アクション評価・修正</a></div>
             <div><a class="button_red" href="{% url 'weekly_action:action-delete' object.id %}">削除</a></div>
         </div>
     </div>
