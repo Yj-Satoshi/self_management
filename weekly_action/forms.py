@@ -1,8 +1,8 @@
 from django import forms
-from .models import MonthlyGoal
+from .models import WeeklyAction
 
 
-class GoalScoreForm(forms.Form):
+class ActionScoreForm(forms.Form):
     score = forms.IntegerField(
         required=False,
         label='自己評価')
@@ -14,7 +14,7 @@ class GoalScoreForm(forms.Form):
         return score
 
     class Meta():
-        model = MonthlyGoal
+        model = WeeklyAction
         fields = (
              'socore',
         )

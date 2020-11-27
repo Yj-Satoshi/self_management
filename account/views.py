@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.contrib.auth import login as auth_signin
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, SignInForm
+# from monthly_goal.forms import GoalScoreForm
+# from weekly_action.forms import ActionScoreForm
 from django.views.generic import TemplateView
 from django.views import View
 from monthly_goal.models import MonthlyGoal
@@ -97,10 +98,22 @@ class SignIn(View):
 
         return render(request, 'account/signin.html', {'form': form})
 
-        auth_signin(request, form)
-
 
 class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, LoginRequiredMixin):
+    # マイページに自己評価入力フォーム導入予定
+    # def post_goal_score(request):
+    #     if request.method == 'POST':
+    #         goal_score = GoalScoreForm(request.POST)
+    #     else:
+    #         goal_score = GoalScoreForm()
+    #     return goal_score
+
+    # def post_action_score(request):
+    #     if request.method == 'POST':
+    #         action_score = ActionScoreForm(request.POST)
+    #     else:
+    #         action_score = ActionScoreForm()
+    #     return action_score
 
     def paginate_queryset(request, queryset, count):
         paginator = Paginator(queryset, count)
@@ -139,6 +152,9 @@ class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, Log
         month_calendar_context = MyPageView().get_context_month_data
         week_calendar_context = MyPageView().get_context_week_data
 
+        # goal_score = MyPageView.post_goal_score(request)
+        # action_score = MyPageView.post_action_score(request)
+
         context = {
             'user': user,
             'monthly_goals': page_obj.object_list,
@@ -149,6 +165,8 @@ class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, Log
             'month_calendar_context': month_calendar_context,
             'week_calendar_context': week_calendar_context,
             'this_week': this_week,
+            # 'goal_score_form': goal_score,
+            # 'action_score_form': action_score,
         }
         return render(
             request, 'account/main.html', context)
