@@ -9,16 +9,14 @@
         <h1>{{monthly_goal.month}}月の目標：{{monthly_goal.goal}}</h1>
         <h2>{{object.week_no}}週目のアクション</h2>
         <h2>アクション：{{ object.goal_action }}</h2>
-        {% if objec.score %}
+        {% if objec.why_select_action %}
         <div>アクション選択理由：{{object.why_select_action}}</div>
         {% else %}
         <div>アクション選択理由：未記入</div>
         {% endif %}
-
-        {% if objec.score %}
-        <div>評価：{{object.score}}</div>
-        {% else %}
-        <div>評価：未評価</div>
+        <div>評価：{{object.score|default_if_none:"未評価"}}</div>
+        {% if objec.after_memo %}
+        <div>後書き・反省点：{{object.after_memo}}</div>
         {% endif %}
         <div class="deteil_lower">
             <div><a class="button_blue" href="{% url 'weekly_action:action-update' object.id %}">アクション評価・修正</a></div>
