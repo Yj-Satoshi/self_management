@@ -27,8 +27,6 @@ class MonthlyGoalDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
         context = super().get_context_data(**kwargs)
         context['weekly_action'] = WeeklyAction.objects.filter(monthly_goal_id=self.object.id)
         return context
-        # weekly_action = {'weekly_action': WeeklyAction.objects.filter(id=self.object.id)}
-        # return weekly_action
 
 
 class MonthlyGoalCreateView(CreateView, MyPageView):
@@ -49,7 +47,7 @@ class MonthlyGoalCreateView(CreateView, MyPageView):
 class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = MonthlyGoal
     fields = [
-        'year', 'month', 'category', 'score', 'revised_goal', 'why_revise'
+        'score', 'after_memo', 'year', 'month', 'category',  'revised_goal', 'why_revise'
         ]
 
     def form_valid(self, form):

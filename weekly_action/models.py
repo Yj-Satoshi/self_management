@@ -29,5 +29,6 @@ class WeeklyAction(models.Model):
         verbose_name='自己評価', null=True,
         help_text='アクションを終えたら入力（範囲１〜５）', validators=[clean_score], blank=True)
     after_memo = models.TextField(
-        verbose_name='後書きメモ', help_text='評価の際の反省点などの後から振り返るメモ（未設定可）',
-        max_length=500, null=True, blank=True),
+        verbose_name='後書きメモ',
+        max_length=500, null=True,
+        help_text='評価の際の反省点などの後から振り返るメモ（未設定可）', blank=True)

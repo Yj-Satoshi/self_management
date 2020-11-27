@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-# from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import (
     DetailView,
@@ -44,7 +43,7 @@ class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
 class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = WeeklyAction
     fields = [
-        'score', 'week_no', 'goal_action', 'why_select_action'
+        'score', 'after_memo', 'week_no', 'goal_action', 'why_select_action'
         ]
 
     def form_valid(self, form):

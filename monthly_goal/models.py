@@ -50,7 +50,7 @@ class MonthlyGoal(models.Model):
         verbose_name='目標修正理由',
         max_length=500, null=True,
         help_text='なぜ目標を修正するのか？（未設定可）', blank=True)
-    afte_memo = models.TextField(
+    after_memo = models.TextField(
         verbose_name='後書きメモ',
         max_length=500, null=True,
         help_text='評価の際の反省点などの後から振り返るメモ（未設定可）', blank=True)
