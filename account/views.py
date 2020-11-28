@@ -1,67 +1,40 @@
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, SignInForm
-# from monthly_goal.forms import GoalScoreForm
-# from weekly_action.forms import ActionScoreForm
 from django.views.generic import TemplateView
 from django.views import View
 from monthly_goal.models import MonthlyGoal
 from weekly_action.models import WeeklyAction
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .mixins import MonthCalendarMixin, WeekCalendarMixin
+# from django.contrib.auth import login
+# from .models import CustomUser
+# from django.contrib.auth.views import LoginView
+# from monthly_goal.forms import GoalScoreForm
+# from weekly_action.forms import ActionScoreForm
 import datetime
 import math
 date_string = datetime.datetime.now()
 
-if date_string.day % 7 == 2:
-    if date_string.strftime('%a') == 'Mon' or 'Sun':
+add = 0
+if date_string.strftime('%a') == 'Mon':
+    if date_string.day % 7 != 1:
         add = +1
-    elif date_string.strftime('%a') == 'Tue':
-        add = -1
-    else:
-        add = 0
-elif date_string.day % 7 == 3:
-    if date_string.strftime('%a') == 'Tue' or 'Mon':
+elif date_string.strftime('%a') == 'Tue':
+    if date_string.day % 7 > 2 or date_string.day % 7 == 0:
         add = +1
-    elif date_string.strftime('%a') == 'Wed':
-        add = -1
-    else:
-        add = 0
-elif date_string.day % 7 == 4:
-    if date_string.strftime('%a') == 'Wed' or 'Tue':
+elif date_string.strftime('%a') == 'Wed':
+    if date_string.day % 7 > 3 or date_string.day % 7 == 0:
         add = +1
-    elif date_string.strftime('%a') == 'Thu':
-        add = -1
-    else:
-        add = 0
-elif date_string.day % 7 == 5:
-    if date_string.strftime('%a') == 'Thu' or 'Wed':
+elif date_string.strftime('%a') == 'Thu':
+    if date_string.day % 7 > 4 or date_string.day % 7 == 0:
         add = +1
-    elif date_string.strftime('%a') == 'Fri':
-        add = -1
-    else:
-        add = 0
-elif date_string.day % 7 == 6:
-    if date_string.strftime('%a') == 'Fri' or 'Thu':
+elif date_string.strftime('%a') == 'Fri':
+    if date_string.day % 7 > 5 or date_string.day % 7 == 0:
         add = +1
-    elif date_string.strftime('%a') == 'Sat':
-        add = -1
-    else:
-        add = 0
-elif date_string.day % 7 == 0:
-    if date_string.strftime('%a') == 'Sat' or 'Fri':
+elif date_string.strftime('%a') == 'Sat':
+    if date_string.day % 7 == 0:
         add = +1
-    elif date_string.strftime('%a') == 'Sun':
-        add = -1
-    else:
-        add = 0
-elif date_string.day % 7 == 1:
-    if date_string.strftime('%a') == 'Sun' or 'Sat':
-        add = +1
-    elif date_string.strftime('%a') == 'Mon':
-        add = -1
-    else:
-        add = 0
 this_week = math.ceil(date_string.day / 7) + add
 
 
@@ -81,7 +54,7 @@ class IndexView(TemplateView):
     template_name = 'account/index.html'
 
 
-index = IndexView.as_view()
+# index = IndexView.as_view()
 
 
 class SignIn(View):
@@ -185,3 +158,12 @@ class MyPageScoredView(MyPageView):
         }
         return render(
             request, 'account/main_scored.html', context)
+
+
+# class GuestLogin(LoginView):
+#     form_class = SignInForm
+#     template_name = 'account/index_guest.html'
+
+#     def gestpage(request):
+#         guest_user = CustomUser.objects.get(username='test2')
+#         login(request, guest_user, backend='django.contrib.auth.backends.ModelBackend')
