@@ -1,14 +1,14 @@
 {% extends 'account/base.html' %}
 {% block body %}
+<h1 class="pege_title">{{ user.username }}さんの評価済み目標</h1>
+<div class="main_upper">
+    <botton><a class="button" href="{% url 'monthly_goal:goal-create' %}">目標作成</a></botton>
+    <botton><a class="button" href="{% url 'account:main' user.id%}">未評価目標</a></botton>
+</div>
 
-    <h1 class="pege_title">{{ user.username }}さんのマイページ</h1>
-    <div class="main_upper">
-        <botton><a class="button" href="{% url 'monthly_goal:goal-create' %}">月間目標作成</a></botton>
-        <botton><a class="button" href="{% url 'account:main' user.id%}">未評価目標</a></botton>
-    </div>
-
+<div class="main">
     <div class="monthly-goal"> 
-        <h1>直近の評価済み目標</h1>
+        <h1 class="sub_title">直近の評価済み目標</h1>
         {% for goal in monthly_goals %}
         {% if goal.score %}
             <div class="goals_content">
@@ -20,13 +20,15 @@
                 {% endif %}
                 <ul>
                     <li>達成期限{{ goal.year }}年{{ goal.month }}月</li>
+                    <li>カテゴリー:{{ goal.categoly }}</li>
+                    <li>評価:{{ goal.score }}</li>
                 </ul>
             </div>
         {% endif %}
         {% endfor %}
     </div>
-    
-    <div class="calendar">
+</div>
+    <div class="chart">
         
     </div>
     

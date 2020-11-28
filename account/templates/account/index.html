@@ -1,15 +1,15 @@
 {% extends 'account/base.html' %}
 {% load crispy_forms_tags %}
-
+{% load widget_tweaks %}
+{% load static %}
 {% block body %}
-  
+
   <section class="process">
     <div class="container">
       <div class="page-section text-center">
-        <h2 class="page-section__title">About app</h2>
-        <p class="page-section__paragraph">
-          目標達成のサポートを目的としたアプリです。   
-          <br>これから達成したい目標があったり、成長したい人用の役に立てば幸いです</p>
+        <h2 class="pege_title">About app</h2>
+        <div class="">
+          月単位の目標とその目標を達成する為の週単位のアクションを<br>設定→行動→評価→振り返りのPDCAサイクル支援する目標の管理アプリです。<br>これから達成したい目標があったり、成長したい人の役に立てば幸いです。</div>
       </div>
     </div>
   </section>
@@ -17,10 +17,10 @@
   <section class="subscribe">
     <div class="container">
       <div class="page-section page-section--medium text-center">
-        <h2>サインインはこちらから</h2>
+        <h2 class="sub_title">サインイン</h2>
         <form method="POST" role="form" action="" class="signin-form">
           {% csrf_token %}
-          {{form|crispy}}
+          <div>{{form|crispy}}</div>
           {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
           {% endfor %}

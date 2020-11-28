@@ -1,16 +1,26 @@
 {% extends 'account/base.html' %}
-{% load bootstrap4 %}
-{% bootstrap_css %}
-{% bootstrap_javascript jquery=True %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
 {% load static %}
 {% block body %}
-{% if request.user.id == object.custom_user.id %}<h1 class="pege_title">目標修正</h1>
+{% if request.user.id == object.custom_user.id %}
+<h1 class="pege_title">評価・修正ページ</h1>
 
 <div class="post-monthly-goal">
     <form method='POST' role="form" action="" class="login-form">
+        <h2 class="sub_title">評価</h2>
         {% csrf_token %}
-        {% bootstrap_form form %}
-        <button type="submit" class="btn btn-primary">自己評価・目標修正!</button>
+        <div>{{form.score|as_crispy_field}}</div>
+        <div>{{ form.after_memo|attr:"cols:100"|attr:"rows:3"|as_crispy_field }}</div>
+        <button type="submit" class="btn btn-primary">自己評価!</button>
+        <h2 class="sub_title">修正</h2>
+        <div>{{form.year|as_crispy_field}}</div>
+        <div>{{form.month|as_crispy_field}}</div>
+        <div>{{form.category|as_crispy_field}}</div>
+        <div>{{ form.revised_goal|add_class:'inputtext'|as_crispy_field }}</div>
+        <div>{{ form.why_revise|attr:"cols:100"|attr:"rows:3"|as_crispy_field }}</div>
+       
+        <button type="submit" class="btn btn-primary">目標修正!</button>
     </form>
 </div>
 {% endif %}

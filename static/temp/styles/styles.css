@@ -1,7 +1,9 @@
 @charset "UTF-8";
+.all_content { margin-left: 5px; margin-right: 5px; }
+
 a { text-decoration: none; }
 
-.baseheader a { color: rgba(12, 14, 24, 0.74); font-size: 15px; margin-left: 10px; }
+.baseheader a { color: white; font-size: 15px; margin-left: 10px; }
 
 .baseheader_name { position: relative; padding: 0, 5px; }
 
@@ -9,13 +11,13 @@ a { text-decoration: none; }
 
 body { line-height: 1.8; }
 
-@media screen and (min-width: 1000px) { .container { width: 1000px; } .main { display: flex; } .main .calendar { width: 50vw; } .main .monthly-goal { width: 50vw; } }
+@media screen and (min-width: 1000px) { .container { width: 1000px; margin-left: 10px; } .main { display: flex; } .main .calendar { width: 50vw; } .main .monthly-goal { width: 50vw; } }
 
 html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: hidden; }
 
 .header { background: #00810b; background-size: cover; }
 
-.header--wrapper { display: flex; justify-content: left; }
+.header--wrapper { display: flex; justify-content: start; }
 
 .header__title { font-size: 50px; color: white; font-weight: 800; }
 
@@ -69,29 +71,23 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 
 .monthly-goal { padding-right: 10px; margin-left: 10px; }
 
-.monthly-goal h1 { position: relative; border-left: 6px solid #ccc; padding: 10px; color: #000; font-size: 30px; }
-
-.monthly-goal h1::before { position: absolute; left: -6px; bottom: 0; content: ''; width: 6px; height: 50%; background-color: #00a02e; }
-
-.monthly-goal h1::after { position: absolute; left: 0; bottom: 0; content: ''; width: 100%; height: 0; border-bottom: 1px solid #00a02e; }
-
 .monthly-goal h2 { font-size: 25px; padding-top: 10px; }
 
 .monthly-goal h3 { font-size: 18px; }
 
-.monthly-goal .l_font { font-size: 18px; align-items: center; }
+.monthly-goal .goal_action { display: flex; padding: 5px, 0.5em; margin: 0.1em 0; border-bottom: double 5px #376ccf; width: 70%; }
 
-.monthly-goal .goal_action { display: flex; padding: 0.15em 0.5em; margin: 0.1em 0; border-bottom: double 5px #376ccf; width: 80%; }
+.monthly-goal .goal_action_finish { display: flex; padding: 5px, 0.5em; margin: 0.1em 0; border-bottom: solid 2px #555c81; width: 80%; }
 
-.monthly-goal .goal_action_finish { display: flex; padding: 0.15em 0.5em; margin: 0.1em 0; border-bottom: solid 2px #555c81; width: 80%; }
-
-.goals_content { background-color: rgba(0, 109, 18, 0.123); margin-top: 10px; padding-bottom: 10px; padding-left: 10px; text-decoration: none; color: #6b6b6b; border-style: solid; border-color: #137001; /* 枠の色 */ border-width: 5px 1px 1px; box-shadow: 1px 1px 3px #ccc; /* 影 */ }
+.goals_content { background-color: rgba(0, 109, 18, 0.123); margin-top: 10px; padding-bottom: 10px; padding-left: 10px; text-decoration: none; color: #6b6b6b; border-style: solid; border-color: #137001; border-width: 5px 1px 1px; box-shadow: 1px 1px 3px #ccc; }
 
 .goals_limit { background-color: rgba(255, 0, 0, 0.096); margin-top: 10px; padding-bottom: 10px; padding-left: 10px; text-decoration: none; color: #6b6b6b; border-style: solid; border-color: #137001; /* 枠の色 */ border-width: 5px 1px 1px; box-shadow: 1px 1px 3px #ccc; /* 影 */ }
 
-.button_middle { padding: 8px 10px; border-radius: 10px; font-size: 12px; color: white; border: 2px solid white; margin-right: 10px; display: inline-block; background-color: rgba(0, 156, 13, 0.726); position: relative; }
+.button_middle { padding: 8px 10px; border-radius: 10px; font-size: 12px; color: white; border: 2px solid white; margin-right: 10px; display: inline-block; background-color: rgba(0, 94, 8, 0.726); position: relative; }
 
 .button_middle a:link, .button_middle a:visited { color: white; }
+
+.calendar_title { font-size: 18px; align-items: center; }
 
 .action_create { align-items: center; }
 
@@ -99,7 +95,7 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 
 .weekly_action_select { display: flex; justify-content: space-between; margin-bottom: 10px; }
 
-.weekly_action_select .weekly_action_select_button { display: flex; margin: 0,10px; height: 60px; }
+.weekly_action_select .weekly_action_select_button { display: flex; align-items: center; margin: 0,10px; height: 50px; }
 
 .button_red, .button_blue { border-radius: 10px; font-size: 15px; height: 80%; border: 2px solid white; padding: 8px; display: inline-block; text-decoration: none; }
 
@@ -107,7 +103,7 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 
 .button_red a:link, .button_red a:visited { color: white; }
 
-.button_blue { text-align: center; background-color: #4a5bbd; color: white; }
+.button_blue { text-align: center; margin-right: 10px; background-color: #4a5bbd; color: white; }
 
 .button_blue a:link, .button_blue a:visited { color: white; }
 
@@ -124,5 +120,25 @@ html, body { width: 100%; height: 100%; margin: 0px; padding: 0px; overflow-x: h
 .goal_button .button_middle, .goal_button .button_blue, .goal_button .button_red, .action_create .button_middle, .action_create .button_blue, .action_create .button_red { margin-left: 4px; }
 
 hr { height: 1px; background-color: green; width: 100%; border: none; }
+
+.pege_title { position: relative; border-left: 6px solid #ccc; padding: 10px; color: #000; font-size: 30px; }
+
+.pege_title::before { position: absolute; left: -6px; bottom: 0; content: ''; width: 6px; height: 50%; background-color: #00a02e; }
+
+.pege_title::after { position: absolute; left: 0; bottom: 0; content: ''; width: 100%; height: 0; border-bottom: 1px solid #00a02e; }
+
+.sub_title { font-size: 20px; position: relative; padding: .25em 0 .5em .75em; border-left: 6px solid #0f5313; }
+
+.sub_title::after { position: absolute; left: 0; bottom: 0; content: ''; width: 100%; height: 0; border-bottom: 1px solid #ccc; }
+
+.inputtext { width: 700px; }
+
+.font { font-size: 1.1em; align-items: flex-end; }
+
+.this_week ul { border: double 4px #006142; padding: 0.5em 1em 0.5em 2.3em; position: relative; }
+
+.this_week ul li { line-height: 1.5; padding: 0.5em 0; list-style-type: none !important; }
+
+.this_week ul li:before { font-family: "Font Awesome 5 Free"; content: "\f0a4"; position: absolute; left: 1em; color: #005a3e; }
 
 /*# sourceMappingURL=styles.css.map */
