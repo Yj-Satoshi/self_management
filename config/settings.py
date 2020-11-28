@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'sass_processor',
     'bootstrap4',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,4 @@ SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
 SASS_PRECISION = 8
 SASS_OUTPUT_STYLE = 'compact'
 SASS_TEMPLATE_EXTS = ['.html', '.haml']
+# CRISPY_TEMPLATE_PACK = 'bootstrap3'
