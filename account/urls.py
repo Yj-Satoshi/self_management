@@ -11,6 +11,9 @@ urlpatterns = [
         'main/<int:user_id>/', views.MyPageView.users_detail, name='main'
         ),
     path(
+        'userupdate/<int:pk>/', views.UserUpdateView.as_view(), name='user_update'
+        ),
+    path(
         'main_scored/<int:user_id>/', views.MyPageScoredView.scored_users_detail, name='main_scored'
     ),
     path(
