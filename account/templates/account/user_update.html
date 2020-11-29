@@ -1,0 +1,21 @@
+{% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
+<!-- {% load widget_tweaks %} -->
+{% load static %}
+{% block body %}
+{% if request.user.id == object.id %}
+<h1 class="pege_title">評価・修正ページ</h1>
+
+<div class="post-monthly-goal">
+    <form method='POST' role="form" action="" class="login-form">
+        <h2 class="sub_title">ユーザー情報変更</h2>
+        {% csrf_token %}
+        {{form|crispy}}
+        {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">変更</button>
+    </form>
+</div>
+{% endif %}
+{% endblock body %}
