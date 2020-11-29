@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SELF_MANAGEMENT_SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'self-management.herokuapp.com']
+ALLOWED_HOSTS = ['self-management.herokuapp.com']
 
 
 # Application definition
@@ -150,4 +150,3 @@ SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-django_heroku.settings(locals())
