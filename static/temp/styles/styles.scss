@@ -5,6 +5,13 @@
 a{
   text-decoration:none;
 }
+
+.fa-blog {
+  color: white;
+  a:link, a:visited {
+    color: white;
+  }
+}
 .baseheader a{
   color: rgb(255, 255, 255);
   font-size: 15px;

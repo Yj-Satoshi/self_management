@@ -24,5 +24,3 @@ class GoalScoreForm(forms.ModelForm):
         fields = (
              'socore', 'after_memo'
         )
-
-class GoalModifyForm()

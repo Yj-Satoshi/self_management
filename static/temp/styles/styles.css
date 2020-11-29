@@ -2,6 +2,10 @@
 
 a { text-decoration: none; }
 
+.fa-blog { color: white; }
+
+.fa-blog a:link, .fa-blog a:visited { color: white; }
+
 .baseheader a { color: white; font-size: 15px; margin-left: 10px; }
 
 .baseheader_name { position: relative; padding: 0, 5px; }

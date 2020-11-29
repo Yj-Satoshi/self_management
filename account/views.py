@@ -1,14 +1,15 @@
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.shortcuts import render, redirect
-from .forms import SignUpForm, SignInForm
-from django.views.generic import TemplateView
+from django.urls import reverse
+from .forms import SignUpForm, SignInForm, UserUpdateForm
+from django.views.generic import TemplateView, UpdateView
 from django.views import View
 from monthly_goal.models import MonthlyGoal
 from weekly_action.models import WeeklyAction
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .mixins import MonthCalendarMixin, WeekCalendarMixin
+from .models import CustomUser
 # from django.contrib.auth import login
-# from .models import CustomUser
 # from django.contrib.auth.views import LoginView
 # from monthly_goal.forms import GoalScoreForm
 # from weekly_action.forms import ActionScoreForm
@@ -54,9 +55,6 @@ class IndexView(TemplateView):
     template_name = 'account/index.html'
 
 
-# index = IndexView.as_view()
-
-
 class SignIn(View):
     def get(self, request, *args, **kwargs):
         context = {
@@ -70,6 +68,20 @@ class SignIn(View):
             return render(request, 'account/index.html', {'form': form})
 
         return render(request, 'account/signin.html', {'form': form})
+
+
+class UserUpdateView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
+    model = CustomUser
+    form_class = UserUpdateForm
+    template_name = 'account/user_update.html'
+
+    def form_valid(self, form):
+        form.instance.custom_user = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        user = self.request.user
+        return reverse('account:main', kwargs={'user_id': user.id})
 
 
 class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, LoginRequiredMixin):
