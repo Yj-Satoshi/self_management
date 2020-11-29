@@ -9,6 +9,9 @@ verify_ssl = true
 pip = "*"
 mysqlclient = "*"
 django-crispy-forms = "*"
+libsass = "*"
+django-compressor = "*"
+django-sass-processor = "*"
 
 [requires]
 python_version = "3.8"

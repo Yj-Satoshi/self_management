@@ -3,19 +3,21 @@
 
 {% block body %}
 {% if request.user.is_authenticated %}
-    <h1>
+    <h1 class="page_title">
         {{ user.username }}さんは
         {% if request.user.is_superuser %}
             スーパーユーザー
         {% elif request.user.is_staff %}
             スタッフユーザー
+        {% elif request.user.username == "test2" %}
+                テストユーザー
+        {% elif request.user.username == "gest" %}
+                gestユーザーさんです
         {% elif request.user.is_active %}
-            アクティブユーザー
+            一般ユーザーさんです
         {% endif %}
         です
     </h1>
-{% else %}
-    <h1>一般ユーザーさんです</h1>
 {% endif %}
-<h2><a href="{% url 'account:main' request.user.id %}">マイページへ</a></h2>
+<h2 class="sub_title"><a href="{% url 'account:main' request.user.id %}">マイページへ</a></h2>
 {% endblock body %}

@@ -1,35 +1,68 @@
 {% extends 'account/base.html' %}
 {% block body %}
+<h1 class="pege_title">{{ user.username }}さんの評価済み目標</h1>
+<div class="main_upper">
+    <botton><a class="button" href="{% url 'monthly_goal:goal-create' %}">目標作成</a></botton>
+    <botton><a class="button" href="{% url 'account:main' user.id%}">未評価目標</a></botton>
+</div>
 
-    <h1 class="pege_title">{{ user.username }}さんのマイページ</h1>
-    <div class="main_upper">
-        <botton><a class="button" href="{% url 'monthly_goal:goal-create' %}">月間目標作成</a></botton>
-        <botton><a class="button" href="{% url 'account:main' user.id%}">未評価目標</a></botton>
-    </div>
-
+<div class="main">
     <div class="monthly-goal"> 
-        <h1>直近の評価済み目標</h1>
+        <h1 class="sub_title">直近の評価済み目標</h1>
         {% for goal in monthly_goals %}
-        <!-- 月間目標・1週間アクションを表示(1ヶ月分)、クリックで詳細・編集ページへ -->
         {% if goal.score %}
             <div class="goals_content">
                 {% if goal.revised_goal %}
-                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
+                <h2 class="goal"><i class="fas fa-angle-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
                 <h3>（初期目標：{{ goal.goal }}）</h3>
                 {% else %}
-                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
+                <h2 class="goal"><i class="fas fa-angle-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
                 {% endif %}
-                <ul>
-                    <li>達成期限{{ goal.year }}年{{ goal.month }}月</li>
+                <ul class="action_list">
+                    <li><i class="fas fa-chevron-circle-down"></i>達成期限{{ goal.year }}年{{ goal.month }}月</li>
+                    <li><i class="fas fa-chevron-circle-down"></i>カテゴリー:{{ goal.categoly }}</li>
+                    <li><i class="fas fa-chevron-circle-down"></i>評価:{{ goal.score }}</li>
                 </ul>
             </div>
         {% endif %}
         {% endfor %}
     </div>
-    
-    <div class="calendar">
+</div>
+    <div class="chart">
         
     </div>
     
+    <div class="pagenation_main">
+        <div class="pagenation">ページ</div>
+        <ul class="pagination">
+          <!-- 前へ の部分 -->
+          {% if page_obj.has_previous %}
+              <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                      <span aria-hidden="true">&laquo;</span>
+                  </a>
+              </li>
+          {% endif %}
+      
+          <!-- 数字の部分 -->
+          
+          {% for num in page_obj.paginator.page_range %}
+              {% if page_obj.number == num %}
+                  <li class="page-item active"><a class="page-link" href="#!">{{ num }}</a></li>
+              {% else %}
+                  <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+              {% endif %}
+          {% endfor %}
+      
+          <!-- 次へ の部分 -->
+          {% if page_obj.has_next %}
+              <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                      <span aria-hidden="true">&raquo;</span>
+                  </a>
+              </li>
+          {% endif %}
+        </ul>
+      </div>
 {% endblock body %}
 

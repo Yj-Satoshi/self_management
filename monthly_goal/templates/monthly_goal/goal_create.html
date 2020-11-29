@@ -1,20 +1,22 @@
 {% extends 'account/base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-
+{% load widget_tweaks %}
 {% block body %}
 <div class="post-monthly-goal">
     <form method='POST' role="form" action="" class="login-form">
         {% csrf_token %}
-        {{form|crispy}}
-        <button type="submit" class="btn btn-primary">目標投稿!</button>
+        <div>{{form.year|as_crispy_field}}</div>
+        <div>{{form.month|as_crispy_field}}</div>
+        <div>{{form.category|as_crispy_field}}</div>
+        <div>
+            {{ form.goal|add_class:'inputtext'|as_crispy_field }}
+        </div>
+        <div>{{ form.why_need_goal|attr:"cols:100"|attr:"rows:3"|as_crispy_field }}</div>
+        <div class="form-bottom">
+            <button type="submit" class="btn btn-primary">目標投稿!</button>
+        </div>
     </form>
-    <style>
-    #hint_id_username,
-    #hint_id_password1 {
-        display: none;
-    }
-    </style>
 </div>
 
 {% endblock body %}

@@ -1,5 +1,7 @@
 <!doctype html>
 {% load static %}
+{% load sass_tags %} 
+
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -9,7 +11,18 @@
   <meta name="description" content="">
   
   <link rel="stylesheet" type=text/css href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type=text/css href='{% static "temp/styles/styles.css" %}'>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href='{% sass_src "temp/styles/styles.scss" %}' type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
     
@@ -19,7 +32,7 @@
       <h1 class="header__title"><span class="header__title--light">目標管理</span> アプリ</h1>
       {% if user.is_authenticated %}
       <div class="baseheader">
-        <div class="baseheader_name"><a href="{% url 'account:main' request.user.id %}">マイページ：{{ user.username }}</a></div>
+        <div class="baseheader_name"><a href="{% url 'account:main' request.user.id %}">{{ user.username }}さんのマイページ</a></div>
         <div class="baseheader_content"><a href="{% url 'account:signout' %}">サインアウト</a></div>
         <div class="baseheader_content"><a href="#">プロフィール</a></div> 
       </div>
@@ -27,6 +40,7 @@
     </div>
 
   </header>
+  <div class="all_content">
   {% block body %}
   
   <section class="process">
@@ -51,34 +65,7 @@
   </section>
 
   {% endblock body %}
-  <ul class="pagination">
-    <!-- 前へ の部分 -->
-    {% if page_obj.has_previous %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-    {% endif %}
-
-    <!-- 数字の部分 -->
-    {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-            <li class="page-item active"><a class="page-link" href="#!">{{ num }}</a></li>
-        {% else %}
-            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-        {% endif %}
-    {% endfor %}
-
-    <!-- 次へ の部分 -->
-    {% if page_obj.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    {% endif %}
-  </ul>
+</div>
 
   <footer class="footer footer--bg">
     <div class="container">

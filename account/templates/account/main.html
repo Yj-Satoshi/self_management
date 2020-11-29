@@ -1,43 +1,181 @@
 {% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
 {% block body %}
 
-    <h1 class="pege_title">{{ user.username }}さんのマイページ</h1>
-    <div class="main_upper">
-        <botton><a class="button" href="{% url 'monthly_goal:goal-create' %}">月間目標作成</a></botton>
-        <botton><a class="button" href="{% url 'account:main_scored' user.id %}">評価済み目標</a></botton>
-    </div>
+<h1 class="pege_title">{{ user.username }}さんのマイページ</h1>
+<div class="main_upper">
+    <botton><a class="button" href="{% url 'monthly_goal:goal-create' %}">目標作成</a></botton>
+    <botton><a class="button" href="{% url 'account:main_scored' user.id %}">評価済み目標</a></botton>
+</div>
 
+<div class="main">
     <div class="monthly-goal"> 
-        <h1>直近の目標</h1>
+        <h1 class="sub_title">直近の目標</h1>
         {% for goal in monthly_goals %}
-        <!-- 月間目標・1週間アクションを表示(1ヶ月分)、クリックで詳細・編集ページへ -->
-            <div class="goals_content">
-                {% if goal.revised_goal %}
-                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
-                <h3>（初期目標：{{ goal.goal }}）</h3>
-                {% else %}
-                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
-                {% endif %}
-                <h3>達成期限{{ goal.year }}年{{ goal.month }}月</h3>
-                <div><a href="{% url 'weekly_action:action-create' goal.id %}">週別アクション作成</a></div>
-                <ul>
-                    {% for action in weekly_actions %}
-                    {% if goal.id == action.monthly_goal_id %}
-                        {% if not action.score %}
-                            <li><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション:{{ action.goal_action }}</a></li>
-                        {% else %}
-                            <li><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション済:{{ action.goal_action }}</a></li>
-                        {% endif %}
+        {% if goal.year > month_calendar_context.month_current.year %}
+            {% include 'account/goal_output.html' %}
+        {% elif goal.month < month_calendar_context.month_current.month %}              
+                <div class="goals_limit">
+                    {% if goal.revised_goal %}
+                    <h2 class="goal"><i class="fas fa-angle-double-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
+                    <p class="font">（初期目標：{{ goal.goal }}）</p>
+                    
+                    {% else %}
+                    <h2 class="goal"><i class="fas fa-angle-double-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
+                    
                     {% endif %}
+                    <div class="goal_button">
+                        <h3 class="goal_limit">【期限切れ】達成期限{{ goal.year }}年{{ goal.month }}月</h3>
+                        <div class="monthly_action_select_button">
+                            <div class="button_blue"><a href="{% url 'monthly_goal:goal-update' goal.id %}">評価・修正</a></div>
+                            <div class="button_red"><a href="{% url 'monthly_goal:goal-delete' goal.id %}">削除</a></div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="action_create">
+                        <div calss="actionlist">アクション一覧</div>
+                        <div class="button_middle"><a href="{% url 'weekly_action:action-create' goal.id %}">週別アクション作成</a></div>
+                    </div>
+                    {% for action in weekly_actions %}
+                        {% if goal.id == action.monthly_goal_id %}
+                            {% if not action.score %}
+                            <div class="weekly_action_select">
+                                <div class="goal_action font"><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">{{ action.week_no }}週目アクション:{{ action.goal_action }}</a></div>
+                                <div class="weekly_action_select_button">
+                                    <div class="button_blue"><a href="{% url 'weekly_action:action-update' action.id %}">評価・修正</a></div>
+                                    <div class="button_red"><a href="{% url 'weekly_action:action-delete' action.id %}">削除</a></div>
+                                </div>
+                            </div >
+                            {% elif action.score %}
+                            <div class="weekly_action_select">
+                                <div class="goal_action_finish font"><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション:{{ action.goal_action }}</a></div>
+                                    <div class="hanko">済</div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
                     {% endfor %}
-                </ul>
             </div>
+            {% else %}
+                {% include 'account/goal_output.html' %}  
+            {% endif %}
         {% endfor %}
     </div>
     
     <div class="calendar">
-        
-    </div>
+        <div>
+            <div class="sub_title">{{ month_calendar_context.month_current | date:"Y年m月" }}の日付</div>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                {% for w in month_calendar_context.week_names %}
+                    <th>{{ w }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <p>{{calendar_context.month_days}}</p>
+            <tbody>
+                
+            {% for week in month_calendar_context.month_days  %}
+                <tr>
+                    {% for day in week %}
+                        {% if now == day %}
+                            <td class="table-success">
+                                {% else %}
+                            <td>
+                        {% endif %}
     
+                    {% if month_calendar_context.month_current.month != day.month %}
+                    <div class="not_this_month">
+                        {{ day | date:"m/d" }}
+                    </div>
+                    {% else %}
+                        {{ day.day }}
+                    {% endif %}
+    
+                    </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="this_week">
+            <div class="sub_title">{{ month_calendar_context.month_current | date:"m"}}月{{this_week}}週目の日付</div>
+            <table class="table">
+                <thead>
+                <tr>
+                    {% for w in week_calendar_context.week_names %}
+                        <th>{{ w }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for day in week_calendar_context.week_days %}
+                        {% if now == day %}
+                            <td class="table-success this_month">
+                                {% else %}
+                            <td>
+                        {% endif %}
+                    {% if week_calendar_context.week_first.month != day.month %}
+                        <div class="not_this_month">{{ day | date:"m/d" }}</div>
+                    {% else %}
+                        <div>{{ day.day }}</div>
+                    {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+            <div>
+            <div class="sub_title">{{ month_calendar_context.month_current | date:"m" }}月{{this_week}}週目のアクション一覧</div>
+            </div>
+                <ul class="this_week_action">
+                    {% for this_m_g in this_monthly_goals %}
+                    {% for this_w_a in this_weekly_actions %}
+                    {% if this_m_g.id == this_w_a.monthly_goal_id %}
+                        {% if not action.score %}
+                            <li class="list_font">目標:{{ this_m_g.goal }} アクション:{{ this_w_a.goal_action }}</li>
+                        {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pagenation_main">
+    <div class="pagenation">ページ</div>
+    <ul class="pagination">
+        <!-- 前へ の部分 -->
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    
+        <!-- 数字の部分 -->
+        
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li class="page-item active"><a class="page-link" href="#!">{{ num }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+    
+        <!-- 次へ の部分 -->
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
 {% endblock body %}
 

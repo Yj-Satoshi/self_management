@@ -5,18 +5,40 @@
 {% if request.user.id == object.custom_user.id %}
 <h1 class="pege_title">目標詳細</h1>
 
-    <div>
-        <h2>目標：{{ object.goal }}</h2>
-        <ul>
-            <li>達成期限{{ object.year }}年{{ object.month }}月</li>
-            <li>修正目標{{ object.revised_goal }}</li>
-            <li>週別アクション</li>
-        </ul>
-        <div>{{ object.why_need_goal }}</div>
-        <div>{{ object.why_evised}}</div>
-        <div class="deteil_lower">
-            <div><a class="button" href="{% url 'monthly_goal:goal-update' object.id %}">自己評価・目標修正</a></div>
-            <div><a class="button" href="{% url 'monthly_goal:goal-delete' object.id %}">削除</a></div>
+    <div class="action_list">
+        <h2 class="sub_title">目標：{{ object.goal }}</h2>
+        <div class="main_content">
+            <div class="">達成期限{{ object.year }}年{{ object.month }}月</div>
+            <div class="">修正目標{{ object.revised_goal|default_if_none:"なし" }}</div>
+            <div class="">カテゴリー:{{ object.category }}</div>
+            {% if objec.why_need_goal %}
+            <div class="">目標設定理由：{{object.why_need_goal}}</div>
+            {% else %}
+            <div class="">目標設定理由：未記入</div>
+            {% endif %}
+            {% if objec.why_evised %}
+            <div class="">目標修正理由：{{object.why_evise}}</div>
+            {% endif %}
+            <div class="">評価：{{object.score|default_if_none:"未評価"}}</div>
+            {% if objec.after_memo %}
+            <div class="">後書き・反省点：{{object.why_evise}}</div>
+            {% endif %}
+            
+            <div class="deteil_lower">
+                <div><a class="button_blue" href="{% url 'monthly_goal:goal-update' object.id %}">評価・修正</a></div>
+                <div><a class="button_red" href="{% url 'monthly_goal:goal-delete' object.id %}">削除</a></div>
+            </div>
+        </div>
+        <h2 class="sub_title">アクション一覧</h2>
+            {% for action in weekly_action %}
+                <ul class="weekly_action_select">
+                    <li class="goal_action font"><a href="{% url 'weekly_action:action-detail' object.id action.id %}">{{ action.week_no }} 週目のアクション:{{ action.goal_action }}</a></li>
+                    <div class="weekly_action_select_button">
+                        <div class="button_blue"><a href="{% url 'weekly_action:action-update' action.id %}">評価・修正</a></div>
+                        <div class="button_red"><a href="{% url 'weekly_action:action-delete' action.id %}">削除</a></div>
+                    </div>
+                </ul >
+            {% endfor %}
         </div>
     </div>
 
