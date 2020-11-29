@@ -1,6 +1,6 @@
 {% extends 'account/base.html' %}
 {% load crispy_forms_tags %}
-<!-- {% load widget_tweaks %} -->
+{% load widget_tweaks %}
 {% load static %}
 {% block body %}
 {% if request.user.id == object.id %}
@@ -10,7 +10,11 @@
     <form method='POST' role="form" action="" class="login-form">
         <h2 class="sub_title">ユーザー情報変更</h2>
         {% csrf_token %}
-        {{form|crispy}}
+        {{form.email|add_class:'inputtext'|as_crispy_field}}
+        {{form.birth_year|as_crispy_field}}
+        {{form.address|as_crispy_field}}
+        {{form.gender|as_crispy_field}}
+        {{form.profession|as_crispy_field}}
         {% for error in field.errors %}
         <p style="color: red">{{ error }}</p>
         {% endfor %}

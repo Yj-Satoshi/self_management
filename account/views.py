@@ -79,12 +79,6 @@ class UserUpdateView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
         form.instance.custom_user = self.request.user
         return super().form_valid(form)
 
-    def test_func(self):
-        monthly_goal = self.get_object()
-        if self.request.user == monthly_goal.custom_user:
-            return True
-        return False
-
     def get_success_url(self):
         user = self.request.user
         return reverse('account:main', kwargs={'user_id': user.id})
