@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__fi
 SECRET_KEY = os.environ['SELF_MANAGEMENT_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['self-management.herokuapp.com']
 
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'sass_processor',
     'bootstrap4',
     'widget_tweaks',
