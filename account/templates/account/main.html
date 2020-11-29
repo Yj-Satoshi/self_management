@@ -17,11 +17,11 @@
         {% elif goal.month < month_calendar_context.month_current.month %}              
                 <div class="goals_limit">
                     {% if goal.revised_goal %}
-                    <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
+                    <h2 class="goal"><i class="fas fa-angle-double-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
                     <p class="font">（初期目標：{{ goal.goal }}）</p>
                     
                     {% else %}
-                    <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
+                    <h2 class="goal"><i class="fas fa-angle-double-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
                     
                     {% endif %}
                     <div class="goal_button">

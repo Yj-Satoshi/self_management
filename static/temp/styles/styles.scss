@@ -56,7 +56,7 @@ html,body {
     background-size: cover;
   }
 
-.header--wrapper{
+.header--wrapper {
   display: flex;
   justify-content: start;
 }
@@ -107,8 +107,12 @@ html,body {
   .button_red, .button_blue{
     height: 100%;
     a:link {
-        font-size: 12px;
+        font-size: 8px;
     }
+  .weekly_action_select_button{
+    height: 100%;
+    align-items: baseline;
+  }
   }
 }
 
@@ -253,7 +257,7 @@ html,body {
     padding: 5px, 0.5em;
     margin: 0.1em 0;
     border-bottom: solid 2px #555c81;
-    width: 80%;
+    width: 70%;
   }
 }
 .goals_content{
@@ -277,9 +281,9 @@ html,body {
   text-decoration: none;
   color: rgb(107, 107, 107);
   border-style: solid;
-  border-color: #137001; /* 枠の色 */
+  border-color: #137001; 
   border-width: 5px 1px 1px;
-  box-shadow: 1px 1px 3px #ccc; /* 影 */
+  box-shadow: 1px 1px 3px #ccc; 
   }
 
 
@@ -291,7 +295,7 @@ html,body {
   border: 2px solid white;
   margin-right: 10px;
   display: inline-block;
-  background-color: rgba(0, 94, 8, 0.726);
+  background-color: green;
   position: relative;
 
   a:link, a:visited {
@@ -315,7 +319,8 @@ html,body {
 
 .weekly_action_select{
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
+  align-items:center;
   margin-bottom: 10px;
   .weekly_action_select_button{
     display: flex;
@@ -347,7 +352,7 @@ html,body {
 .button_blue{
   text-align: center;
   margin-right: 10px;
-  background-color: rgb(74, 91, 189);
+  background-color: rgb(39, 51, 117);
   color: white;
   a:link, a:visited {
     color: white;
@@ -442,6 +447,26 @@ hr {
   border-bottom: 1px solid #ccc;
 }
 
+.goal{
+  font-size: 15px;
+  position: relative;
+     color: white;
+     padding:0.5em 0.5em 0.5em 1.4em;
+     background-color: #157a37;
+     border-radius: 5px;
+     a:link, a:visited {
+       color: white;
+     }
+}
+
+.goal::after{
+  font-size: 15px;
+  position: relative;
+     color: white;
+     padding:0.5em 0.5em 0.5em 1.4em;
+     background-color: #446689;
+     border-radius: 5px;
+}
 
  .inputtext{
    width: 700px;
@@ -450,9 +475,10 @@ hr {
  .font{
    font-size: 1.1em;
    align-items:flex-end ;
+   margin-right: 10px;
  }
 
-.this_week{
+.this_week {
   ul {
     border: double 4px #006142;
     padding: 0.5em 1em 0.5em 2.3em;
@@ -470,4 +496,46 @@ hr {
     left : 1em; 
     color: #005a3e; 
   }
+}
+
+.main_content{
+  margin-left: 30px;
+}
+
+.form-bottom{
+  margin-bottom: 15px;
+  margin-left: 30px;
+}
+ul.action_list{
+  padding: 0 0.7em;
+  font: 14px/1.6 'arial narrow', sans-serif;
+  width:370px;
+  list-style: none;
+}
+ul.action_list li{
+  position: relative;
+  padding: 0.5em 1em 0.5em 2em;
+  margin-bottom: 3px;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  background: #4565a1;
+}
+ul.action_list li:last-child{
+  border:none;
+  margin: 0;
+}
+ul.action_list li:before{
+
+  position: absolute;
+  left: 0.8em;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: normal;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }

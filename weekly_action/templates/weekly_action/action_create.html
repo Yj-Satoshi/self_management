@@ -11,7 +11,9 @@
         <div>{{form.week_no|as_crispy_field}}</div>
         <div>{{ form.goal_action|add_class:'inputtext'|as_crispy_field }}</div>
         <div>{{ form.why_select_action|attr:"cols:100"|attr:"rows:3"|as_crispy_field }}</div>
-        <button type="submit" class="btn btn-primary">アクション設定!</button>
+        <div class="form-bottom">
+            <button type="submit" class="btn btn-primary">アクション設定!</button>
+        </div>
     </form>
 </div>
 

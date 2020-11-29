@@ -12,13 +12,16 @@
         {% csrf_token %}
         <div>{{form.score|as_crispy_field}}</div>
         <div>{{ form.after_memo|attr:"cols:100"|attr:"rows:3"|as_crispy_field }}</div>
-        <button type="submit" class="btn btn-primary">自己評価!</button>
+        <div class="form-bottom">
+            <button type="submit" class="btn btn-primary">自己評価!</button>
+        </div>
         <h2 class="sub_title">修正</h2>
         <div>{{form.week_no|as_crispy_field}}</div>
         <div>{{ form.goal_action|add_class:'inputtext'|as_crispy_field }}</div>
         <div>{{ form.why_select_action|attr:"cols:100"|attr:"rows:3"|as_crispy_field }}</div>
-       
-        <button type="submit" class="btn btn-primary">目標修正!</button>
+        <div class="form-bottom">
+            <button type="submit" class="btn btn-primary">目標修正!</button>
+        </div>
     </form>
 
 </div>

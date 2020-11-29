@@ -113,13 +113,13 @@ class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, Log
             custom_user_id=user.id).exclude(score__isnull=False).order_by('year', 'month', 'goal')
 
         weekly_actions = WeeklyAction.objects.filter(
-                    custom_user_id=user.id).order_by('score', 'week_no', 'goal_action')[:100]
+                    custom_user_id=user.id).order_by('score', 'week_no', 'goal_action')
         this_monthly_goals = MonthlyGoal.objects.filter(
             custom_user_id=user.id, year=date_string.year, month=date_string.month
             ).exclude(score__isnull=False).order_by('year', 'month', 'goal')
         this_weekly_actions = WeeklyAction.objects.filter(
                     custom_user_id=user.id, week_no=this_week
-                    ).exclude(score__isnull=False).order_by('goal_action')[:10]
+                    ).exclude(score__isnull=False).order_by('goal_action')
         page_obj = MyPageView.paginate_queryset(request, monthly_goals, 5)
 
         month_calendar_context = MyPageView().get_context_month_data

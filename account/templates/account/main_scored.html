@@ -13,15 +13,15 @@
         {% if goal.score %}
             <div class="goals_content">
                 {% if goal.revised_goal %}
-                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
+                <h2 class="goal"><i class="fas fa-angle-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
                 <h3>（初期目標：{{ goal.goal }}）</h3>
                 {% else %}
-                <h2><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
+                <h2 class="goal"><i class="fas fa-angle-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
                 {% endif %}
-                <ul>
-                    <li>達成期限{{ goal.year }}年{{ goal.month }}月</li>
-                    <li>カテゴリー:{{ goal.categoly }}</li>
-                    <li>評価:{{ goal.score }}</li>
+                <ul class="action_list">
+                    <li><i class="fas fa-chevron-circle-down"></i>達成期限{{ goal.year }}年{{ goal.month }}月</li>
+                    <li><i class="fas fa-chevron-circle-down"></i>カテゴリー:{{ goal.categoly }}</li>
+                    <li><i class="fas fa-chevron-circle-down"></i>評価:{{ goal.score }}</li>
                 </ul>
             </div>
         {% endif %}
