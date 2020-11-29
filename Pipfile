@@ -20,6 +20,8 @@ django = "*"
 pillow = "*"
 psycopg2 = "*"
 django-heroku = "*"
+django-widget-tweaks = "*"
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.8"
