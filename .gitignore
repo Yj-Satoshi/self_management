@@ -3,3 +3,5 @@ db.mysql
 base
 __pycache__
 local_settings.py
+
+mysql://b7d0352bc734d9:368dac5e@us-cdbr-east-02.cleardb.com/heroku_d6edf5373e4e071?reconnect=true
