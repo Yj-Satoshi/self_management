@@ -62,7 +62,7 @@ class WeekCalendarMixin(BaseCalendarMixin):
             date = datetime.date.today()
 
         for week in self._calendar.monthdatescalendar(date.year, date.month):
-            if date in week:  # 週ごとに取り出され、中身は全てdatetime.date型。該当の日が含まれていれば、それが今回表示すべき週です
+            if date in week:
                 return week
 
     def get_week_calendar(self):

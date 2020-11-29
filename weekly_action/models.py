@@ -5,7 +5,6 @@ from django.core.exceptions import ValidationError
 import datetime
 date_string = datetime.datetime.now()
 this_week = round(date_string.day / 7) + 1
-# Create your models here.
 
 
 def clean_score(value):

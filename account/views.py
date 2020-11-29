@@ -9,10 +9,6 @@ from weekly_action.models import WeeklyAction
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .mixins import MonthCalendarMixin, WeekCalendarMixin
 from .models import CustomUser
-# from django.contrib.auth import login
-# from django.contrib.auth.views import LoginView
-# from monthly_goal.forms import GoalScoreForm
-# from weekly_action.forms import ActionScoreForm
 import datetime
 import math
 date_string = datetime.datetime.now()
@@ -85,21 +81,6 @@ class UserUpdateView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
 
 
 class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, LoginRequiredMixin):
-    # マイページに自己評価入力フォーム導入予定
-    # def post_goal_score(request):
-    #     if request.method == 'POST':
-    #         goal_score = GoalScoreForm(request.POST)
-    #     else:
-    #         goal_score = GoalScoreForm()
-    #     return goal_score
-
-    # def post_action_score(request):
-    #     if request.method == 'POST':
-    #         action_score = ActionScoreForm(request.POST)
-    #     else:
-    #         action_score = ActionScoreForm()
-    #     return action_score
-
     def paginate_queryset(request, queryset, count):
         paginator = Paginator(queryset, count)
         page = request.GET.get('page')
@@ -137,9 +118,6 @@ class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, Log
         month_calendar_context = MyPageView().get_context_month_data
         week_calendar_context = MyPageView().get_context_week_data
 
-        # goal_score = MyPageView.post_goal_score(request)
-        # action_score = MyPageView.post_action_score(request)
-
         context = {
             'user': user,
             'monthly_goals': page_obj.object_list,
@@ -150,8 +128,6 @@ class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, Log
             'month_calendar_context': month_calendar_context,
             'week_calendar_context': week_calendar_context,
             'this_week': this_week,
-            # 'goal_score_form': goal_score,
-            # 'action_score_form': action_score,
         }
         return render(
             request, 'account/main.html', context)
@@ -170,12 +146,3 @@ class MyPageScoredView(MyPageView):
         }
         return render(
             request, 'account/main_scored.html', context)
-
-
-# class GuestLogin(LoginView):
-#     form_class = SignInForm
-#     template_name = 'account/index_guest.html'
-
-#     def gestpage(request):
-#         guest_user = CustomUser.objects.get(username='test2')
-#         login(request, guest_user, backend='django.contrib.auth.backends.ModelBackend')
