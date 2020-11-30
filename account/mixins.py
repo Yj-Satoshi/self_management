@@ -62,22 +62,16 @@ class WeekCalendarMixin(BaseCalendarMixin):
             date = datetime.date.today()
 
         for week in self._calendar.monthdatescalendar(date.year, date.month):
-            if date in week:  # 週ごとに取り出され、中身は全てdatetime.date型。該当の日が含まれていれば、それが今回表示すべき週です
+            if date in week:
                 return week
 
     def get_week_calendar(self):
         """週間カレンダー情報の入った辞書を返す"""
         self.setup_calendar()
         days = self.get_week_days()
-        first = days[0]
-        last = days[-1]
         calendar_data = {
             'now': datetime.date.today(),
             'week_days': days,
-            'week_previous': first - datetime.timedelta(days=7),
-            'week_next': first + datetime.timedelta(days=7),
             'week_names': self.get_week_names(),
-            'week_first': first,
-            'week_last': last,
         }
         return calendar_data

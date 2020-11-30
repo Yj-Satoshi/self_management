@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.urls import reverse
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -36,8 +35,7 @@ class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
         weekly_action.save()
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse('account:main', kwargs={'user_id': self.request.user.id})
+    success_url = '/main'
 
 
 class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
@@ -56,8 +54,7 @@ class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView
             return True
         return False
 
-    def get_success_url(self):
-        return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
+    success_url = '/main'
 
 
 class WeeklyActionDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
@@ -69,5 +66,6 @@ class WeeklyActionDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
             return True
         return False
 
-    def get_success_url(self):
-        return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
+    success_url = '/main'
+    # def get_success_url(self):
+    #     return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})

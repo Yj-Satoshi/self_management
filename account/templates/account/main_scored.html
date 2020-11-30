@@ -3,7 +3,7 @@
 <h1 class="pege_title">{{ user.username }}さんの評価済み目標</h1>
 <div class="main_upper">
     <botton><a class="button" href="{% url 'monthly_goal:goal-create' %}">目標作成</a></botton>
-    <botton><a class="button" href="{% url 'account:main' user.id%}">未評価目標</a></botton>
+    <botton><a class="button" href="{% url 'account:main' %}">未評価目標</a></botton>
 </div>
 
 <div class="main">
@@ -35,7 +35,7 @@
     <div class="pagenation_main">
         <div class="pagenation">ページ</div>
         <ul class="pagination">
-          <!-- 前へ の部分 -->
+            
           {% if page_obj.has_previous %}
               <li class="page-item">
                   <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
@@ -44,8 +44,6 @@
               </li>
           {% endif %}
       
-          <!-- 数字の部分 -->
-          
           {% for num in page_obj.paginator.page_range %}
               {% if page_obj.number == num %}
                   <li class="page-item active"><a class="page-link" href="#!">{{ num }}</a></li>
@@ -53,8 +51,7 @@
                   <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
               {% endif %}
           {% endfor %}
-      
-          <!-- 次へ の部分 -->
+
           {% if page_obj.has_next %}
               <li class="page-item">
                   <a class="page-link" href="?page={{ page_obj.next_page_number }}">

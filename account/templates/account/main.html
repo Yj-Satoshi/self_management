@@ -5,7 +5,7 @@
 <h1 class="pege_title">{{ user.username }}さんのマイページ</h1>
 <div class="main_upper">
     <botton><a class="button" href="{% url 'monthly_goal:goal-create' %}">目標作成</a></botton>
-    <botton><a class="button" href="{% url 'account:main_scored' user.id %}">評価済み目標</a></botton>
+    <botton><a class="button" href="{% url 'account:main_scored'  %}">評価済み目標</a></botton>
 </div>
 
 <div class="main">
@@ -48,7 +48,7 @@
                             </div >
                             {% elif action.score %}
                             <div class="weekly_action_select">
-                                <div class="goal_action_finish font"><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション:{{ action.goal_action }}</a></div>
+                                <div class="goal_action_finish font"><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">{{ action.week_no }} 週目アクション:{{ action.goal_action }}</a></div>
                                     <div class="hanko">済</div>
                                 </div>
                             {% endif %}
@@ -90,7 +90,9 @@
                         {{ day | date:"m/d" }}
                     </div>
                     {% else %}
+                    <div class="this_month">
                         {{ day.day }}
+                    </div>
                     {% endif %}
     
                     </td>
@@ -117,10 +119,10 @@
                                 {% else %}
                             <td>
                         {% endif %}
-                    {% if week_calendar_context.week_first.month != day.month %}
+                    {% if month_calendar_context.month_current.month != day.month %}
                         <div class="not_this_month">{{ day | date:"m/d" }}</div>
                     {% else %}
-                        <div>{{ day.day }}</div>
+                        <div class="this_month">{{ day.day }}</div>
                     {% endif %}
                     </td>
                     {% endfor %}
@@ -148,7 +150,7 @@
 <div class="pagenation_main">
     <div class="pagenation">ページ</div>
     <ul class="pagination">
-        <!-- 前へ の部分 -->
+
         {% if page_obj.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
@@ -156,8 +158,6 @@
                 </a>
             </li>
         {% endif %}
-    
-        <!-- 数字の部分 -->
         
         {% for num in page_obj.paginator.page_range %}
             {% if page_obj.number == num %}
@@ -167,7 +167,6 @@
             {% endif %}
         {% endfor %}
     
-        <!-- 次へ の部分 -->
         {% if page_obj.has_next %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.next_page_number }}">

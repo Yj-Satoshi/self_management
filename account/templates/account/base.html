@@ -32,7 +32,7 @@
       <h1 class="header__title"><span class="header__title--light">目標管理</span> アプリ</h1>
       {% if user.is_authenticated %}
       <div class="baseheader">
-        <div class="baseheader_name"><a href="{% url 'account:main' request.user.id %}">{{ user.username }}さんのマイページ</a></div>
+        <div class="baseheader_name"><a href="{% url 'account:main'  %}">{{ user.username }}さんのマイページ</a></div>
         <div class="baseheader_content"><a href="{% url 'account:signout' %}">サインアウト</a></div>
         <div class="baseheader_content"><a href="{% url 'account:user_update' request.user.id %}">プロフィール変更</a></div> 
       </div>
@@ -43,26 +43,6 @@
   <div class="all_content">
   {% block body %}
   
-  <section class="process">
-    <div class="container">
-      <div class="page-section text-center">
-        <h2 class="page-section__title">About app</h2>
-        <p class="page-section__paragraph">
-          目標達成のサポートを目的としたアプリです。   
-          <br>これから達成したい目標があったり、成長したい人用の役に立てば幸いです</p>
-          
-          <a class="button" href="#">SIGN IN</a>
-          <a class="button" href="#">SIGN UP</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="subscribe">
-    <div class="container">
-      <div class="page-section page-section--medium text-center">
-      </div>
-    </div>
-  </section>
 
   {% endblock body %}
 </div>

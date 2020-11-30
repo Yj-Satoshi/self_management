@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.urls import reverse
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -39,9 +38,7 @@ class MonthlyGoalCreateView(CreateView, MyPageView):
         form.instance.custom_user = self.request.user
         return super().form_valid(form)
 
-    def get_success_url(self):
-        user = self.request.user
-        return reverse('account:main', kwargs={'user_id': user.id})
+    success_url = '/main'
 
 
 class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
@@ -60,9 +57,7 @@ class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView)
             return True
         return False
 
-    def get_success_url(self):
-        user = self.request.user
-        return reverse('account:main', kwargs={'user_id': user.id})
+    success_url = '/main'
 
 
 class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
@@ -74,6 +69,4 @@ class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
             return True
         return False
 
-    def get_success_url(self):
-        user = self.request.user
-        return reverse('account:main', kwargs={'user_id': user.id})
+    success_url = '/main'

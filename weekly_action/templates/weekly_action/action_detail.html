@@ -9,7 +9,7 @@
     <div class="main_content">
         <h2 class="font"><a href="{% url 'monthly_goal:goal-detail' monthly_goal.id %}">{{monthly_goal.month}}月の目標：{{monthly_goal.goal}}(リンク)</a></h2 class="font">
         <h2>{{object.week_no}}週目のアクション</h2>
-        {% if objec.why_select_action %}
+        {% if object.why_select_action %}
         <div>アクション選択理由：{{object.why_select_action}}</div>
         {% else %}
         <div>アクション設定理由：未記入</div>
