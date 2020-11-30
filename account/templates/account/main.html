@@ -48,7 +48,7 @@
                             </div >
                             {% elif action.score %}
                             <div class="weekly_action_select">
-                                <div class="goal_action_finish font"><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">週目:{{ action.week_no }} アクション:{{ action.goal_action }}</a></div>
+                                <div class="goal_action_finish font"><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">{{ action.week_no }} 週目アクション:{{ action.goal_action }}</a></div>
                                     <div class="hanko">済</div>
                                 </div>
                             {% endif %}
