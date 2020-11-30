@@ -15,7 +15,7 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))) **本番時は有効化
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__fi
 SECRET_KEY = os.environ['SELF_MANAGEMENT_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['self-management.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'self-management.herokuapp.com']
 
 
 # Application definition
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    # 'debug_toolbar',
+    'debug_toolbar',
     'sass_processor',
     'widget_tweaks',
 ]
