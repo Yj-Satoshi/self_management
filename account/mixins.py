@@ -69,15 +69,9 @@ class WeekCalendarMixin(BaseCalendarMixin):
         """週間カレンダー情報の入った辞書を返す"""
         self.setup_calendar()
         days = self.get_week_days()
-        first = days[0]
-        last = days[-1]
         calendar_data = {
             'now': datetime.date.today(),
             'week_days': days,
-            'week_previous': first - datetime.timedelta(days=7),
-            'week_next': first + datetime.timedelta(days=7),
             'week_names': self.get_week_names(),
-            'week_first': first,
-            'week_last': last,
         }
         return calendar_data
