@@ -162,4 +162,6 @@ ul.action_list li:last-child { border: none; margin: 0; }
 
 ul.action_list li:before { position: absolute; left: 0.8em; color: #fff; font-size: 0.8em; font-weight: normal; top: 50%; -moz-transform: translateY(-50%); -webkit-transform: translateY(-50%); -o-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); }
 
+.calendar td { width: 14%; }
+
 /*# sourceMappingURL=styles.css.map */

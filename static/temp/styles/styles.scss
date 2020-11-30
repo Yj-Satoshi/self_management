@@ -546,3 +546,9 @@ ul.action_list li:before{
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+.calendar{
+  td {
+    width: 14%;
+  }
+}

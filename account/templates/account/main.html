@@ -90,7 +90,9 @@
                         {{ day | date:"m/d" }}
                     </div>
                     {% else %}
+                    <div class="this_month">
                         {{ day.day }}
+                    </div>
                     {% endif %}
     
                     </td>
@@ -117,10 +119,10 @@
                                 {% else %}
                             <td>
                         {% endif %}
-                    {% if week_calendar_context.week_first.month != day.month %}
+                    {% if month_calendar_context.month_current.month != day.month %}
                         <div class="not_this_month">{{ day | date:"m/d" }}</div>
                     {% else %}
-                        <div>{{ day.day }}</div>
+                        <div class="this_month">{{ day.day }}</div>
                     {% endif %}
                     </td>
                     {% endfor %}
