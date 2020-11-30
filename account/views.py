@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.urls import reverse
+# from django.urls import reverse
 from .forms import SignUpForm, SignInForm, UserUpdateForm
 from django.views.generic import TemplateView, UpdateView
 from django.views import View
@@ -56,14 +56,14 @@ class SignIn(View):
         context = {
             'form': SignInForm(),
         }
-        return render(request, 'account/signin.html', context)
+        return render(request, 'account/main.html', context)
 
     def post(self, request, *args, **kwargs):
         form = SignInForm(request.POST)
         if not form.is_valid():
             return render(request, 'account/index.html', {'form': form})
 
-        return render(request, 'account/signin.html', {'form': form})
+        return render(request, 'account/main.html', {'form': form})
 
 
 class UserUpdateView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
@@ -75,9 +75,12 @@ class UserUpdateView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
         form.instance.custom_user = self.request.user
         return super().form_valid(form)
 
-    def get_success_url(self):
-        user = self.request.user
-        return reverse('account:main', kwargs={'user_id': user.id})
+    success_url = '/main'
+
+    # def get_success_url(self):
+    #     user = self.request.user
+    #     return reverse('account:main', kwargs={'user_id': user.id})
+    #     return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
 
 
 class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, LoginRequiredMixin):
@@ -100,7 +103,7 @@ class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, Log
         week_calendar_context = self.get_week_calendar()
         return week_calendar_context
 
-    def users_detail(request, user_id):
+    def users_detail(request):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(
             custom_user_id=user.id).exclude(score__isnull=False).order_by('year', 'month', 'goal')
@@ -134,7 +137,7 @@ class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, Log
 
 
 class MyPageScoredView(MyPageView):
-    def scored_users_detail(request, user_id):
+    def scored_users_detail(request):
         user = request.user
         monthly_goals = MonthlyGoal.objects.filter(
             custom_user_id=user.id, score__isnull=False).order_by('-year', '-month', 'goal')

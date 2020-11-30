@@ -136,7 +136,7 @@ AUTH_USER_MODEL = 'account.CustomUser'
 
 CRISPY_TEMPLATE_ = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'account:signin'
+LOGIN_REDIRECT_URL = 'account:main'
 
 INTERNAL_IPS = ['127.0.0.1']
 

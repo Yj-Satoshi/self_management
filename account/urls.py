@@ -8,13 +8,13 @@ urlpatterns = [
     path('', views_auth.LoginView.as_view(template_name='account/index.html'), name='index'),
     path('signin/', views.SignIn.as_view(), name='signin'),
     path(
-        'main/<int:user_id>/', views.MyPageView.users_detail, name='main'
+        'main', views.MyPageView.users_detail, name='main'
         ),
     path(
         'userupdate/<int:pk>/', views.UserUpdateView.as_view(), name='user_update'
         ),
     path(
-        'main_scored/<int:user_id>/', views.MyPageScoredView.scored_users_detail, name='main_scored'
+        'main_scored', views.MyPageScoredView.scored_users_detail, name='main_scored'
     ),
     path(
         'signout/', views_auth.LogoutView.as_view(template_name='account/signout.html'),
