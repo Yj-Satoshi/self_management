@@ -27,7 +27,7 @@ SECRET_KEY = os.environ['SELF_MANAGEMENT_SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'self-management.herokuapp.com']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -89,9 +89,6 @@ DATABASES = {
         'NAME': 'management',
         'USER': 'root',
         'PASSWORE': '',
-        'OPTIONS': {
-           'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-           },
     }
 }
 
