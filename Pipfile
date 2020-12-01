@@ -22,6 +22,7 @@ psycopg2 = "*"
 django-heroku = "*"
 django-widget-tweaks = "*"
 django-debug-toolbar = "*"
+mysql = "*"
 
 [requires]
 python_version = "3.8"
