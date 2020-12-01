@@ -157,6 +157,7 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 django_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
 # try:
 #     from .local_settings import *
 # except ImportError:
