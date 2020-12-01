@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-# import django_heroku
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -88,8 +88,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'management',
-        'USER': 'be59ea6ead78c0',
-        'PASSWORE': 'YES',
+        'USER': 'root',
+        'PASSWORE': '',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -152,4 +154,12 @@ SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-# django_heroku.settings(locals())
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())
