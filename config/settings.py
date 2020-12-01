@@ -27,7 +27,7 @@ SECRET_KEY = os.environ['SELF_MANAGEMENT_SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['127.0.0.1', 'self-management.herokuapp.com']
 
 
 # Application definition
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    # 'debug_toolbar',
     'sass_processor',
     'widget_tweaks',
 ]
@@ -90,9 +89,6 @@ DATABASES = {
         'NAME': 'management',
         'USER': 'root',
         'PASSWORE': '',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
     }
 }
 
