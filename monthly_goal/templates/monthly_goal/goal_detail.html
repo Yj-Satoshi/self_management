@@ -11,17 +11,17 @@
             <div class="">達成期限{{ object.year }}年{{ object.month }}月</div>
             <div class="">修正目標{{ object.revised_goal|default_if_none:"なし" }}</div>
             <div class="">カテゴリー:{{ object.category }}</div>
-            {% if objec.why_need_goal %}
+            {% if object.why_need_goal %}
             <div class="">目標設定理由：{{object.why_need_goal}}</div>
             {% else %}
             <div class="">目標設定理由：未記入</div>
             {% endif %}
-            {% if objec.why_evised %}
-            <div class="">目標修正理由：{{object.why_evise}}</div>
+            {% if object.why_revise %}
+            <div class="">目標修正理由：{{object.why_revise}}</div>
             {% endif %}
             <div class="">評価：{{object.score|default_if_none:"未評価"}}</div>
-            {% if objec.after_memo %}
-            <div class="">後書き・反省点：{{object.why_evise}}</div>
+            {% if object.after_memo %}
+            <div class="">後書き・反省点：{{object.after_memo}}</div>
             {% endif %}
             
             <div class="deteil_lower">
