@@ -11,10 +11,10 @@
         <h2 class="sub_title">ユーザー情報変更</h2>
         {% csrf_token %}
         {{form.email|add_class:'inputtext'|as_crispy_field}}
-        {{form.birth_year|as_crispy_field}}
-        {{form.address|as_crispy_field}}
-        {{form.gender|as_crispy_field}}
-        {{form.profession|as_crispy_field}}
+        {{form.birth_year|add_class:'shortform'|as_crispy_field}}
+        {{form.address|add_class:'shortform'|as_crispy_field}}
+        {{form.gender|add_class:'shortform'|as_crispy_field}}
+        {{form.profession|add_class:'shortform'|as_crispy_field}}
         {% for error in field.errors %}
         <p style="color: red">{{ error }}</p>
         {% endfor %}

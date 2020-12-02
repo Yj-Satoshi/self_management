@@ -1,12 +1,23 @@
 {% extends 'account/base.html' %}
 {% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% load static %}
 {% block body %}
   
   <section class="process">
     <div class="container">
       <form method="POST" role="form" action="" class="signup-form">
         {% csrf_token %}
-        {{form|crispy}}
+        
+        <div>{{form.username|add_class:'inputtext'|as_crispy_field}}</div>
+      
+        <div>{{form.email|add_class:'inputtext'|as_crispy_field}}</div>
+        <div>{{form.birth_year|add_class:'shortform'|as_crispy_field}}</div>
+        <div>{{form.address|add_class:'shortform'|as_crispy_field}}</div>
+        <div>{{form.gender|add_class:'shortform'|as_crispy_field}}</div>
+        <div>{{form.profession|add_class:'shortform'|as_crispy_field}}</div>
+        <div>{{form.password1|add_class:'inputtext'|as_crispy_field}}</div>
+        <div>{{form.password2|add_class:'inputtext'|as_crispy_field}}</div>
         {% for error in field.errors %}
         <p style="color: red">{{ error }}</p>
         {% endfor %}
