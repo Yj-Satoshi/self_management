@@ -457,26 +457,29 @@ hr {
 .goal{
   font-size: 15px;
   position: relative;
-     color: white;
-     padding:0.5em 0.5em 0.5em 1.4em;
-     background-color: #157a37;
-     border-radius: 5px;
-     a:link, a:visited {
-       color: white;
-     }
+  color: white;
+  padding:0.5em 0.5em 0.5em 1.4em;
+  background-color: #157a37;
+  border-radius: 5px;
+    a:link, a:visited {
+      color: white;
+    }
 }
 
 .goal::after{
   font-size: 15px;
   position: relative;
-     color: white;
-     padding:0.5em 0.5em 0.5em 1.4em;
-     background-color: #446689;
-     border-radius: 5px;
+  color: white;
+  padding:0.5em 0.5em 0.5em 1.4em;
+  background-color: #446689;
+  border-radius: 5px;
 }
 
- .inputtext{
+.inputtext{
    width: 700px;
+ }
+.shortform{
+   width: 150px;
  }
 
  .font{
@@ -485,7 +488,7 @@ hr {
    margin-right: 10px;
  }
 
-.this_week {
+.this_week, .action_list {
   ul {
     border: double 4px #006142;
     padding: 0.5em 1em 0.5em 2.3em;

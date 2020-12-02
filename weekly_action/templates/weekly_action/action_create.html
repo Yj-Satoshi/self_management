@@ -8,7 +8,7 @@
 <div class="post-monthly-goal">
     <form method='POST' role="form" action="" class="login-form">
         {% csrf_token %}
-        <div>{{form.week_no|as_crispy_field}}</div>
+        <div>{{form.week_no|add_class:'shortform'|as_crispy_field}}</div>
         <div>{{ form.goal_action|add_class:'inputtext'|as_crispy_field }}</div>
         <div>{{ form.why_select_action|attr:"cols:100"|attr:"rows:3"|as_crispy_field }}</div>
         <div class="form-bottom">
