@@ -1,7 +1,7 @@
 asgiref==3.3.1
 beautifulsoup4==4.9.3
 dj-database-url==0.5.0
-Django==3.1.4
+Django==2.2.2
 django-appconf==1.0.4
 django-bootstrap-toolkit==2.15.0
 django-bootstrap4==2.3.1
