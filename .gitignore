@@ -1,6 +1,4 @@
-base
 __pycache__
 staticfiles
 local_settings.py
-db.mysql
 *.py[co]
