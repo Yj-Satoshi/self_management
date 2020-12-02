@@ -13,6 +13,8 @@ import os
 # from pathlib import Path
 import dj_database_url
 import django_heroku
+from socket import gethostname
+hostname = gethostname()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -95,7 +97,7 @@ DATABASES = {
         'PASSWORD': '',
     }
 }
-
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
