@@ -37,7 +37,7 @@ class MonthlyGoal(models.Model):
         verbose_name='目標期限（月末）', validators=[clean_month], default=date_string.month)
     category = models.CharField(
         verbose_name='カテゴリー', choices=category_choice, max_length=255, null=True, blank=True)
-    goal = models.CharField(verbose_name='達成目標', help_text='1月単位で達成したい目標', max_length=255)
+    goal = models.CharField(verbose_name='達成目標', help_text='一ヶ月単位で達成したい目標', max_length=255)
     why_need_goal = models.TextField(
         verbose_name='目標設定動機', help_text='なぜその目標を達成したいのか？プラン設定("P")の確認（未設定可）',
         max_length=500, null=True, blank=True)
