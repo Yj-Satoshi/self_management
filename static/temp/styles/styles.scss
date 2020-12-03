@@ -6,6 +6,7 @@ a{
   text-decoration:none;
 }
 
+
 .fa-blog {
   color: white;
   a:link, a:visited {
@@ -19,8 +20,12 @@ a{
 }
 
 .baseheader_name {
+  font-size: 20px;
   position: relative;
   padding:0, 5px;
+  a{
+    display: block;
+  }
 }
 .baseheader_name:after { 
   content: ""; 
@@ -38,6 +43,16 @@ body{
   .container{
     width: 1000px;
     margin-left:10px;
+    .baseheader{
+      font-size: 30px;
+    }
+  }
+  .baseheader{
+    .baseheader_name, .baseheader_content{
+      a{
+        font-size: 20px;
+      }
+    }
   }
   .main{
     display: flex;
@@ -92,15 +107,21 @@ html,body {
   }
   
   .header .header__title {
-    font-size: 20px;
+    font-size: 25px;
   }
   body h2{
     font-size: 15px;
   }
-  .baseheader{
-    width: 80px;
+  .container{
+    .baseheader{
+    width: 50%;
     display: flex;
     flex-direction: column;
+    align-items: initial;
+    }
+    .baseheader_content, .baseheader_name{
+      width: 70%;
+    }
   }
   .button_red, .button_blue{
     height: 100%;
@@ -133,14 +154,19 @@ html,body {
   display: inline-block;
   background-color: rgb(0, 129, 11);
   position: relative;
+  a{
+    display: block;
+}
 }
 
 .baseheader {
   display: flex;
   justify-content: left;
-  align-items: center;
-  width: 50%;
-  
+  align-items: flex-end;
+  width: 60%;
+  a{
+    display: block;
+  }
 }
 
 .baseheader_content .baseheader_name{
@@ -187,6 +213,11 @@ html,body {
   max-width: 520px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.container-center{
+  display: flex;
+  justify-content: center;
 }
 
 .footer--bg{
@@ -304,7 +335,9 @@ html,body {
   display: inline-block;
   background-color: green;
   position: relative;
-
+  a{
+    display: block;
+}
   a:link, a:visited {
     color: white;
   }
@@ -345,6 +378,9 @@ html,body {
   padding: 8px;
   display: inline-block;
   text-decoration: none;
+  a{
+    display: block;
+}
 }
 
 .button_red{
