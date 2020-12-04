@@ -25,8 +25,6 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
-    
-  
   <header class="header">
     <div class="container header--wrapper">
       <h1 class="header__title"><span class="header__title--light">目標管理</span> アプリ</h1>
@@ -38,9 +36,17 @@
       </div>
       {% endif %}
     </div>
-
   </header>
   <div class="all_content">
+    {% if messages %}
+    <div class="alert alert-info">
+            <div class="message-body">
+                {% for message in messages %}
+                <p class=""> {{ message }}</p>
+                {% endfor %}
+            </div>
+    </div>
+    {% endif %}
   {% block body %}
   
 
@@ -48,7 +54,7 @@
 </div>
 
   <footer class="footer footer--bg">
-    <div class="container">
+    <div class="content">
       <div class="page-section page-section--small">
         <div class="row gutters-100">
           <div class="col-md-6 col-lg-2">
@@ -63,7 +69,5 @@
       </div>
     </div>
   </footer>
-
-
 </body>
 </html>  

@@ -1,6 +1,7 @@
 .all_content{
   margin-left: 5px;
   margin-right: 5px;
+  justify-content: center;
 }
 a{
   text-decoration:none;
@@ -41,7 +42,7 @@ body{
 
 @media screen and (min-width: 1000px) {
   .container{
-    width: 1000px;
+    width: 90%;
     margin-left:10px;
     .baseheader{
       font-size: 30px;
@@ -247,12 +248,11 @@ html,body {
     }
 
 .footer .gutters-100 > [class^="col-"], .gutters-100 > [class^="col-"]{
-  padding-right: 50px;
   padding-left: 50px;
 }
 
 .col-md-6 {
-  width: 50vw;
+  width: 95vw;
   display: flex;
   flex-direction: column;
 }
