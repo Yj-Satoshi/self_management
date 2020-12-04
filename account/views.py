@@ -1,14 +1,14 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib import messages
-from django.urls import reverse
+# from django.urls import reverse
 from django.shortcuts import render, redirect
 from .models import CustomUser
 from monthly_goal.models import MonthlyGoal
 from weekly_action.models import WeeklyAction
-from django.views import View
+# from django.views import View
 from django.views.generic import TemplateView, UpdateView
-from .forms import SignUpForm, SignInForm, UserUpdateForm
+from .forms import SignUpForm, UserUpdateForm  # SignInForm,
 from .mixins import MonthCalendarMixin, WeekCalendarMixin
 import datetime
 import math
@@ -42,6 +42,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.info(request, "アカウント作成しました。")
             return redirect('/')
         else:
             form = SignUpForm()
@@ -50,7 +51,6 @@ def signup(request):
 
 class IndexView(TemplateView):
     template_name = 'account/index.html'
-
 
 # class SignIn(View):
 #     def get(self, request, *args, **kwargs):
@@ -66,7 +66,7 @@ class IndexView(TemplateView):
 #         messages.info(request, "サインインしました。")
 #         messages.success(request, "サインイン。")
 #         return redirect(reverse('account:main'))
-        # return render(request, 'account/main.html', {'form': form})
+#         return render(request, 'account/main.html', {'form': form})
 
 
 class UserUpdateView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
@@ -79,11 +79,6 @@ class UserUpdateView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
         messages.info(self.request, "プロフィールを更新しました。")
         return super().form_valid(form)
     success_url = '/main'
-
-    # def get_success_url(self):
-    #     user = self.request.user
-    #     return reverse('account:main', kwargs={'user_id': user.id})
-    #     return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
 
 
 class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, LoginRequiredMixin):

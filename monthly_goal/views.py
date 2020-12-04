@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -7,7 +8,6 @@ from django.views.generic import (
 )
 from .models import MonthlyGoal
 from weekly_action.models import WeeklyAction
-from account.views import MyPageView
 
 
 class OnlyYouMixin(UserPassesTestMixin):
@@ -28,7 +28,7 @@ class MonthlyGoalDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
         return context
 
 
-class MonthlyGoalCreateView(CreateView, MyPageView):
+class MonthlyGoalCreateView(CreateView):
     model = MonthlyGoal
     fields = [
         'year', 'month', 'category', 'goal', 'why_need_goal'
@@ -36,6 +36,7 @@ class MonthlyGoalCreateView(CreateView, MyPageView):
 
     def form_valid(self, form):
         form.instance.custom_user = self.request.user
+        messages.info(self.request, "目標作成しました。次はアクションを作成下さい")
         return super().form_valid(form)
 
     success_url = '/main'
@@ -49,6 +50,7 @@ class MonthlyGoalUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView)
 
     def form_valid(self, form):
         form.instance.custom_user = self.request.user
+        messages.info(self.request, "目標を更新しました。")
         return super().form_valid(form)
 
     def test_func(self):
@@ -66,6 +68,7 @@ class MonthlyGoalDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
     def test_func(self):
         monthly_goal = self.get_object()
         if self.request.user == monthly_goal.custom_user:
+            messages.info(self.request, "目標を削除しました。")
             return True
         return False
 
