@@ -38,9 +38,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'account.apps.AccountConfig',
-    'monthly_goal.apps.MonthlyGoalConfig',
-    'weekly_action.apps.WeeklyActionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,6 +48,9 @@ INSTALLED_APPS = [
     'sass_processor',
     'widget_tweaks',
     'debug_toolbar',
+    'account.apps.AccountConfig',
+    'monthly_goal.apps.MonthlyGoalConfig',
+    'weekly_action.apps.WeeklyActionConfig',
 ]
 
 MIDDLEWARE = [
@@ -156,6 +156,8 @@ SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
 SASS_PRECISION = 8
 SASS_OUTPUT_STYLE = 'compressed'
 SASS_TEMPLATE_EXTS = ['.html', '.haml']
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 django_heroku.settings(locals())
 # try:
