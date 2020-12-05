@@ -159,7 +159,7 @@ SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
 # try:
 #     from .local_settings import *
 # except ImportError:
