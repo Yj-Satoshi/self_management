@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['SELF_MANAGEMENT_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["self-management.herokuapp.com"]
 
 
 # Application definition
@@ -155,10 +155,10 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 django_heroku.settings(locals())
 
-# try:
-#     from .local_settings import *
-# except ImportError:
-#     pass
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
 # if not DEBUG:
 #     django_heroku.settings(locals())
