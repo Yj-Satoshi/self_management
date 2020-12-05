@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-# from pathlib import Path
 import dj_database_url
 import django_heroku
 from socket import gethostname
@@ -166,7 +165,7 @@ except ImportError:
 #     import django_heroku
 #     django_heroku.settings(locals())
 
-if DEBUG:
+if DEBUT:
     SECURE_SSL_REDIRECT = False
 else:
     SECURE_SSL_REDIRECT = True
