@@ -20,7 +20,7 @@
                 {% endif %}
                 <ul class="action_list">
                     <li><i class="fas fa-chevron-circle-down"></i>達成期限{{ goal.year }}年{{ goal.month }}月</li>
-                    <li><i class="fas fa-chevron-circle-down"></i>カテゴリー:{{ goal.category|default_if_none:"未設定" }}</li>
+                    <li><i class="fas fa-chevron-circle-down"></i>カテゴリー:{{ goal.category_display|default_if_none:"未設定" }}</li>
                     <li><i class="fas fa-chevron-circle-down"></i>評価:{{ goal.score }}</li>
                 </ul>
             </div>
