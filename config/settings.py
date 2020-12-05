@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sass_processor',
     'widget_tweaks',
-    # 'debug_toolbar',
     'sslserver',
+    # 'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -155,7 +155,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 
 try:
-    from .local_settings import *
+    from . local_settings import *
 except ImportError:
     django_heroku.settings(locals())
 
