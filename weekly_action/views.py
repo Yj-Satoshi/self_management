@@ -37,27 +37,26 @@ class WeeklyActionCreateView(CreateView, MonthlyGoal):
         messages.info(self.request, 'アクション作成しました。作成したアクションを実施下さい（P "D" CA）')
         return super().form_valid(form)
 
+    success_url = '/main'
+
 
 class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = WeeklyAction
     fields = [
         'score', 'after_memo', 'week_no', 'goal_action', 'why_select_action'
         ]
-    success_url = '/main'
 
-    def form_valid(self, form, request):
+    def form_valid(self, form):
         form.instance.custom_user = self.request.user
-        return super().form_valid(form)
-
-    def post(self, request, *args, **kwargs):
-        if not request.POST['score']:
-            messages.info(request, "アクションを修正しました。")
-        elif request.POST['score'] == "1":
-            messages.info(request, "アクションを評価しました。反省点を無駄にせず、今後のアクションに生かしましょう")
-        elif request.POST['score'] == "5":
-            messages.info(request, "アクションを評価しました。その調子で頑張りましょう")
+        if not self.request.POST['score']:
+            messages.info(self.request, "アクションを修正しました。")
+        elif self.request.POST['score'] == "1":
+            messages.info(self.request, "アクションを評価しました。反省点を無駄にせず、今後のアクションに生かしましょう")
+        elif self.request.POST['score'] == "5":
+            messages.info(self.request, "アクションを評価しました。その調子で頑張りましょう")
         else:
-            messages.info(request, "アクションを評価しました。次のアクションも頑張りましょう")
+            messages.info(self.request, "アクションを評価しました。次のアクションも頑張りましょう")
+        return super().form_valid(form)
         return redirect('/main')
 
     def test_func(self):
@@ -65,6 +64,8 @@ class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView
         if self.request.user == weekly_action.custom_user:
             return True
         return False
+
+    success_url = '/main'
 
 
 class WeeklyActionDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
