@@ -2,3 +2,5 @@ __pycache__
 staticfiles
 config/local_settings.py
 db.mysql
+*.pyc
+venv
