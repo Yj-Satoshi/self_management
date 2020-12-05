@@ -1,6 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from django.shortcuts import redirect
 from django.views.generic import (
     DetailView,
     CreateView,
