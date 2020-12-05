@@ -14,6 +14,7 @@ from monthly_goal.views import OnlyYouMixin
 
 class WeeklyActionDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
     model = WeeklyAction
+    success_url = '/main'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -35,8 +36,6 @@ class WeeklyActionCreateView(CreateView, MonthlyGoal):
         weekly_action.save()
         messages.info(self.request, 'アクション作成しました。作成したアクションを実施下さい（P "D" CA）')
         return super().form_valid(form)
-
-    success_url = '/main'
 
 
 class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
