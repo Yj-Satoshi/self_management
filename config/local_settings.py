@@ -9,5 +9,5 @@ DATABASES = {
         'PASSWORE': '',
     }
 }
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 DEBUG = True
