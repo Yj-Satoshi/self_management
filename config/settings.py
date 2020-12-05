@@ -162,9 +162,9 @@ try:
 except ImportError:
     pass
 
-if not DEBUG:
-    import django_heroku
-    django_heroku.settings(locals())
+# if not DEBUG:
+#     import django_heroku
+#     django_heroku.settings(locals())
 
 if DEBUG:
     SECURE_SSL_REDIRECT = False
