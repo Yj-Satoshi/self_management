@@ -135,9 +135,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'account.CustomUser'
@@ -161,7 +159,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 try:
     from . local_settings import *
 except ImportError:
-    django_heroku.settings(locals())
+    django_heroku.settings(locals(), staticfiles=False)
     SECURE_SSL_REDIRECT = True
 
 
