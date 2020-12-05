@@ -38,6 +38,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'account.apps.AccountConfig',
+    'monthly_goal.apps.MonthlyGoalConfig',
+    'weekly_action.apps.WeeklyActionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,9 +51,6 @@ INSTALLED_APPS = [
     'sass_processor',
     'widget_tweaks',
     # 'debug_toolbar',
-    'account.apps.AccountConfig',
-    'monthly_goal.apps.MonthlyGoalConfig',
-    'weekly_action.apps.WeeklyActionConfig',
 ]
 
 MIDDLEWARE = [
@@ -61,8 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
