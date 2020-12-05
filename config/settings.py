@@ -11,9 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 import dj_database_url
-import django_heroku
-from socket import gethostname
-hostname = gethostname()
+# from socket import gethostname
+# hostname = gethostname()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,8 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['SELF_MANAGEMENT_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 DEBUG = False
+# DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -155,17 +154,15 @@ SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
+# django_heroku.settings(locals())
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     pass
 
 # if not DEBUG:
 #     import django_heroku
 #     django_heroku.settings(locals())
 
-if DEBUT:
-    SECURE_SSL_REDIRECT = False
-else:
-    SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = True
