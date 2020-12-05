@@ -15,7 +15,9 @@ import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.abspath(__file__)
+
 
 # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -135,7 +137,6 @@ USE_TZ = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-BASE_DIR = os.path.abspath(__file__)
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
