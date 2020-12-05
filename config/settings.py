@@ -133,7 +133,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'account.CustomUser'
@@ -153,12 +153,12 @@ SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-django_heroku.settings(locals())
 
 try:
     from .local_settings import *
 except ImportError:
-    pass
+    django_heroku.settings(locals())
+
 
 # if not DEBUG:
 #     django_heroku.settings(locals())
