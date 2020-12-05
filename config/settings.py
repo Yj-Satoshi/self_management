@@ -160,7 +160,7 @@ try:
 except ImportError:
     django_heroku.settings(locals())
 
-if DEBUG:
-    SECURE_SSL_REDIRECT = False
-else:
-    SECURE_SSL_REDIRECT = True
+# if DEBUG:
+#     SECURE_SSL_REDIRECT = False
+# else:
+#     SECURE_SSL_REDIRECT = True
