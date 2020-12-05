@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sass_processor',
     'widget_tweaks',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'account.apps.AccountConfig',
     'monthly_goal.apps.MonthlyGoalConfig',
     'weekly_action.apps.WeeklyActionConfig',
@@ -61,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
@@ -97,7 +97,7 @@ DATABASES = {
         'PASSWORD': '',
     }
 }
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
