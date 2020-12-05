@@ -24,6 +24,7 @@ a{
   font-size: 20px;
   position: relative;
   padding:0, 5px;
+  margin-left: 5px;
   a{
     display: block;
   }
@@ -31,7 +32,9 @@ a{
 .baseheader_name:after { 
   content: ""; 
   display: block; 
-  height: 4px; 
+  height: 8px; 
+  margin-bottom: 5px;
+  margin-left: 5px;
   background: -webkit-linear-gradient(to right, #2e3cff, transparent); 
   background: linear-gradient(to right, #2e3cff, transparent); }
 
