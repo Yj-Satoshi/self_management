@@ -159,9 +159,8 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 # except ImportError:
 #     pass
 
-# if not DEBUG:
-#     import django_heroku
-#     django_heroku.settings(locals())
+if not DEBUG:
+    django_heroku.settings(locals())
 
 # if DEBUG:
 #     SECURE_SSL_REDIRECT = False
