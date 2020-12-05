@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 import dj_database_url
+import django_heroku
+from socket import gethostname
+hostname = gethostname()
 # from socket import gethostname
 # hostname = gethostname()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,25 +30,26 @@ SECRET_KEY = os.environ['SELF_MANAGEMENT_SECRET_KEY']
 DEBUG = False
 # DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'account.apps.AccountConfig',
-    'monthly_goal.apps.MonthlyGoalConfig',
-    'weekly_action.apps.WeeklyActionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'account.apps.AccountConfig',
+    'monthly_goal.apps.MonthlyGoalConfig',
+    'weekly_action.apps.WeeklyActionConfig',
     'crispy_forms',
     'sass_processor',
     'widget_tweaks',
     'debug_toolbar',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -154,15 +158,22 @@ SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-# django_heroku.settings(locals())
 
-# try:
-#     from .local_settings import *
-# except ImportError:
-#     pass
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
-# if not DEBUG:
-#     import django_heroku
-#     django_heroku.settings(locals())
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())
 
+if DEBUG:
+    SECURE_SSL_REDIRECT = False
+else:
+    SECURE_SSL_REDIRECT = True
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
