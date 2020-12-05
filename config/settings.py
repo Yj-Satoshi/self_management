@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'sass_processor',
     'widget_tweaks',
     'sslserver',
-    # 'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -161,16 +160,7 @@ try:
 except ImportError:
     django_heroku.settings(locals())
 
-
-# if not DEBUG:
-#     django_heroku.settings(locals())
-
-# if DEBUG:
-#     SECURE_SSL_REDIRECT = False
-# else:
-#     SECURE_SSL_REDIRECT = True
-
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
+if DEBUG:
+    SECURE_SSL_REDIRECT = False
+else:
+    SECURE_SSL_REDIRECT = True
