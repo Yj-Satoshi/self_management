@@ -159,17 +159,17 @@ SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-django_heroku.settings(locals())
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# django_heroku.settings(locals())
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     pass
 
-if not DEBUG:
-    import django_heroku
-    django_heroku.settings(locals())
+# if not DEBUG:
+#     import django_heroku
+#     django_heroku.settings(locals())
 
-if DEBUG:
-    SECURE_SSL_REDIRECT = False
-else:
-    SECURE_SSL_REDIRECT = True
+# if DEBUG:
+#     SECURE_SSL_REDIRECT = False
+# else:
+#     SECURE_SSL_REDIRECT = True
