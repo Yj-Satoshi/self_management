@@ -136,8 +136,10 @@
                     {% for this_m_g in this_monthly_goals %}
                     {% for this_w_a in this_weekly_actions %}
                     {% if this_m_g.id == this_w_a.monthly_goal_id %}
-                        {% if not action.score %}
-                            <li class="list_font">目標:{{ this_m_g.goal }} アクション:{{ this_w_a.goal_action }}</li>
+                    {% if this_m_g.revised_goal %}
+                            <li class="list_font">修正目標:{{ this_m_g.revised_goal }} アクション:{{ this_w_a.goal_action }}  評価：{{this_w_a.score|default_if_none:"未評価"}}</li>
+                        {% else %}
+                            <li class="list_font">目標:{{ this_m_g.goal }}   アクション:{{ this_w_a.goal_action }}  評価：{{this_w_a.score|default_if_none:"未評価"}}</li>
                         {% endif %}
                     {% endif %}
                     {% endfor %}

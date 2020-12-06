@@ -3,12 +3,13 @@
 {% load static %}
 {% load widget_tweaks %}
 {% block body %}
+<h1 class="pege_title">目標設定</h1>
 <div class="post-monthly-goal">
     <form method='POST' role="form" action="" class="login-form">
         {% csrf_token %}
-        <div>{{form.year|as_crispy_field}}</div>
-        <div>{{form.month|as_crispy_field}}</div>
-        <div>{{form.category|as_crispy_field}}</div>
+        <div>{{form.year|add_class:'shortform'|as_crispy_field}}</div>
+        <div>{{form.month|add_class:'shortform'|as_crispy_field}}</div>
+        <div>{{form.category|add_class:'shortform'|as_crispy_field}}</div>
         <div>
             {{ form.goal|add_class:'inputtext'|as_crispy_field }}
         </div>

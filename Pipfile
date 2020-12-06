@@ -23,6 +23,8 @@ django-heroku = "*"
 django-widget-tweaks = "*"
 django-debug-toolbar = "*"
 mysql = "*"
+django-toolbelt = "*"
+django-sslserver = "*"
 
 [requires]
 python_version = "3.8"

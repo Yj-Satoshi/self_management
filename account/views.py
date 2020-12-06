@@ -1,14 +1,17 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
+from django.contrib.auth.views import LoginView
 # from django.urls import reverse
-from .forms import SignUpForm, SignInForm, UserUpdateForm
-from django.views.generic import TemplateView, UpdateView
-from django.views import View
+# from django.views import View
+from django.views.generic import UpdateView
+from django.shortcuts import render, redirect
+from .models import CustomUser
 from monthly_goal.models import MonthlyGoal
 from weekly_action.models import WeeklyAction
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .forms import SignUpForm, UserUpdateForm  # SignInForm
 from .mixins import MonthCalendarMixin, WeekCalendarMixin
-from .models import CustomUser
 import datetime
 import math
 date_string = datetime.datetime.now()
@@ -41,29 +44,17 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.info(request, "アカウント作成しました。")
             return redirect('/')
         else:
             form = SignUpForm()
     return render(request, 'account/signup.html', {'form': form})
 
 
-class IndexView(TemplateView):
+class SignInView(SuccessMessageMixin, LoginView):
     template_name = 'account/index.html'
-
-
-class SignIn(View):
-    def get(self, request, *args, **kwargs):
-        context = {
-            'form': SignInForm(),
-        }
-        return render(request, 'account/main.html', context)
-
-    def post(self, request, *args, **kwargs):
-        form = SignInForm(request.POST)
-        if not form.is_valid():
-            return render(request, 'account/index.html', {'form': form})
-
-        return render(request, 'account/main.html', {'form': form})
+    success_url = '/main'
+    success_message = "サインインしました。"
 
 
 class UserUpdateView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
@@ -73,17 +64,13 @@ class UserUpdateView(UpdateView, UserPassesTestMixin, LoginRequiredMixin):
 
     def form_valid(self, form):
         form.instance.custom_user = self.request.user
+        messages.info(self.request, "プロフィールを更新しました。")
         return super().form_valid(form)
-
     success_url = '/main'
-
-    # def get_success_url(self):
-    #     user = self.request.user
-    #     return reverse('account:main', kwargs={'user_id': user.id})
-    #     return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})
 
 
 class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, LoginRequiredMixin):
+
     def paginate_queryset(request, queryset, count):
         paginator = Paginator(queryset, count)
         page = request.GET.get('page')
@@ -120,7 +107,6 @@ class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, Log
 
         month_calendar_context = MyPageView().get_context_month_data
         week_calendar_context = MyPageView().get_context_week_data
-
         context = {
             'user': user,
             'monthly_goals': page_obj.object_list,

@@ -22,25 +22,36 @@
         crossorigin="anonymous"></script>
   
   <link rel="stylesheet" href='{% sass_src "temp/styles/styles.scss" %}' type="text/css">
+  <!-- <link rel="stylesheet" href="{% static 'temp/styles/styles.css' %}"> -->
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
-    
-  
   <header class="header">
     <div class="container header--wrapper">
       <h1 class="header__title"><span class="header__title--light">目標管理</span> アプリ</h1>
       {% if user.is_authenticated %}
       <div class="baseheader">
         <div class="baseheader_name"><a href="{% url 'account:main'  %}">{{ user.username }}さんのマイページ</a></div>
-        <div class="baseheader_content"><a href="{% url 'account:signout' %}">サインアウト</a></div>
-        <div class="baseheader_content"><a href="{% url 'account:user_update' request.user.id %}">プロフィール変更</a></div> 
+        <div class="baseheader_content baseheader_name"><a href="{% url 'account:signout' %}">サインアウト</a></div>
+        <div class="baseheader_content baseheader_name"><a href="{% url 'account:user_update' request.user.id %}">プロフィール変更</a></div> 
       </div>
       {% endif %}
     </div>
-
   </header>
   <div class="all_content">
+    {% if messages %}
+    <div class="alert alert-info">
+            <div class="message-body">
+                {% for message in messages %}
+                <div class=""> {{ message }}  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button></div>
+               
+                {% endfor %}
+            </div>
+    </div>
+    {% endif %}
   {% block body %}
   
 
@@ -48,7 +59,7 @@
 </div>
 
   <footer class="footer footer--bg">
-    <div class="container">
+    <div class="content">
       <div class="page-section page-section--small">
         <div class="row gutters-100">
           <div class="col-md-6 col-lg-2">
@@ -63,7 +74,5 @@
       </div>
     </div>
   </footer>
-
-
 </body>
 </html>  

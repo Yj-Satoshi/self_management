@@ -1,4 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -8,12 +10,11 @@ from django.views.generic import (
 from .models import WeeklyAction
 from monthly_goal.models import MonthlyGoal
 from monthly_goal.views import OnlyYouMixin
-from account.views import MyPageView
-from django.shortcuts import get_object_or_404
 
 
 class WeeklyActionDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
     model = WeeklyAction
+    success_url = '/main'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -21,7 +22,7 @@ class WeeklyActionDetailView(DetailView, OnlyYouMixin,  LoginRequiredMixin):
         return context
 
 
-class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
+class WeeklyActionCreateView(CreateView, MonthlyGoal):
     model = WeeklyAction
     fields = [
         'week_no', 'goal_action', 'why_select_action'
@@ -33,6 +34,7 @@ class WeeklyActionCreateView(CreateView, MyPageView, MonthlyGoal):
         monthly_goal_pk = self.kwargs['monthly_goal_id']
         weekly_action.monthly_goal = get_object_or_404(MonthlyGoal, pk=monthly_goal_pk)
         weekly_action.save()
+        messages.info(self.request, 'アクション作成しました。作成したアクションを実施下さい（P "D" CA）')
         return super().form_valid(form)
 
     success_url = '/main'
@@ -46,7 +48,16 @@ class WeeklyActionUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView
 
     def form_valid(self, form):
         form.instance.custom_user = self.request.user
+        if not self.request.POST['score']:
+            messages.info(self.request, "アクションを修正しました。")
+        elif self.request.POST['score'] == "1":
+            messages.info(self.request, "アクションを評価しました。反省点を無駄にせず、今後のアクションに生かしましょう")
+        elif self.request.POST['score'] == "5":
+            messages.info(self.request, "アクションを評価しました。その調子で頑張りましょう")
+        else:
+            messages.info(self.request, "アクションを評価しました。次のアクションも頑張りましょう")
         return super().form_valid(form)
+        return redirect('/main')
 
     def test_func(self):
         weekly_action = self.get_object()
@@ -63,9 +74,8 @@ class WeeklyActionDeleteView(OnlyYouMixin, LoginRequiredMixin, DeleteView):
     def test_func(self):
         weekly_action = self.get_object()
         if self.request.user == weekly_action.custom_user:
+            messages.info(self.request, "アクションを削除しました。")
             return True
         return False
 
     success_url = '/main'
-    # def get_success_url(self):
-    #     return reverse('account:main', kwargs={'user_id': self.kwargs['pk']})

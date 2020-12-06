@@ -37,20 +37,20 @@ class MonthlyGoal(models.Model):
         verbose_name='目標期限（月末）', validators=[clean_month], default=date_string.month)
     category = models.CharField(
         verbose_name='カテゴリー', choices=category_choice, max_length=255, null=True, blank=True)
-    goal = models.CharField(verbose_name='達成目標', help_text='1月単位で達成したい目標', max_length=255)
+    goal = models.CharField(verbose_name='達成目標', help_text='一ヶ月単位で達成したい目標', max_length=255)
     why_need_goal = models.TextField(
         verbose_name='目標設定動機', help_text='なぜその目標を達成したいのか？プラン設定("P")の確認（未設定可）',
         max_length=500, null=True, blank=True)
     score = models.IntegerField(
         verbose_name='自己評価', validators=[clean_score], null=True,
-        help_text='目標達成及び期限が来たら入力。達成度チェック("C")（範囲１〜５, 数字が高い程、評価良）', blank=True)
+        help_text='目標達成及び期限が来たら入力。達成度チェック(PD "C" A)（範囲１〜５, 数字が高い程、評価良）', blank=True)
     revised_goal = models.CharField(
         verbose_name='修正目標', max_length=255, null=True, blank=True)
     why_revise = models.TextField(
         verbose_name='目標修正理由',
         max_length=500, null=True,
-        help_text='目標を修正する理由。最初の目標のプラン設定("P")は妥当であったか確認（未設定可）', blank=True)
+        help_text='目標を修正する理由。最初の目標のプラン設定("P" DCA)は妥当であったか確認（未設定可）', blank=True)
     after_memo = models.TextField(
         verbose_name='後書きメモ',
         max_length=500, null=True,
-        help_text='反省点などの振り返りメモ。達成度チェック("C")・次の目標("A")の確認（未設定可）', blank=True)
+        help_text='反省点などの振り返りメモ。達成度チェック(PD "C" A)・次の目標(PDC "A")の確認（未設定可）', blank=True)
