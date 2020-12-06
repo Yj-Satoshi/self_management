@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+from django.contrib.messages import constants as messages
 import dj_database_url
 import django_heroku
 
@@ -155,6 +156,9 @@ SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 try:
     from . local_settings import *
