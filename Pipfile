@@ -27,6 +27,7 @@ django-toolbelt = "*"
 django-sslserver = "*"
 coverage = "*"
 factory-boy = "*"
+pytz = "*"
 
 [requires]
 python_version = "3.8"
