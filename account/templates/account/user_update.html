@@ -4,11 +4,10 @@
 {% load static %}
 {% block body %}
 {% if request.user.id == object.id %}
-<h1 class="pege_title">評価・修正ページ</h1>
+<h1 class="pege_title">ユーザー情報変更</h1>
 
 <div class="post-monthly-goal">
     <form method='POST' role="form" action="" class="login-form">
-        <h2 class="sub_title">ユーザー情報変更</h2>
         {% csrf_token %}
         {{form.email|add_class:'inputtext'|as_crispy_field}}
         {{form.birth_year|add_class:'shortform'|as_crispy_field}}
