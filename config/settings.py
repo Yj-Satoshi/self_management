@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import sys
 from django.contrib.messages import constants as messages
 import dj_database_url
 import django_heroku
@@ -160,11 +161,50 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
-try:
-    from . local_settings import *
-except ImportError:
-    django_heroku.settings(locals(), staticfiles=False)
-    # SECURE_SSL_REDIRECT = True
+# LOGGING = {
+#         'version': 1,
+#         'disable_existing_loggers': False,
+#         'formatters': {
+#             'verbose': {
+#                 'format': "[%(asctime)s] %(levelname)s %(message)s",
+#                 'datefmt': "%d/%b/%Y %H:%M:%S"
+#             }
+#         },
+#         'handlers': {
+#             'file': {
+#                 'level': 'DEBUG',
+#                 'class': 'logging.FileHandler',
+#                 'filename': '/var/log/django_practices.log',
+#                 'formatter': 'verbose'
+#             },
+#             'console': {
+#                 'level': 'DEBUG',
+#                 'class': 'logging.StreamHandler',
+#                 'stream': sys.stdout,
+#                 'formatter': 'verbose'
+#             },
+#         },
+#         'loggers': {
+
+#             'django_test': {
+#                 'handlers': ['file', 'console'],
+#                 'level': 'DEBUG',
+#             },
+#             'name_your_app': {
+#                 'handlers': ['file', 'console'],
+#                 'level': 'DEBUG',
+#             }
+
+#         }
+#     }
+
+
+django_heroku.settings(locals(), staticfiles=False)
+# try:
+#     from . local_settings import *
+# except ImportError:
+#     django_heroku.settings(locals(), staticfiles=False)
+#     SECURE_SSL_REDIRECT = True
 
 
 # if DEBUG:
