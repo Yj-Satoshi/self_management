@@ -1,19 +1,19 @@
+import factory
 from django.contrib.auth import get_user_model
 from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyInteger, FuzzyText
 from factory import Faker
 from factory import Sequence
 
-# from .. models import CustomUser
-CustomUserModel = get_user_model()
-MonthlyGoalModel = get_user_model()
+from .. models import MonthlyGoal
+CustomUser = get_user_model()
+
 FAKER_LOCALE = 'ja_JP'
 
 
 class CustomUserFactory(DjangoModelFactory):
-
     class Meta:
-        model = CustomUserModel
+        model = CustomUser
 
     username = Sequence(lambda n: 'user{0}'.format(n))
     password = FuzzyText(length=12, suffix='192837')
@@ -25,10 +25,10 @@ class CustomUserFactory(DjangoModelFactory):
 
 
 class MonthlyGoalFactory(DjangoModelFactory):
-
     class Meta:
-        model = MonthlyGoalModel
+        model = MonthlyGoal
 
+    custom_user = factory.SubFactory(CustomUserFactory)
     year = FuzzyInteger(low=0, high=9999)
     month = FuzzyInteger(low=1, high=12)
     category = FuzzyInteger(low=1, high=6)
