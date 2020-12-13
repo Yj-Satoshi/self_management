@@ -1,12 +1,9 @@
 from django.test import TestCase
 from django.db.utils import IntegrityError
+from django.core.exceptions import ValidationError
 
 from .factory import CustomUserFactory
 from .factory import MonthlyGoalFactory
-
-# import logging
-# logger = logging.getLogger('django_test')
-# logger.info('test_log')
 
 
 class MonthlyGoalTests(TestCase):
@@ -16,11 +13,35 @@ class MonthlyGoalTests(TestCase):
             username='test_user',
             email='sample@sample.com',
             password='testpass1234')
-        self.goal = MonthlyGoalFactory(custom_user=self.user1.id)
+        self.goal = MonthlyGoalFactory()
 
     def test_user(self):
         self.assertTrue(self.goal)
 
-    def test_user_fail_blank_goal(self):
+    def test_user_fail_blank_user(self):
         with self.assertRaises(IntegrityError):
-            MonthlyGoalFactory(username='test_user')
+            MonthlyGoalFactory(custom_user=None)
+
+    def test_user_fail_blank_goal(self):
+        with self.assertRaises(TypeError):
+            MonthlyGoalFactory(monthly_goal=None)
+
+    def test_user_fail_blank_year(self):
+        with self.assertRaises(IntegrityError):
+            MonthlyGoalFactory(year=None)
+
+    def test_user_fail_blank_month(self):
+        with self.assertRaises(IntegrityError):
+            MonthlyGoalFactory(month=None)
+
+    def test_user_fail_wrong_month(self):
+        # self.goal1 = MonthlyGoalFactory(month=-1)
+        # self.assertTrue(self.goal1)
+        with self.assertRaises(ValidationError):
+            MonthlyGoalFactory(month=-1).save()
+
+    # def test_user_fail_wrong_score(self):
+    #     self.goal1 = MonthlyGoalFactory(score=-1)
+    #     self.assertTrue(self.goal1)
+        # with self.assertRaises(ValidationError):
+        #     MonthlyGoalFactory(score=-1).is_valid()
