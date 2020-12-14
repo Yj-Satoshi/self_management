@@ -47,7 +47,6 @@ class WeeklyActionFactory(DjangoModelFactory):
 
     custom_user = factory.SubFactory(CustomUserFactory)
     monthly_goal = factory.SubFactory(MonthlyGoalFactory)
-    year = FuzzyInteger(low=0, high=9999)
     week_no = FuzzyInteger(low=1, high=12)
     score = FuzzyInteger(low=1, high=5)
     goal_action = Faker('text', max_nb_chars=255, locale=FAKER_LOCALE)
