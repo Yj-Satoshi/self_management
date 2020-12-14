@@ -38,5 +38,5 @@ class MonthlyGoalTests(TestCase):
         self.assertFalse(self.goal1)
 
     def test_user_fail_wrong_score(self):
-        self.goal1 = MonthlyGoalFactory(score=-1)
+        self.goal1 = MonthlyGoalFactory(score=-1).save()
         self.assertFalse(self.goal1)
