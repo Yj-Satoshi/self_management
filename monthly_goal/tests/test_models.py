@@ -14,7 +14,7 @@ class MonthlyGoalTests(TestCase):
             password='testpass1234')
         self.goal = MonthlyGoalFactory()
 
-    def test_user(self):
+    def test_goal(self):
         self.assertTrue(self.goal)
 
     def test_user_fail_blank_user(self):
