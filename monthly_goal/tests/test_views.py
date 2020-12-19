@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 # Create your tests here.
 
 
-class TestSignInView(TestCase):
+class TestMonthlyGoalView(TestCase):
 
     def setUp(self):
         self.user = get_user_model().objects.create_user(
@@ -14,3 +14,21 @@ class TestSignInView(TestCase):
         self.client.login(username='test1', password='1234pass')
         response = self.client.get('/main/')
         self.assertTrue(response)
+
+    def test_goal_create_success(self):
+        self.client.login(username='test1', password='1234pass')
+
+        response = self.client.get('/goal/new/')
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['form'].errors)
+        self.assertTemplateUsed(response, 'monthly_goal/goal_create.html')
+
+        monthly_goal = self.client.post('/goal/new/', {
+            'custom_user': self.user.id,
+            'year': 2020,
+            'month': 12,
+            'goal': 'aaaa',
+            'category': 1,
+        })
+        self.assertEqual(monthly_goal.status_code, 302)
+        self.assertRedirects(monthly_goal, '/main')
