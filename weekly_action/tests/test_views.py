@@ -30,7 +30,7 @@ class TestWeeklyActionView(TestCase):
             month=12,
             goal='aaaa',
             category=1,)
-        url_goal = reverse('weekly_action:action-create', args=(create_goal.id,))
+        url_goal = reverse('weekly_action:action-create', args=(create_goal.id))
         response = self.client.get(url_goal)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'weekly_action/action_create.html')
