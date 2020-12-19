@@ -10,11 +10,6 @@ class TestMonthlyGoalView(TestCase):
             username='test1', email='samples@sample.com', password='1234pass'
         )
 
-    def test_get_signup_post_success(self):
-        self.client.login(username='test1', password='1234pass')
-        response = self.client.get('/main/')
-        self.assertTrue(response)
-
     def test_goal_create_success(self):
         self.client.login(username='test1', password='1234pass')
 
