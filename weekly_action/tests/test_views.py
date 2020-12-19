@@ -1,5 +1,9 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from monthly_goal.models import MonthlyGoal
+from account.models import CustomUser
+# from .. models import WeeklyAction
+from django.urls import reverse
 # Create your tests here.
 
 
@@ -12,22 +16,33 @@ class TestWeeklyActionView(TestCase):
 
     def test_action_create_success(self):
         self.client.login(username='test1', password='1234pass')
-        goal = self.client.post('/goal/new/', {
-            'custom_user': self.user.id,
-            'year': 2020,
-            'month': 12,
-            'goal': 'aaaa',
-            'category': 1,
-        })
-        response = self.client.get('/goal/1/action/new/')
+        # self.client.post('/goal/new/', {
+        #     'custom_user': self.user.id,
+        #     'year': 2020,
+        #     'month': 12,
+        #     'goal': 'aaaa',
+        #     'category': 1,
+        # })
+        # user = CustomUser.objects.get(username='test1')
+        create_goal = MonthlyGoal.objects.create(
+            custom_user=CustomUser.objects.get(username='test1'),
+            year=2020,
+            month=12,
+            goal='aaaa',
+            category=1,)
+        url_goal = reverse('weekly_action:action-create', args=(create_goal.id,))
+        response = self.client.get(url_goal)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'weekly_action/action_create.html')
+        self.assertFalse(response.context['form'].errors)
 
-        action = self.client.post('/goal/1/action/new/', {
-            'custom_user': self.user.id,
-            'monthly_goal': goal.id,
-            'week_no': 5,
-            'goal_action': 'bbbb',
-        })
-        self.assertEqual(action.status_code, 302)
-        self.assertRedirects(action, '/main')
+        # self.client.post('/goal/1/action/new/', {
+        #     'monthly_goal': 1,
+        #     'custom_user': self.user.id,
+        #     'week_no': 3,
+        #     'goal_action': 'bbbb',
+        # })
+        # self.assertEqual(action.status_code, 302)
+        # response_action = self.client.get('/goal/1/action/1/')
+        # self.assertEqual(response_action.status_code, 200)
+        # self.assertRedirects(action, '/main')
