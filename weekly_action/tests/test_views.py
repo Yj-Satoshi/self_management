@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from monthly_goal.models import MonthlyGoal
 from account.models import CustomUser
-# from .. models import WeeklyAction
+from .. models import WeeklyAction
 from django.urls import reverse
 # Create your tests here.
 
@@ -36,6 +36,16 @@ class TestWeeklyActionView(TestCase):
         self.assertTemplateUsed(response, 'weekly_action/action_create.html')
         self.assertFalse(response.context['form'].errors)
 
+        create_action = WeeklyAction.objects.create(
+            monthly_goal=MonthlyGoal.objects.get(goal='aaaa'),
+            custom_user=CustomUser.objects.get(username='test1'),
+            week_no=3,
+            goal_action='bbbb',
+        )
+        url_action = reverse(
+            'weekly_action:action-detail', args=(create_action.id), pk=(create_goal.id))
+        response_action = self.client.get(url_action)
+        self.assertEqual(response_action.status_code, 200)
         # self.client.post('/goal/1/action/new/', {
         #     'monthly_goal': 1,
         #     'custom_user': self.user.id,
