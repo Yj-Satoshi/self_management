@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from monthly_goal.models import MonthlyGoal
 from account.models import CustomUser
-from .. models import WeeklyAction
+# from .. models import WeeklyAction
 from django.urls import reverse
 # Create your tests here.
 
@@ -45,6 +45,4 @@ class TestWeeklyActionView(TestCase):
             'goal_action': 'bbbb',
         })
         self.assertEqual(action.status_code, 302)
-        # response_action = self.client.get('/goal/1/action/1/')
-        # self.assertEqual(response_action.status_code, 200)
         self.assertRedirects(action, '/main')
