@@ -148,7 +148,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'account:main'
 
-INTERNAL_IPS = ['127.0.0.1']
+INTERNAL_IPS = ['0.0.0.0', '127.0.0.1']
 
 SASS_PROCESSOR_AUTO_INCLUDE = False
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
