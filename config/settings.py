@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sass_processor',
     'widget_tweaks',
-    'sslserver',
+    # 'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +93,8 @@ DATABASES = {
         'NAME': 'management',
         'USER': 'root',
         'PASSWORD': '',
+        'HOST': 'db',
+        'POST': 33306
     }
 }
 # DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
