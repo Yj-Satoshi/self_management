@@ -48,6 +48,7 @@ def signup(request):
             return redirect('/')
         else:
             form = SignUpForm()
+            messages.error(request, "アカウント作成に失敗しました。もう一度入力下さい。")
     return render(request, 'account/signup.html', {'form': form})
 
 

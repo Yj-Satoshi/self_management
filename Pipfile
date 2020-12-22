@@ -25,6 +25,10 @@ django-debug-toolbar = "*"
 mysql = "*"
 django-toolbelt = "*"
 django-sslserver = "*"
+coverage = "*"
+factory-boy = "*"
+pytz = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.8"
