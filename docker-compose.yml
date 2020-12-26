@@ -5,7 +5,6 @@ services:
     container_name: management
     build: . 
     command: python3 manage.py runserver 0.0.0.0:8000
-    x-aws-pull_credentials: <<<your arn for your secret you can get with docker ecs secret list>>>
     image: syaji/timestamper
     volumes:
       - .:/code
