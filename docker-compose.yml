@@ -3,6 +3,7 @@ version: '3'
 services:
   web:
     container_name: management
+    image: syaji/timestamper
     build: . 
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
