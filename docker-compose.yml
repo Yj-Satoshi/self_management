@@ -5,7 +5,7 @@ services:
     container_name: management
     build: . 
     command: python3 manage.py runserver 0.0.0.0:8000
-    image: 038183792649.dkr.ecr.ap-northeast-1.amazonaws.com/myself_management:latest
+    image: 038183792649.dkr.ecr.ap-northeast-1.amazonaws.com/myselfmanagement:latest
     volumes:
       - .:/code
     ports:
