@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  django:
+  web:
     container_name: management
     build: . 
     command: python3 manage.py runserver 0.0.0.0:80
@@ -10,23 +10,19 @@ services:
       - .:/code
     ports:
       - "80:80"
-    depends_on:
-      - db
     environment:
       - SELF_MANAGEMENT_SECRET_KEY
     depends_on:
-      - mysql
+      - db
 
-  mysql:
+  db:
     container_name: django-docker-db
-    image : mysql:8.0.19
+    image : mysql:5.7
     volumes:
-      - db-data:/var/lib/mysql
+      - "./.data/db:/var/lib/mysql"
     restart: always
     environment:
       MYSQL_DATABASE: management
       MYSQL_USER: root
       MYSQL_PASSWORD: ''
       MYSQL_ALLOW_EMPTY_PASSWORD: ‘yes’
-volumes:
-  db-data:
