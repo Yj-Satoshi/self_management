@@ -27,27 +27,33 @@ services:
   #   depends_on:
   #     - db
 
-  gunicorn:
-    image: gunicorn:latest
-    container_name: gunicorn
+  web:
+    restart: always
+    build: ./selfmanagement
+    expose:
+      - "8000"
+    depends_on:
+      - db
+    command: bash -c "python manage.py migrate && gunicorn config.wsgi -b 0.0.0.0:8000"
     environment:
       - SELF_MANAGEMENT_SECRET_KEY
     volumes:
-      - .:/usr/src/app
-      - gunicorn:/var/run/gunicorn
-    depends_on:
-      - db
+      - ./selfmanagement:/usr/src/app
+      - ./selfmanagement/static/:/usr/src/app/static
 
   nginx:
-    image: nginx:1.17.7
-    container_name: nginx
+    restart: always
+    image: nginx
     ports:
       - "80:80"
     volumes:
-      - ./gunicorn.conf:/etc/nginx/conf.d/default.conf
-      - gunicorn:/var/run/gunicorn
-    depends_on: 
-      - gunicorn
+      - "./nginx/:/etc/nginx/"
+      - /www/static
+    volumes_from:
+      - web
+    links:
+      - web:web
+
 volumes:
   gunicorn:
     driver: local
