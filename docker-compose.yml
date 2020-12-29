@@ -29,7 +29,7 @@ services:
 
   web:
     restart: always
-    build: ./selfmanagement
+    build: .
     expose:
       - "8000"
     depends_on:
@@ -38,8 +38,8 @@ services:
     environment:
       - SELF_MANAGEMENT_SECRET_KEY
     volumes:
-      - ./selfmanagement:/usr/src/app
-      - ./selfmanagement/static/:/usr/src/app/static
+      - .:/usr/src/app
+      - ./static/:/usr/src/app/static
 
   nginx:
     restart: always
