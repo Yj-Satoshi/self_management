@@ -41,6 +41,4 @@ services:
       - web:web
 
 volumes:
-  gunicorn:
-    driver: local
   db: {}
