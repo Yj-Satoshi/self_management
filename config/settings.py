@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import sys
 from django.contrib.messages import constants as messages
-import dj_database_url
-import django_heroku
+# import dj_database_url
+# import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -101,8 +101,8 @@ DATABASES = {
     }
 }
 # DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -204,7 +204,7 @@ MESSAGE_TAGS = {
 #     }
 
 
-django_heroku.settings(locals(), staticfiles=False)
+# django_heroku.settings(locals(), staticfiles=False)
 # try:
 #     from . local_settings import *
 # except ImportError:
