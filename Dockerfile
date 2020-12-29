@@ -11,4 +11,6 @@ RUN pip install -r requirements.txt
 
 RUN mkdir -p /var/run/gunicorn
 
-CMD ["gunicorn", "config.wsgi", "--bind=unix:/var/run/gunicorn/gunicorn.sock"]
+EXPOSE 8001
+
+CMD ["gunicorn", "config.wsgi", "--bind=unix:/run/gunicorn/gunicorn.sock"]
