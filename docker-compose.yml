@@ -29,7 +29,7 @@ services:
 
   nginx:
     restart: always
-    image: nginx:1.17.8
+    build: ./nginx
     ports:
       - "80:80"
     volumes:
