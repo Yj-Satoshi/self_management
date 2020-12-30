@@ -3,7 +3,7 @@ version: '3.7'
 services:
   db:
     container_name: django-docker-db
-    image : mysql:5.7
+    build : ./mysql
     volumes:
       - db:/var/lib/mysql
     environment:
@@ -14,7 +14,7 @@ services:
 
   web:
     restart: always
-    build: .
+    build: ./app
     image: 038183792649.dkr.ecr.ap-northeast-1.amazonaws.com/myselfmanagement
     expose:
       - "8000"

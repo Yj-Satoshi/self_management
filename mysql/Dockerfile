@@ -1,4 +1,4 @@
-FROM mysql
+FROM mysql:5.7
 
 #ポートを開ける
 EXPOSE 3306
