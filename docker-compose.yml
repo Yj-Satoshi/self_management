@@ -29,11 +29,11 @@ services:
 
   nginx:
     restart: always
-    image: nginx
+    image: nginx:1.17.8
     ports:
       - "80:80"
     volumes:
-      - "./nginx/:/etc/nginx/"
+      - ./nginx/:/etc/nginx/
       - /www/static
     volumes_from:
       - web
@@ -42,3 +42,4 @@ services:
 
 volumes:
   db: {}
+
