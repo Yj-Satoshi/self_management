@@ -11,7 +11,7 @@ RUN pip install -r requirements.txt
 
 RUN mkdir -p /var/run/gunicorn
 
-EXPOSE 8001
+EXPOSE 8000
 
 # CMD ["gunicorn", "config.wsgi", "--bind=unix:/run/gunicorn/gunicorn.sock"]
 CMD python manage.py migrate && gunicorn config.wsgi -b 0.0.0.0:8000
