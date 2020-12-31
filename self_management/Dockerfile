@@ -14,4 +14,6 @@ RUN mkdir -p /var/run/gunicorn
 EXPOSE 8000
 
 # CMD ["gunicorn", "config.wsgi", "--bind=unix:/run/gunicorn/gunicorn.sock"]
-CMD python manage.py migrate && gunicorn config.wsgi -b 0.0.0.0:8000
+# CMD ["gunicorn", "config.wsgi:application -b 0.0.0.0:8000"]
+# CMD python manage.py migrate && gunicorn config.wsgi -b 0.0.0.0:8000
+CMD python manage.py migrate && python3 manage.py runserver 0.0.0.0:8000
