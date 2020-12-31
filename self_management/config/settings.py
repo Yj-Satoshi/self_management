@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sass_processor',
     'widget_tweaks',
-    'debug_toolbar',
+    # 'debug_toolbar',
     # 'django_extensions',
     # 'sslserver',
 ]
@@ -63,7 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
