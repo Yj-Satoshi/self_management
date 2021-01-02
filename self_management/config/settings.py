@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import sys
 from django.contrib.messages import constants as messages
-# import dj_database_url
-# import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -26,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SELF_MANAGEMENT_SECRET_KEY']
+SECRET_KEY = '_(*e_07l7^f3j2wxuzxh79wh2#gmjx*v=u@*d_p0bm50pye37l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,6 +47,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sass_processor',
     'widget_tweaks',
+    # 'gunicorn',
     # 'debug_toolbar',
     # 'django_extensions',
     # 'sslserver',
@@ -97,12 +96,10 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'db',
-        'POST': 33306
+        'POST': 3306,
     }
 }
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -165,53 +162,3 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
-
-# LOGGING = {
-#         'version': 1,
-#         'disable_existing_loggers': False,
-#         'formatters': {
-#             'verbose': {
-#                 'format': "[%(asctime)s] %(levelname)s %(message)s",
-#                 'datefmt': "%d/%b/%Y %H:%M:%S"
-#             }
-#         },
-#         'handlers': {
-#             'file': {
-#                 'level': 'DEBUG',
-#                 'class': 'logging.FileHandler',
-#                 'filename': '/var/log/django_practices.log',
-#                 'formatter': 'verbose'
-#             },
-#             'console': {
-#                 'level': 'DEBUG',
-#                 'class': 'logging.StreamHandler',
-#                 'stream': sys.stdout,
-#                 'formatter': 'verbose'
-#             },
-#         },
-#         'loggers': {
-
-#             'django_test': {
-#                 'handlers': ['file', 'console'],
-#                 'level': 'DEBUG',
-#             },
-#             'name_your_app': {
-#                 'handlers': ['file', 'console'],
-#                 'level': 'DEBUG',
-#             }
-
-#         }
-#     }
-
-
-# django_heroku.settings(locals(), staticfiles=False)
-# try:
-#     from . local_settings import *
-# except ImportError:
-#     django_heroku.settings(locals(), staticfiles=False)
-#     SECURE_SSL_REDIRECT = True
-
-
-# if DEBUG:
-#     SECURE_SSL_REDIRECT = False
-# else:
