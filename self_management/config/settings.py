@@ -93,9 +93,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'management',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'db',
+        'USER': 'selfmanagement',
+        'PASSWORD': 'self1234',
+        # 'HOST': 'db',
         'POST': 3306,
     }
 }
@@ -139,7 +139,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = 'var/www/static/'
+STATIC_ROOT = '/usr/src/app/var/www/static'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'account.CustomUser'
