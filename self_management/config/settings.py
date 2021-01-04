@@ -93,9 +93,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'management',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'db',
+        'USER': 'selfmanagement',
+        'PASSWORD': 'self1234',
+        'HOST': '0.0.0.0',
         'POST': 3306,
     }
 }
