@@ -95,7 +95,7 @@ DATABASES = {
         'NAME': 'management',
         'USER': 'selfmanagement',
         'PASSWORD': 'self1234',
-        'HOST': '0.0.0.0',
+        'HOST': 'db',
         'POST': 3306,
     }
 }
