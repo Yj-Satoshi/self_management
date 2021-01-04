@@ -2,39 +2,45 @@ version: '3.7'
 
 services:
   db:
-    container_name: django-docker-db
-    image : mysql:5.7
+    container_name: sm-db
+    # hostname: "127.0.0.1"
+    build: ./mysql
     volumes:
       - db:/var/lib/mysql
     environment:
       MYSQL_DATABASE: management
-      MYSQL_USER: root
-      MYSQL_PASSWORD: ''
-      MYSQL_ALLOW_EMPTY_PASSWORD: ‘yes’
+      MYSQL_USER: selfmanagement
+      MYSQL_PASSWORD: self1234
+      # MYSQL_ROOT_PASSWORD: pass1234
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    expose:
+      - "3306"
 
   web:
+    container_name: sm-app
     restart: always
-    build: .
-    image: 038183792649.dkr.ecr.ap-northeast-1.amazonaws.com/myselfmanagement
+    build: ./self_management
     expose:
       - "8000"
     depends_on:
       - db
-    command: bash -c "python manage.py migrate && gunicorn config.wsgi -b 0.0.0.0:8000"
+    command: bash -c "python manage.py migrate && python manage.py collectstatic && gunicorn config.wsgi -b 0.0.0.0:8000"
     environment:
       - SELF_MANAGEMENT_SECRET_KEY
     volumes:
-      - .:/usr/src/app
-      - ./static/:/usr/src/app/static
+      - ./self_management:/usr/src/app
+      # - ./self_management/static:/usr/src/static
 
-  nginx:
-    restart: always
+  ng:
+    container_name: sm-ng
     build: ./nginx
+    restart: always
+    expose:
+      - "80"
     ports:
       - "80:80"
     volumes:
-      - ./nginx/:/etc/nginx/
-      - /www/static
+      - "./nginx/:/etc/nginx/"
     volumes_from:
       - web
     links:
@@ -42,4 +48,3 @@ services:
 
 volumes:
   db: {}
-
