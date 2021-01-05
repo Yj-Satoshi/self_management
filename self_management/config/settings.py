@@ -140,7 +140,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = 'app/var/www/static'
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
@@ -150,12 +149,12 @@ LOGIN_REDIRECT_URL = 'account:main'
 
 INTERNAL_IPS = ['0.0.0.0', '127.0.0.1']
 
-SASS_PROCESSOR_AUTO_INCLUDE = False
-SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
-SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
-SASS_PRECISION = 8
-SASS_OUTPUT_STYLE = 'compressed'
-SASS_TEMPLATE_EXTS = ['.html', '.haml']
+# SASS_PROCESSOR_AUTO_INCLUDE = False
+# SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
+# SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
+# SASS_PRECISION = 8
+# SASS_OUTPUT_STYLE = 'compressed'
+# SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
