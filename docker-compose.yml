@@ -41,8 +41,8 @@ services:
       - "80:80"
     volumes:
       - "./nginx/:/etc/nginx/"
-    volumes_from:
-      - web
+    # volumes_from:
+    #   - web
     links:
       - web:web
 
