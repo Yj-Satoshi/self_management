@@ -38,11 +38,11 @@ services:
     expose:
       - "80"
     ports:
-      - "80:80"
+      - "8000:80"
     volumes:
       - "./nginx/:/etc/nginx/"
-    # volumes_from:
-    #   - web
+    environment:
+      - ROOT=/var/www/
     links:
       - web:web
 
