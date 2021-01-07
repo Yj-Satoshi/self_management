@@ -24,6 +24,7 @@ services:
     depends_on:
       - db
     command: bash -c "python manage.py migrate && gunicorn config.wsgi -b 0.0.0.0:8000"
+    # command: bash -c "python manage.py runserver"
       
   ng:
     container_name: sm-ng
@@ -34,7 +35,7 @@ services:
     ports:
       - "80:80"   
     volumes:
-      - "./nginx/:/etc/nginx/"
+      - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
     environment:
       - ROOT=/var/www/
     links:
