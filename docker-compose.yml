@@ -3,7 +3,6 @@ version: '3.7'
 services:
   db:
     container_name: sm-db
-    # hostname: "127.0.0.1"
     build: ./mysql
     volumes:
       - db:/var/lib/mysql
@@ -11,7 +10,7 @@ services:
       MYSQL_DATABASE: management
       MYSQL_USER: selfmanagement
       MYSQL_PASSWORD: self1234
-      # MYSQL_ROOT_PASSWORD: pass1234
+
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     expose:
       - "3306"
@@ -29,7 +28,6 @@ services:
       - SELF_MANAGEMENT_SECRET_KEY
     volumes:
       - ./self_management:/usr/src/app
-      # - ./self_management/static:/usr/src/static
 
   ng:
     container_name: sm-ng
