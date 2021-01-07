@@ -27,8 +27,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_(*e_07l7^f3j2wxuzxh79wh2#gmjx*v=u@*d_p0bm50pye37l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
+
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -135,9 +136,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = '/static/'
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
@@ -147,12 +148,12 @@ LOGIN_REDIRECT_URL = 'account:main'
 
 INTERNAL_IPS = ['0.0.0.0', '127.0.0.1']
 
-# SASS_PROCESSOR_AUTO_INCLUDE = False
-# SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
-# SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
-# SASS_PRECISION = 8
-# SASS_OUTPUT_STYLE = 'compressed'
-# SASS_TEMPLATE_EXTS = ['.html', '.haml']
+SASS_PROCESSOR_AUTO_INCLUDE = False
+SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
+SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.(sass|scss)$'
+SASS_PRECISION = 8
+SASS_OUTPUT_STYLE = 'compressed'
+SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
