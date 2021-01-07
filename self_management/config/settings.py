@@ -49,8 +49,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     # 'gunicorn',
     # 'debug_toolbar',
-    # 'django_extensions',
-    # 'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -139,7 +137,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = 'app/var/www/static'
+STATIC_ROOT = '/var/www/static'
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
