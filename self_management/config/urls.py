@@ -23,5 +23,3 @@ urlpatterns = [
     path('', include('weekly_action.urls')),
     path('admin/', admin.site.urls),
 ]
-
-
