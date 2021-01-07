@@ -10,8 +10,8 @@ services:
       MYSQL_DATABASE: management
       MYSQL_USER: selfmanagement
       MYSQL_PASSWORD: self1234
-
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
     expose:
       - "3306"
 
@@ -23,12 +23,8 @@ services:
       - "8000"
     depends_on:
       - db
-    command: bash -c "python manage.py migrate && python manage.py collectstatic && gunicorn config.wsgi -b 0.0.0.0:8000"
-    environment:
-      - SELF_MANAGEMENT_SECRET_KEY
-    volumes:
-      - ./self_management:/usr/src/app
-
+    command: bash -c "python manage.py migrate && gunicorn config.wsgi -b 0.0.0.0:8000"
+      
   ng:
     container_name: sm-ng
     build: ./nginx
@@ -36,7 +32,7 @@ services:
     expose:
       - "80"
     ports:
-      - "8000:80"
+      - "80:80"   
     volumes:
       - "./nginx/:/etc/nginx/"
     environment:
