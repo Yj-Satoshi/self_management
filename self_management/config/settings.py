@@ -30,7 +30,7 @@ SECRET_KEY = '_(*e_07l7^f3j2wxuzxh79wh2#gmjx*v=u@*d_p0bm50pye37l'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["0.0.0.0", "app-server"]
 
 
 # Application definition
@@ -136,9 +136,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = STATIC_URL
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
