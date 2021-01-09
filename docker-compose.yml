@@ -21,6 +21,8 @@ services:
     build: ./self_management
     expose:
       - "8000"
+    volumes:
+      - ./static:/static
     depends_on:
       - db
     command: bash -c "python manage.py migrate && gunicorn config.wsgi -b 0.0.0.0:8000"
@@ -33,10 +35,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - "./nginx/:/etc/nginx/"
-      - /www/static
-    volumes_from:
-      - web
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./static:/static
     links:
       - web:web
 
