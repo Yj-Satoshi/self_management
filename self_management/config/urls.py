@@ -16,10 +16,14 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+from django.views.static import serve
+from django.conf.urls import url
+
 
 urlpatterns = [
     path('', include('account.urls')),
     path('', include('monthly_goal.urls')),
     path('', include('weekly_action.urls')),
     path('admin/', admin.site.urls),
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
