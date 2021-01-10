@@ -7,12 +7,12 @@ services:
     volumes:
       - db:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: management
-      MYSQL_USER: selfmanagement
-      MYSQL_PASSWORD: self1234
-      - management
-      - selfmanagement
-      - self1234
+      MYSQL_DATABASE: MANAGEMENT
+      MYSQL_USER: SELFMANAGEMENT
+      MYSQL_PASSWORD: SELF
+      - MANAGEMENT
+      - SELFMANAGEMENT
+      - SELF
 
     expose:
       - "3306"
