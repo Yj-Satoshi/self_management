@@ -26,7 +26,6 @@ services:
     depends_on:
       - db
     command: bash -c "python manage.py migrate && gunicorn config.wsgi -b 0.0.0.0:8000"
-    # command: bash -c "python manage.py runserver"
       
   ng:
     container_name: sm-ng
