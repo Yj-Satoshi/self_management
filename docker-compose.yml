@@ -10,7 +10,9 @@ services:
       MYSQL_DATABASE: management
       MYSQL_USER: selfmanagement
       MYSQL_PASSWORD: self1234
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      - management
+      - selfmanagement
+      - self1234
 
     expose:
       - "3306"
