@@ -88,9 +88,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'MANAGEMENT',
-        'USER': 'SELFMANAFGEMENT',
-        'PASSWORD': 'SELF',
+        'NAME': 'management',
+        'USER': 'selfmanagement',
+        'PASSWORD': 'self1234',
         'HOST': 'db',
         'POST': 3306,
     }
