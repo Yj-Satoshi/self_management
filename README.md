@@ -6,8 +6,8 @@
 <https://www.yj-selfmanagement-app.tk/>
 
 ## テスト用アカウント	
-ユーザー名 test1
-パスワード 1234test
+- ユーザー名 test1
+- パスワード 1234test
 
 ## 利用方法
 1. アカウントを登録します
