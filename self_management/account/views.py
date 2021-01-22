@@ -142,7 +142,7 @@ class MyPageScoredView(MyPageView):
             request, 'account/main_scored.html', context)
 
 
-class month_score_chart:
+class MonthScoreChart():
     def month_count(n):
         if date_string.month - n <= 0:
             month = date_string.month - n + 12
