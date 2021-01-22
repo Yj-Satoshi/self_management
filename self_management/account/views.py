@@ -143,8 +143,6 @@ class MyPageScoredView(MyPageView):
 
 
 class MonthScoreChart():
-
-
     # def month_count(n):
     #     if date_string.month - n <= 0:
     #         month = date_string.month - n + 12
@@ -164,7 +162,12 @@ class MonthScoreChart():
         month5 = date_string.month - 4
         month6 = date_string.month - 5
 
-        year1, year2, year3, year4, year5, year6 = date_string.year
+        year1 = date_string.year
+        year2 = date_string.year
+        year3 = date_string.year
+        year4 = date_string.year
+        year5 = date_string.year
+        year6 = date_string.year
 
         if date_string.month - 1 <= 0:
             month2 = date_string.year + 11
