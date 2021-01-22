@@ -127,31 +127,7 @@ class MyPageView(MonthCalendarMixin, WeekCalendarMixin, UserPassesTestMixin, Log
             request, 'account/main.html', context)
 
 
-class MyPageScoredView(MyPageView):
-    def scored_users_detail(request):
-        user = request.user
-        monthly_goals = MonthlyGoal.objects.filter(
-            custom_user_id=user.id, score__isnull=False).order_by('-year', '-month', 'goal')
-        page_obj = MyPageView.paginate_queryset(request, monthly_goals, 5)
-        context = {
-            'user': user,
-            'monthly_goals': page_obj.object_list,
-            'page_obj': page_obj,
-        }
-        return render(
-            request, 'account/main_scored.html', context)
-
-
 class MonthScoreChart():
-    # def month_count(n):
-    #     if date_string.month - n <= 0:
-    #         month = date_string.month - n + 12
-    #         return month
-
-    # def year_count(n):
-    #     if date_string.month - n <= 0:
-    #         year = date_string.year - 1
-    #         return year
 
     def setPlt(request):
         user = request.user
@@ -185,48 +161,42 @@ class MonthScoreChart():
             month6 = date_string.month + 7
             year6 = date_string.year - 1
 
-        month1_goals_score_ave = MonthlyGoal.objects.filter(
+        month1_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
                 custom_user_id=user.id, year=year1, month=month1, score__isnull=False
-                ).aggregate(Avg('score'))
+                )
 
-        month2_goals_score_ave = MonthlyGoal.objects.filter(
+        month2_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
                     custom_user_id=user.id, year=year2,
                     month=month2, score__isnull=False
-                    ).aggregate(Avg('score'))
+                    )
 
-        month3_goals_score_ave = MonthlyGoal.objects.filter(
+        month3_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
                     custom_user_id=user.id, year=year3,
                     month=month3, score__isnull=False
-                    ).aggregate(Avg('score'))
+                    )
 
-        month4_goals_score_ave = MonthlyGoal.objects.filter(
+        month4_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
                     custom_user_id=user.id, year=year4,
                     month=month4, score__isnull=False
-                    ).aggregate(Avg('score'))
+                    )
 
-        month5_goals_score_ave = MonthlyGoal.objects.filter(
+        month5_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
                     custom_user_id=user.id, year=year5,
                     month=month5, score__isnull=False
-                    ).aggregate(Avg('score'))
+                    )
 
-        month6_goals_score_ave = MonthlyGoal.objects.filter(
+        month6_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
                     custom_user_id=user.id, year=year6,
                     month=month6, score__isnull=False
-                    ).aggregate(Avg('score'))
+                    )
 
         y = [
-            month6_goals_score_ave,
-            month5_goals_score_ave,
-            month4_goals_score_ave,
-            month3_goals_score_ave,
-            month2_goals_score_ave,
-            month1_goals_score_ave
-            # 3,
-            # 4,
-            # 3,
-            # 4,
-            # 5,
-            # 2
+            month6_goals_score_ave.aggregate(Avg('score'))['score__avg'],
+            month5_goals_score_ave.aggregate(Avg('score'))['score__avg'],
+            month4_goals_score_ave.aggregate(Avg('score'))['score__avg'],
+            month3_goals_score_ave.aggregate(Avg('score'))['score__avg'],
+            month2_goals_score_ave.aggregate(Avg('score'))['score__avg'],
+            month1_goals_score_ave.aggregate(Avg('score'))['score__avg']
             ]
         x = [
             str(year6) + "-" + str(month6),
@@ -237,17 +207,9 @@ class MonthScoreChart():
             str(year1) + "-" + str(month1),
             ]
         plt.plot(x, y, color='#00d5ff')
-        plt.title(r"$\bf{Average-score(月間目標)}$", color='#3407ba')
+        plt.title(r"$\bf{Average-score}$", color='blue')
         plt.xlabel("month")
         plt.ylabel("score")
-
-    # def setPlt(request):
-    #     x = ["07/01", "07/02", "07/03", "07/04", "07/05", "07/06", "07/07"]
-    #     y = [3, 5, 0, 5, 6, 10, 2]
-    #     plt.plot(x, y, color='#00d5ff')
-    #     plt.title(r"$\bf{Running Trend  -2020/07/07}$", color='#3407ba')
-    #     plt.xlabel("Date")
-    #     plt.ylabel("km")
 
     def plt2svg():
         buf = io.BytesIO()
@@ -262,3 +224,27 @@ class MonthScoreChart():
         plt.cla()
         response = HttpResponse(svg, content_type='image/svg+xml')
         return response
+
+
+class MyPageScoredView(MyPageView, MonthScoreChart):
+    def scored_users_detail(request):
+        user = request.user
+        monthly_goals = MonthlyGoal.objects.filter(
+            custom_user_id=user.id, score__isnull=False).order_by('-year', '-month', 'goal')
+        page_obj = MyPageView.paginate_queryset(request, monthly_goals, 5)
+
+        month2 = date_string.month + 11
+        year2 = date_string.year - 1
+        month2_goals_score_ave = MonthlyGoal.objects.filter(
+                    custom_user_id=user.id, year=year2,
+                    month=month2, score__isnull=False
+                    ).aggregate(Avg('score'))
+
+        context = {
+            'user': user,
+            'monthly_goals': page_obj.object_list,
+            'page_obj': page_obj,
+            'score_ave': month2_goals_score_ave['score__avg'],
+        }
+        return render(
+            request, 'account/main_scored.html', context)
