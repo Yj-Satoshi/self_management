@@ -18,5 +18,5 @@ urlpatterns = [
     path(
         'signout/', views_auth.LogoutView.as_view(template_name='account/signout.html'),
         name='signout'),
-    path('plot/', views.get_svg, name='plot'),
+    path('plot/', views.MonthScoreChart.get_svg, name='plot'),
 ]
