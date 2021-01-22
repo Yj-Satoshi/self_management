@@ -170,49 +170,49 @@ class MonthScoreChart():
         year6 = date_string.year
 
         if date_string.month - 1 <= 0:
-            month2 = date_string.year + 11
+            month2 = date_string.month + 11
             year2 = date_string.year - 1
-        elif date_string.month - 2 <= 0:
-            month3 = date_string.year + 10
+        if date_string.month - 2 <= 0:
+            month3 = date_string.month + 10
             year3 = date_string.year - 1
-        elif date_string.month - 3 <= 0:
-            month4 = date_string.year + 9
+        if date_string.month - 3 <= 0:
+            month4 = date_string.month + 9
             year4 = date_string.year - 1
-        elif date_string.month - 4 <= 0:
-            month5 = date_string.year + 8
+        if date_string.month - 4 <= 0:
+            month5 = date_string.month + 8
             year5 = date_string.year - 1
-        elif date_string.month - 4 <= 0:
-            month6 = date_string.year + 7
+        if date_string.month - 4 <= 0:
+            month6 = date_string.month + 7
             year6 = date_string.year - 1
 
         month1_goals_score_ave = MonthlyGoal.objects.filter(
-                custom_user_id=user.id, year=year1, month=month1
-                ).exclude(score__isnull=False).aggregate(Avg('score'))
+                custom_user_id=user.id, year=year1, month=month1, score__isnull=False
+                ).aggregate(Avg('score'))
 
         month2_goals_score_ave = MonthlyGoal.objects.filter(
                     custom_user_id=user.id, year=year2,
-                    month=month2
-                    ).exclude(score__isnull=False).aggregate(Avg('score'))
+                    month=month2, score__isnull=False
+                    ).aggregate(Avg('score'))
 
         month3_goals_score_ave = MonthlyGoal.objects.filter(
                     custom_user_id=user.id, year=year3,
-                    month=month3
-                    ).exclude(score__isnull=False).aggregate(Avg('score'))
+                    month=month3, score__isnull=False
+                    ).aggregate(Avg('score'))
 
         month4_goals_score_ave = MonthlyGoal.objects.filter(
                     custom_user_id=user.id, year=year4,
-                    month=month4
-                    ).exclude(score__isnull=False).aggregate(Avg('score'))
+                    month=month4, score__isnull=False
+                    ).aggregate(Avg('score'))
 
         month5_goals_score_ave = MonthlyGoal.objects.filter(
                     custom_user_id=user.id, year=year5,
-                    month=month5
-                    ).exclude(score__isnull=False).aggregate(Avg('score'))
+                    month=month5, score__isnull=False
+                    ).aggregate(Avg('score'))
 
         month6_goals_score_ave = MonthlyGoal.objects.filter(
                     custom_user_id=user.id, year=year6,
-                    month=month6
-                    ).exclude(score__isnull=False).aggregate(Avg('score'))
+                    month=month6, score__isnull=False
+                    ).aggregate(Avg('score'))
 
         y = [
             month6_goals_score_ave,
@@ -221,19 +221,25 @@ class MonthScoreChart():
             month3_goals_score_ave,
             month2_goals_score_ave,
             month1_goals_score_ave
+            # 3,
+            # 4,
+            # 3,
+            # 4,
+            # 5,
+            # 2
             ]
         x = [
-            month1,
-            month2,
-            month3,
-            month4,
-            month5,
-            month6
+            str(year6) + "-" + str(month6),
+            str(year5) + "-" + str(month5),
+            str(year4) + "-" + str(month4),
+            str(year3) + "-" + str(month3),
+            str(year2) + "-" + str(month2),
+            str(year1) + "-" + str(month1),
             ]
         plt.plot(x, y, color='#00d5ff')
-        plt.title(r"$\bf{Running Trend  -2020/07/07}$", color='#3407ba')
-        plt.xlabel("月")
-        plt.ylabel("目標評価平均")
+        plt.title(r"$\bf{Average-score(月間目標)}$", color='#3407ba')
+        plt.xlabel("month")
+        plt.ylabel("score")
 
     # def setPlt(request):
     #     x = ["07/01", "07/02", "07/03", "07/04", "07/05", "07/06", "07/07"]
