@@ -3,8 +3,6 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
-# from django.urls import reverse
-# from django.views import View
 from django.views.generic import UpdateView
 from django.shortcuts import render, redirect
 from .models import CustomUser
