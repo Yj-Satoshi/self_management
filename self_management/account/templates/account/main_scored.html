@@ -10,7 +10,6 @@
     <div class="monthly-goal"> 
         <h1 class="sub_title">直近の評価済み目標</h1>
         {% for goal in monthly_goals %}
-        {% if goal.score %}
             <div class="goals_content">
                 {% if goal.revised_goal %}
                 <h2 class="goal"><i class="fas fa-angle-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
@@ -24,11 +23,10 @@
                     <li><i class="fas fa-chevron-circle-down"></i>評価:{{ goal.score }}</li>
                 </ul>
             </div>
-        {% endif %}
         {% endfor %}
     </div>
     <div class="chart">
-        <img src="{% url 'account:plot' %}" width=600 height=600>
+        <img src="{% url 'account:plot' %}" width=700 height=600>
     </div>
 </div>
     
