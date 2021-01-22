@@ -1,0 +1,40 @@
+<div class="goals_limit">
+    {% if goal.revised_goal %}
+    <h2 class="goal"><i class="fas fa-angle-double-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">修正目標：{{ goal.revised_goal }}</a></h2>
+    <p class="font">（初期目標：{{ goal.goal }}）</p>
+    
+    {% else %}
+    <h2 class="goal"><i class="fas fa-angle-double-right"></i><a href="{% url 'monthly_goal:goal-detail' goal.id %}">目標：{{ goal.goal }}</a></h2>
+    
+    {% endif %}
+    <div class="goal_button">
+        <h3 class="goal_limit">【期限切れ】達成期限{{ goal.year }}年{{ goal.month }}月</h3>
+        <div class="monthly_action_select_button">
+            <div class="button_blue"><a href="{% url 'monthly_goal:goal-update' goal.id %}">評価・修正</a></div>
+            <div class="button_red"><a href="{% url 'monthly_goal:goal-delete' goal.id %}">削除</a></div>
+        </div>
+    </div>
+    <hr>
+    <div class="action_create">
+        <div calss="actionlist">アクション一覧</div>
+        <div class="button_middle"><a href="{% url 'weekly_action:action-create' goal.id %}">週別アクション作成</a></div>
+    </div>
+    {% for action in weekly_actions %}
+        {% if goal.id == action.monthly_goal_id %}
+            {% if not action.score %}
+            <div class="weekly_action_select">
+                <div class="goal_action font"><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">{{ action.week_no }}週目アクション:{{ action.goal_action }}</a></div>
+                <div class="weekly_action_select_button">
+                    <div class="button_blue"><a href="{% url 'weekly_action:action-update' action.id %}">評価・修正</a></div>
+                    <div class="button_red"><a href="{% url 'weekly_action:action-delete' action.id %}">削除</a></div>
+                </div>
+            </div >
+            {% elif action.score %}
+            <div class="weekly_action_select">
+                <div class="goal_action_finish font"><a href="{% url 'weekly_action:action-detail' goal.id action.id %}">{{ action.week_no }} 週目アクション:{{ action.goal_action }}</a></div>
+                    <div class="hanko">済</div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>
