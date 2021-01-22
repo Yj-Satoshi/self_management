@@ -24,6 +24,9 @@
                     <li><i class="fas fa-chevron-circle-down"></i>評価:{{ goal.score }}</li>
                 </ul>
             </div>
+        <div>
+            <img src="{% url 'account:plot' %}" width=600 height=600>
+        </div>
         {% endif %}
         {% endfor %}
     </div>
