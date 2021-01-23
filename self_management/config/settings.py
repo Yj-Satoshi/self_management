@@ -25,9 +25,10 @@ SECRET_KEY = '_(*e_07l7^f3j2wxuzxh79wh2#gmjx*v=u@*d_p0bm50pye37l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
+# DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ["0.0.0.0", "app-server", "localhost"]
+ALLOWED_HOSTS = ["0.0.0.0", "app-server", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -51,7 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -89,6 +90,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'management',
+        # 'USER': 'root'
         'USER': 'selfmanagement',
         'PASSWORD': 'self1234',
         'HOST': 'db',
