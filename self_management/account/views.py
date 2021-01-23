@@ -196,28 +196,31 @@ class MonthScoreChart():
             month4_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month3_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month2_goals_score_ave.aggregate(Avg('score'))['score__avg'],
-            month1_goals_score_ave.aggregate(Avg('score'))['score__avg']
+            month1_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             ]
 
         x = [
-            str(year6) + "-" + str(month6),
-            str(year5) + "-" + str(month5),
-            str(year4) + "-" + str(month4),
-            str(year3) + "-" + str(month3),
-            str(year2) + "-" + str(month2),
-            str(year1) + "-" + str(month1),
+            str(str(year6) + "-" + str(month6)),
+            str(str(year5) + "-" + str(month5)),
+            str(str(year4) + "-" + str(month4)),
+            str(str(year3) + "-" + str(month3)),
+            str(str(year2) + "-" + str(month2)),
+            str(str(year1) + "-" + str(month1)),
             ]
 
         y_1 = [i for i in y if i is not None]
-        x_1 = [x[y.index(i)] for i in y if i is not None]
-
+        x_1 = [x[i] for i in range(len(y)) if y[i] is not None]
+        # x_1 = x
+        # y_1 = y
+        fig, ax = plt.subplots(1)
+        ax.set_facecolor('#F0FFFF')
         plt.plot(x_1, y_1, color='#808080')
         for x, y in zip(x_1, y_1):
             plt.text(x, y-0.4, round(y, 1), ha='center', va='bottom')
-        plt.scatter(x_1, y_1, color='#228B22')
+        plt.scatter(x_1, y_1, color='#228B22', s=200)
         plt.xlabel("month")
         plt.ylabel("score")
-        plt.ylim(0, 5)
+        plt.ylim(0, 5.5)
 
     def plt2svg():
         buf = io.BytesIO()
