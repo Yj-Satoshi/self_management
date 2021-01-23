@@ -14,8 +14,8 @@ import datetime
 import math
 import matplotlib
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas
+# import numpy as np
+# import pandas
 from django.db.models import Avg
 import io
 from django.http import HttpResponse
@@ -190,14 +190,14 @@ class MonthScoreChart():
                 custom_user_id=user.id, year=year6, month=month6, score__isnull=False
                 )
 
-        y = np.array([
+        y = [
             month6_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month5_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month4_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month3_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month2_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month1_goals_score_ave.aggregate(Avg('score'))['score__avg']
-            ])
+            ]
 
         x = [
             str(year6) + "-" + str(month6),
@@ -208,16 +208,16 @@ class MonthScoreChart():
             str(year1) + "-" + str(month1),
             ]
 
-        y_1 = [0 for i in y if i is None]
-        # x_1 = [x[int(i-1)] for i in y if i is not None]
+        y_1 = [i for i in y if i is not None]
+        x_1 = [x[y.index(i)] for i in y if i is not None]
 
-        plt.plot(x, y_1, color='#808080')
-        plt.scatter(x, y_1, color='#228B22')
-        plt.title(r"$\bf{Score-average}$", color='blue')
+        plt.plot(x_1, y_1, color='#808080')
+        for x, y in zip(x_1, y_1):
+            plt.text(x, y-0.4, round(y, 1), ha='center', va='bottom')
+        plt.scatter(x_1, y_1, color='#228B22')
         plt.xlabel("month")
         plt.ylabel("score")
         plt.ylim(0, 5)
-        plt.xlim(0.5, 6.5)
 
     def plt2svg():
         buf = io.BytesIO()
@@ -241,18 +241,15 @@ class MyPageScoredView(MyPageView, MonthScoreChart):
             custom_user_id=user.id, score__isnull=False).order_by('-year', '-month', 'goal')
         page_obj = MyPageView.paginate_queryset(request, monthly_goals, 5)
 
-        month2 = date_string.month + 11
-        year2 = date_string.year - 1
-        month2_goals_score_ave = MonthlyGoal.objects.filter(
-                    custom_user_id=user.id, year=year2,
-                    month=month2, score__isnull=False
+        year_goals_score_ave = MonthlyGoal.objects.filter(
+                    custom_user_id=user.id, year=date_string.year, score__isnull=False
                     ).aggregate(Avg('score'))
 
         context = {
             'user': user,
             'monthly_goals': page_obj.object_list,
             'page_obj': page_obj,
-            'score_ave': month2_goals_score_ave['score__avg'],
+            'year_score_ave': year_goals_score_ave['score__avg'],
         }
         return render(
             request, 'account/main_scored.html', context)
