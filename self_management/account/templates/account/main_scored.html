@@ -26,10 +26,10 @@
         {% endfor %}
     </div>
     <div class="chart">
-        <h1 class="sub_title">目標評価の状況(平均)</h1>
-        <div class="baseheader_content baseheader_name">今年の目標評価平均 - {{ year_score_ave }}</div>
+        <h1 class="sub_title">目標評価の状況</h1>
+        <div class="baseheader_content baseheader_name" style="font-size: 25px;">今年の目標評価平均  「{{ year_score_ave|default_if_none:"今年の評価なし"  }}」</div>
         <div>
-            <div class="chart-title ">直近6ヶ月分の評価平均の推移</div>
+            <div class="chart-title " style="margin-top: 30px;font-size: 20px;">　直近6ヶ月分の評価平均の推移</div>
             <div class="cahrt-main">
                 <img src="{% url 'account:plot' %}" width=700 height=600>
             </div>
