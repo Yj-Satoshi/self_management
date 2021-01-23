@@ -14,6 +14,8 @@ import datetime
 import math
 import matplotlib
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas
 from django.db.models import Avg
 import io
 from django.http import HttpResponse
@@ -131,12 +133,12 @@ class MonthScoreChart():
 
     def setPlt(request):
         user = request.user
-        month1 = date_string.month
-        month2 = date_string.month - 1
-        month3 = date_string.month - 2
-        month4 = date_string.month - 3
-        month5 = date_string.month - 4
-        month6 = date_string.month - 5
+        month1 = date_string.month - 1
+        month2 = date_string.month - 2
+        month3 = date_string.month - 3
+        month4 = date_string.month - 4
+        month5 = date_string.month - 5
+        month6 = date_string.month - 6
 
         year1 = date_string.year
         year2 = date_string.year
@@ -146,58 +148,61 @@ class MonthScoreChart():
         year6 = date_string.year
 
         if date_string.month - 1 <= 0:
-            month2 = date_string.month + 11
-            year2 = date_string.year - 1
+            month1 = date_string.month + 11
+            year1 = date_string.year - 1
         if date_string.month - 2 <= 0:
-            month3 = date_string.month + 10
-            year3 = date_string.year - 1
+            month2 = date_string.month + 10
+            year2 = date_string.year - 1
         if date_string.month - 3 <= 0:
-            month4 = date_string.month + 9
+            month3 = date_string.month + 9
+            year3 = date_string.year - 1
+        if date_string.month - 4 <= 0:
+            month4 = date_string.month + 8
             year4 = date_string.year - 1
-        if date_string.month - 4 <= 0:
-            month5 = date_string.month + 8
+        if date_string.month - 5 <= 0:
+            month5 = date_string.month + 7
             year5 = date_string.year - 1
-        if date_string.month - 4 <= 0:
-            month6 = date_string.month + 7
+        if date_string.month - 6 <= 0:
+            month6 = date_string.month + 6
             year6 = date_string.year - 1
+
+        month1_6_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
+                custom_user_id=user.id, year=year6, month=month6, score__isnull=False
+                )
 
         month1_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
                 custom_user_id=user.id, year=year1, month=month1, score__isnull=False
                 )
 
         month2_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
-                    custom_user_id=user.id, year=year2,
-                    month=month2, score__isnull=False
-                    )
+                custom_user_id=user.id, year=year2, month=month2, score__isnull=False
+                )
 
         month3_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
-                    custom_user_id=user.id, year=year3,
-                    month=month3, score__isnull=False
-                    )
+                custom_user_id=user.id, year=year3, month=month3, score__isnull=False
+                )
 
         month4_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
-                    custom_user_id=user.id, year=year4,
-                    month=month4, score__isnull=False
-                    )
+                custom_user_id=user.id, year=year4, month=month4, score__isnull=False
+                )
 
         month5_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
-                    custom_user_id=user.id, year=year5,
-                    month=month5, score__isnull=False
-                    )
+                custom_user_id=user.id, year=year5, month=month5, score__isnull=False
+                )
 
         month6_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
-                    custom_user_id=user.id, year=year6,
-                    month=month6, score__isnull=False
-                    )
+                custom_user_id=user.id, year=year6, month=month6, score__isnull=False
+                )
 
-        y = [
+        y = np.array([
             month6_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month5_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month4_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month3_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month2_goals_score_ave.aggregate(Avg('score'))['score__avg'],
             month1_goals_score_ave.aggregate(Avg('score'))['score__avg']
-            ]
+            ])
+
         x = [
             str(year6) + "-" + str(month6),
             str(year5) + "-" + str(month5),
@@ -206,10 +211,17 @@ class MonthScoreChart():
             str(year2) + "-" + str(month2),
             str(year1) + "-" + str(month1),
             ]
-        plt.plot(x, y, color='#00d5ff')
-        plt.title(r"$\bf{Average-score}$", color='blue')
+
+        y_1 = [0 for i in y if i is None]
+        # x_1 = [x[int(i-1)] for i in y if i is not None]
+
+        plt.plot(x, y_1, color='#808080')
+        plt.scatter(x, y_1, color='#228B22')
+        plt.title(r"$\bf{Score-average}$", color='blue')
         plt.xlabel("month")
         plt.ylabel("score")
+        plt.ylim(0, 5)
+        plt.xlim(0.5, 6.5)
 
     def plt2svg():
         buf = io.BytesIO()
