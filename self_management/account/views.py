@@ -166,10 +166,6 @@ class MonthScoreChart():
             month6 = date_string.month + 6
             year6 = date_string.year - 1
 
-        month1_6_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
-                custom_user_id=user.id, year=year6, month=month6, score__isnull=False
-                )
-
         month1_goals_score_ave = MonthlyGoal.objects.select_related('score').filter(
                 custom_user_id=user.id, year=year1, month=month1, score__isnull=False
                 )
