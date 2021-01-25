@@ -30,7 +30,8 @@ services:
   ng:
     container_name: sm-ng
     restart: always
-    image: nginx:1.17.7
+    # image: nginx:1.17.7
+    build: ./nginx
     ports:
       - "80:80"
     volumes:
