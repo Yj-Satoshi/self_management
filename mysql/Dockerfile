@@ -1,8 +1,7 @@
 FROM mysql:5.7
 
 EXPOSE 3306
-# RUN mkdir -p /var/lib/mysql
-# RUN chown -R 999:999 /var/lib/mysql
+
 VOLUME /var/lib/mysql
 COPY ./my.cnf /etc/mysql/conf.d/my.cnf
 
