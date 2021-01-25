@@ -8,7 +8,7 @@ RUN pip install --upgrade pip
 COPY . /usr/src/app/
 
 RUN pip install -r requirements.txt
-RUN python manage.py migrate
+# RUN python manage.py migrate
 RUN python manage.py collectstatic
 
 WORKDIR /usr/src/app
