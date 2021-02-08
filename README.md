@@ -134,4 +134,4 @@
 docker-compose up
 
 ## インフラ図
-* 現在作成中
+* ![image](https://user-images.githubusercontent.com/65821688/107184214-80aaaa00-6a23-11eb-8796-da165f9c4ae7.png)
